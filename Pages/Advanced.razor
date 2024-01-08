@@ -7,7 +7,7 @@
 <center>
     <br/>
     <MudContainer>
-        <MudButton OnClick="@(() => ShowStrobePanel = !ShowStrobePanel)">
+        <MudButton OnClick="@(() => ShowStrobePanel = !ShowStrobePanel)" EndIcon="@(ShowStrobePanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
             Strobe
         </MudButton>
         @if (ShowStrobePanel)
@@ -45,7 +45,7 @@
     </MudContainer>
     <br/>
     <MudContainer>
-        <MudButton OnClick="@(() => ShowParPanel = !ShowParPanel)">
+        <MudButton OnClick="@(() => ShowParPanel = !ShowParPanel)" EndIcon="@(ShowParPanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
             Par
         </MudButton>
         @if (ShowParPanel)
@@ -73,7 +73,7 @@
     {
         <br/>
         <MudContainer>
-            <MudButton OnClick="@(() => ShowBarPanel[PM.Bar.IndexOf(bar)] = !ShowBarPanel[PM.Bar.IndexOf(bar)])">
+            <MudButton OnClick="@(() => ShowBarPanel[PM.Bar.IndexOf(bar)] = !ShowBarPanel[PM.Bar.IndexOf(bar)])" EndIcon="@(ShowBarPanel[PM.Bar.IndexOf(bar)] ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
                 Bar @(PM.Bar.IndexOf(bar) + 1)
             </MudButton>
             @if (ShowBarPanel[PM.Bar.IndexOf(bar)])
@@ -118,4 +118,3 @@
     }
 
 }
-

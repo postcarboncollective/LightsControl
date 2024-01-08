@@ -6,7 +6,37 @@
 <center>
     <br/>
     <MudContainer>
-        <MudButton OnClick="@(() => ShowExpulsadeiraPanel = !ShowExpulsadeiraPanel)">
+        <MudButton OnClick="@(() => ShowBlackoutPanel = !ShowBlackoutPanel)" EndIcon="@(ShowBlackoutPanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
+            Blackout
+        </MudButton>
+        @if (ShowBlackoutPanel)
+        {
+            <MudContainer Style="background: #111f">
+                <br/>
+                <MudGrid>
+                    <MudItem xs="6">
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Strobe" LabelPosition="LabelPosition.Start" @bind-Value="@BlackoutStrobe" Style="align-items: center"/>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Par" LabelPosition="LabelPosition.Start" @bind-Value="@BlackoutPar" Style="align-items: center"/>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 1" LabelPosition="LabelPosition.Start" @bind-Value="@BlackoutBar1" Style="align-items: center"/>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 2" LabelPosition="LabelPosition.Start" @bind-Value="@BlackoutBar2" Style="align-items: center"/>
+                    </MudItem>
+                </MudGrid>
+                <br/>
+                <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="Blackout">Execute</MudButton>
+                <br/>
+                <br/>
+            </MudContainer>
+        }
+    </MudContainer>
+    <br/>
+    <MudContainer>
+        <MudButton OnClick="@(() => ShowExpulsadeiraPanel = !ShowExpulsadeiraPanel)" EndIcon="@(ShowExpulsadeiraPanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
             Expulsadeira
         </MudButton>
         @if (ShowExpulsadeiraPanel)
@@ -15,20 +45,23 @@
                 <br/>
                 <MudGrid>
                     <MudItem xs="6">
-                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Strobe" @bind-Value="@SwitchExpulsadeiraStrobe" Style="align-items: center"/>
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Strobe" LabelPosition="LabelPosition.Start" @bind-Value="@ExpulsadeiraStrobe" Style="align-items: center"/>
                     </MudItem>
                     <MudItem xs="6">
-                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Par" @bind-Value="@SwitchExpulsadeiraPar" Style="align-items: center"/>
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Par" LabelPosition="LabelPosition.Start" @bind-Value="@ExpulsadeiraPar" Style="align-items: center"/>
                     </MudItem>
                     <MudItem xs="6">
-                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 1" @bind-Value="@SwitchExpulsadeiraBar1" Style="align-items: center"/>
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 1" LabelPosition="LabelPosition.Start" @bind-Value="@ExpulsadeiraBar1" Style="align-items: center"/>
                     </MudItem>
                     <MudItem xs="6">
-                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 2" @bind-Value="@SwitchExpulsadeiraBar2" Style="align-items: center"/>
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 2" LabelPosition="LabelPosition.Start" @bind-Value="@ExpulsadeiraBar2" Style="align-items: center"/>
+                    </MudItem>
+                    <MudItem xs="12" Class="d-flex justify-center">
+                        <MudColorPicker DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
                     </MudItem>
                 </MudGrid>
                 <br/>
-                <MudButton Variant="Variant.Filled" Color="Color.Tertiary">Execute Function</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="Expulsadeira">Execute</MudButton>
                 <br/>
                 <br/>
             </MudContainer>
@@ -37,11 +70,16 @@
 </center>
 
 @code {
+    public bool ShowBlackoutPanel = false;
+    public bool BlackoutStrobe { get; set; } = true;
+    public bool BlackoutPar { get; set; } = true;
+    public bool BlackoutBar1 { get; set; } = true;
+    public bool BlackoutBar2 { get; set; } = true;
     public bool ShowExpulsadeiraPanel = false;
-    public bool SwitchExpulsadeiraStrobe { get; set; } = false;
-    public bool SwitchExpulsadeiraPar { get; set; } = false;
-    public bool SwitchExpulsadeiraBar1 { get; set; } = false;
-    public bool SwitchExpulsadeiraBar2 { get; set; } = false;
+    public bool ExpulsadeiraStrobe { get; set; } = true;
+    public bool ExpulsadeiraPar { get; set; } = true;
+    public bool ExpulsadeiraBar1 { get; set; } = true;
+    public bool ExpulsadeiraBar2 { get; set; } = true;
 
     protected override void OnInitialized()
     {
