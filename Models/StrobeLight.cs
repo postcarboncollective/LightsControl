@@ -14,13 +14,13 @@ public class StrobeLight
     public StrobeLight(int addr)
     {
         Red = new(addr, 0);
-        Green = new(addr, 0);
-        Blue = new(addr, 0);
-        White = new(addr, 0);
-        Brightness = new(addr, 0);
-        Strobe = new(addr, 0);
-        Switch = new(addr, 0);
-        Speed = new(addr, 0);
+        Green = new(addr + 1, 0);
+        Blue = new(addr + 2, 0);
+        White = new(addr + 3, 0);
+        Brightness = new(addr + 4, 0);
+        Strobe = new(addr + 5, 0);
+        Switch = new(addr + 6, 0);
+        Speed = new(addr + 7, 0);
     }
 
     public void Set(float r, float g, float b, float white, float brightness, float strobe, float swtch, float speed)

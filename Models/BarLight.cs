@@ -19,7 +19,7 @@ public class BarLight
         Macro = new();
         for (int i = 0; i < 8; i++)
         {
-            Brightness.Add(new DmxChannel((addr + 0) + (i * 6), 0));
+            Brightness.Add(new DmxChannel(addr + (i * 6), 0));
             Strobe.Add(new DmxChannel((addr + 1) + (i * 6), 0));
             Red.Add(new DmxChannel((addr + 2) + (i * 6), 0));
             Green.Add(new DmxChannel((addr + 3) + (i * 6), 0));

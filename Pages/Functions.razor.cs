@@ -12,9 +12,8 @@ public partial class Functions
         float r = (ExpulsadeiraColor.R / 255f) * 100;
         float g = (ExpulsadeiraColor.G / 255f) * 100;
         float b = (ExpulsadeiraColor.B / 255f) * 100;
-        Console.WriteLine($"{r} {g} {b}");
         PM.Strobe.Set(r, g, b, 0, 100, 0, 0, 0);
-        PM.Par.Set(0, 0, 0, 0);
+        PM.Par.Set(100, 0, 100, 0);
         PM.Bar[0].Set(r, g, b, 100, 0, 0);
         PM.Bar[1].Set(r, g, b, 100, 0, 0);
     }

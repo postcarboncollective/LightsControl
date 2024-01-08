@@ -20,10 +20,10 @@ public static class Osc
         Sender = new OscSender(Address, 58293, outputPort);
         Sender.Connect();
 
-        Receiver = new OscReceiver(inputPort);
-        Thread = new Thread(new ThreadStart(ListenLoop));
-        Receiver.Connect();
-        Thread.Start();
+        // Receiver = new OscReceiver(inputPort);
+        // Thread = new Thread(new ThreadStart(ListenLoop));
+        // Receiver.Connect();
+        // Thread.Start();
     }
 
     public static void Send(string addr, object[] args)
