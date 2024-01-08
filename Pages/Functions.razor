@@ -1,5 +1,7 @@
-﻿@page "/Functions"
+﻿@page "/"
+@page "/Functions"
 @using Page = LightsControl.Page
+@using MudBlazor.Utilities
 
 <PageTitle>Functions</PageTitle>
 
@@ -57,7 +59,7 @@
                         <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 2" LabelPosition="LabelPosition.Start" @bind-Value="@ExpulsadeiraBar2" Style="align-items: center"/>
                     </MudItem>
                     <MudItem xs="12" Class="d-flex justify-center">
-                        <MudColorPicker DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
+                        <MudColorPicker @bind-Value="ExpulsadeiraColor" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
                     </MudItem>
                 </MudGrid>
                 <br/>
@@ -80,6 +82,7 @@
     public bool ExpulsadeiraPar { get; set; } = true;
     public bool ExpulsadeiraBar1 { get; set; } = true;
     public bool ExpulsadeiraBar2 { get; set; } = true;
+    public MudColor ExpulsadeiraColor = new MudColor(255, 255, 255, 255);
 
     protected override void OnInitialized()
     {

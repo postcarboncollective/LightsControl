@@ -34,12 +34,6 @@
 
 @code {
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        Global.MainLayout = this;
-    }
-
     public void Refresh()
     {
         StateHasChanged();
@@ -54,7 +48,6 @@
         Palette = new Palette()
         {
             Background = "000f",
-            BackgroundGrey = "000f",
             Primary = "#ffff",
             Secondary = "#0f0f",
             Tertiary = "#777f",

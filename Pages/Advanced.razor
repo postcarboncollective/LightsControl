@@ -1,6 +1,7 @@
-﻿@page "/"
-@page "/Advanced"
+﻿@page "/Advanced"
 @using Page = LightsControl.Page
+@using System.Security.Cryptography
+@using Microsoft.AspNetCore.Mvc.RazorPages
 
 <PageTitle>Advanced</PageTitle>
 
@@ -16,28 +17,28 @@
                 <br/>
                 <MudGrid>
                     <MudItem xs="12">
-                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Red, x))">Red</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Red.Value">Red</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Green, x))">Green</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Green.Value">Green</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Blue, x))">Blue</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Blue.Value">Blue</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.White, x))">White</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.White.Value">White</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Brightness, x))">Brightness</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Brightness.Value">Brightness</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Strobe, x))">Strobe</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Strobe.Value">Strobe</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Switch, x))">Switch</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Switch.Value">Switch</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Speed, x))">Speed</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Speed.Value">Speed</MudSlider>
                     </MudItem>
                 </MudGrid>
             </MudContainer>
@@ -54,16 +55,16 @@
                 <br/>
                 <MudGrid>
                     <MudItem xs="12">
-                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Par.Brightness, x))">Brightness</MudSlider>
+                        <MudSlider @bind-Value="PM.Par.Brightness.Value">Brightness</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Par.Strobe, x))">Strobe</MudSlider>
+                        <MudSlider @bind-Value="PM.Par.Strobe">Strobe</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Par.UV, x))">UV</MudSlider>
+                        <MudSlider @bind-Value="PM.Par.UV">UV</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Par.Audio, x))">Audio</MudSlider>
+                        <MudSlider @bind-Value="PM.Par.Audio">Audio</MudSlider>
                     </MudItem>
                 </MudGrid>
             </MudContainer>
@@ -82,22 +83,22 @@
                     <br/>
                     <MudGrid>
                         <MudItem xs="12">
-                            <MudSlider ValueChanged="@((double x) => Osc.SendDmx(bar.Brightness, x))">Brightness</MudSlider>
+                            <MudSlider Value="bar.Brightness[0].Value" ValueChanged="@((double x) => bar.SetBrightness((float)x))">Brightness</MudSlider>
                         </MudItem>
                         <MudItem xs="12">
-                            <MudSlider ValueChanged="@((double x) => Osc.SendDmx(bar.Strobe, x))">Strobe</MudSlider>
+                            <MudSlider Value="bar.Strobe[0].Value" ValueChanged="@((double x) => bar.SetStrobe((float)x))">Strobe</MudSlider>
                         </MudItem>
                         <MudItem xs="12">
-                            <MudSlider ValueChanged="@((double x) => Osc.SendDmx(bar.Macro, x))">Macro</MudSlider>
+                            <MudSlider Value="bar.Macro[0].Value" ValueChanged="@((double x) => bar.SetMacro((float)x))">Macro</MudSlider>
                         </MudItem>
                         <MudItem xs="12">
-                            <MudSlider ValueChanged="@((double x) => Osc.SendDmx(bar.Red, x))">Red</MudSlider>
+                            <MudSlider Value="bar.Red[0].Value" ValueChanged="@((double x) => bar.SetRed((float)x))">Red</MudSlider>
                         </MudItem>
                         <MudItem xs="12">
-                            <MudSlider ValueChanged="@((double x) => Osc.SendDmx(bar.Green, x))">Green</MudSlider>
+                            <MudSlider Value="bar.Green[0].Value" ValueChanged="@((double x) => bar.SetGreen((float)x))">Green</MudSlider>
                         </MudItem>
                         <MudItem xs="12">
-                            <MudSlider ValueChanged="@((double x) => Osc.SendDmx(bar.Blue, x))">Blue</MudSlider>
+                            <MudSlider Value="bar.Blue[0].Value" ValueChanged="@((double x) => bar.SetBlue((float)x))">Blue</MudSlider>
                         </MudItem>
                     </MudGrid>
                 </MudContainer>

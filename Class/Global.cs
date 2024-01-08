@@ -11,5 +11,4 @@ public enum Page
 public static class Global
 {
     public static Page Page;
-    public static MainLayout MainLayout;
 }

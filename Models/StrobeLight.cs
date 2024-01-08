@@ -2,25 +2,37 @@ namespace LightsControl;
 
 public class StrobeLight
 {
-    public int Red { get; set; } = 1;
-    public int Green { get; set; } = 2;
-    public int Blue { get; set; } = 3;
-    public int White { get; set; } = 4;
-    public int Brightness { get; set; } = 5;
-    public int Strobe { get; set; } = 6;
-    public int Switch { get; set; } = 7;
-    public int Speed { get; set; } = 8;
+    public DmxChannel Red;
+    public DmxChannel Green;
+    public DmxChannel Blue;
+    public DmxChannel White;
+    public DmxChannel Brightness;
+    public DmxChannel Strobe;
+    public DmxChannel Switch;
+    public DmxChannel Speed;
 
     public StrobeLight(int addr)
     {
-        Red = addr;
-        Green = addr + 1;
-        Blue = addr + 2;
-        White = addr + 3;
-        Brightness = addr + 4;
-        Strobe = addr + 5;
-        Switch = addr + 6;
-        Speed = addr + 7;
+        Red = new(addr, 0);
+        Green = new(addr, 0);
+        Blue = new(addr, 0);
+        White = new(addr, 0);
+        Brightness = new(addr, 0);
+        Strobe = new(addr, 0);
+        Switch = new(addr, 0);
+        Speed = new(addr, 0);
+    }
+
+    public void Set(float r, float g, float b, float white, float brightness, float strobe, float swtch, float speed)
+    {
+        Red.Value = r;
+        Green.Value = g;
+        Blue.Value = b;
+        White.Value = white;
+        Brightness.Value = brightness;
+        Strobe.Value = strobe;
+        Switch.Value = swtch;
+        Speed.Value = speed;
     }
 }
 

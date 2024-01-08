@@ -2,30 +2,73 @@ namespace LightsControl;
 
 public class BarLight
 {
-    public List<int> Brightness { get; set; } = new();
-    public List<int> Strobe { get; set; }= new();
-    public List<int> Red { get; set; } = new();
-    public List<int> Green { get; set; } = new();
-    public List<int> Blue { get; set; } = new();
-    public List<int> Macro { get; set; } = new();
+    public List<DmxChannel> Brightness;
+    public List<DmxChannel> Strobe;
+    public List<DmxChannel> Red;
+    public List<DmxChannel> Green;
+    public List<DmxChannel> Blue;
+    public List<DmxChannel> Macro;
 
     public BarLight(int addr)
     {
-        Brightness.Clear();
-        Strobe.Clear();
-        Red.Clear();
-        Green.Clear();
-        Blue.Clear();
-        Macro.Clear();
+        Brightness = new();
+        Strobe = new();
+        Red = new();
+        Green = new();
+        Blue = new();
+        Macro = new();
         for (int i = 0; i < 8; i++)
         {
-            Brightness.Add((addr + 0) + (i * 6));
-            Strobe.Add((addr + 1) + (i * 6));
-            Red.Add((addr + 2) + (i * 6));
-            Green.Add((addr + 3) + (i * 6));
-            Blue.Add((addr + 4) + (i * 6));
-            Macro.Add((addr + 5) + (i * 6));
+            Brightness.Add(new DmxChannel((addr + 0) + (i * 6), 0));
+            Strobe.Add(new DmxChannel((addr + 1) + (i * 6), 0));
+            Red.Add(new DmxChannel((addr + 2) + (i * 6), 0));
+            Green.Add(new DmxChannel((addr + 3) + (i * 6), 0));
+            Blue.Add(new DmxChannel((addr + 4) + (i * 6), 0));
+            Macro.Add(new DmxChannel((addr + 5) + (i * 6), 0));
         }
+    }
+
+    public void Set(float r, float g, float b, float brightness, float strobe, float macro)
+    {
+        for (int i = 0; i < Red.Count; i++)
+        {
+            Red[i].Value = r;
+            Green[i].Value = g;
+            Blue[i].Value = b;
+            Brightness[i].Value = brightness;
+            Strobe[i].Value = strobe;
+            Macro[i].Value = macro;
+        }
+    }
+
+    public void SetRed(float val)
+    {
+        foreach (var x in Red) x.Value = val;
+    }
+
+    public void SetGreen(float val)
+    {
+        foreach (var x in Green) x.Value = val;
+    }
+
+    public void SetBlue(float val)
+    {
+        foreach (var x in Blue) x.Value = val;
+    }
+
+    public void SetBrightness(float val)
+    {
+        foreach (var x in Brightness) x.Value = val;
+    }
+
+    public void SetStrobe(float val)
+    {
+        foreach (var x in Strobe) x.Value = val;
+    }
+
+    public void SetMacro(float val)
+    {
+        foreach (var x in Macro) x.Value = val;
     }
 }
 
