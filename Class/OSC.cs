@@ -33,6 +33,16 @@ public static class Osc
         Sender.Send(bundle);
     }
 
+    public static void SendDmx(int addr, double val)
+    {
+        Send("/dmx" + addr, new object[] { val / 100 });
+    }
+
+    public static void SendDmx(List<int> addr, double val)
+    {
+        Send("/dmx" + addr, new object[] { val / 100 });
+    }
+
     public static void ListenLoop()
     {
         try

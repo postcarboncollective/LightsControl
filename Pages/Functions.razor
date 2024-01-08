@@ -1,0 +1,52 @@
+﻿@page "/Functions"
+@using Page = LightsControl.Page
+
+<PageTitle>Functions</PageTitle>
+
+<center>
+    <br/>
+    <MudContainer>
+        <MudButton OnClick="@(() => ShowExpulsadeiraPanel = !ShowExpulsadeiraPanel)">
+            Expulsadeira
+        </MudButton>
+        @if (ShowExpulsadeiraPanel)
+        {
+            <MudContainer Style="background: #111f">
+                <br/>
+                <MudGrid>
+                    <MudItem xs="6">
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Strobe" @bind-Value="@SwitchExpulsadeiraStrobe" Style="align-items: center"/>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Par" @bind-Value="@SwitchExpulsadeiraPar" Style="align-items: center"/>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 1" @bind-Value="@SwitchExpulsadeiraBar1" Style="align-items: center"/>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 2" @bind-Value="@SwitchExpulsadeiraBar2" Style="align-items: center"/>
+                    </MudItem>
+                </MudGrid>
+                <br/>
+                <MudButton Variant="Variant.Filled" Color="Color.Tertiary">Execute Function</MudButton>
+                <br/>
+                <br/>
+            </MudContainer>
+        }
+    </MudContainer>
+</center>
+
+@code {
+    public bool ShowExpulsadeiraPanel = false;
+    public bool SwitchExpulsadeiraStrobe { get; set; } = false;
+    public bool SwitchExpulsadeiraPar { get; set; } = false;
+    public bool SwitchExpulsadeiraBar1 { get; set; } = false;
+    public bool SwitchExpulsadeiraBar2 { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Global.Page = Page.Functions;
+    }
+
+}

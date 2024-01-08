@@ -1,0 +1,121 @@
+﻿@page "/"
+@page "/Advanced"
+@using Page = LightsControl.Page
+
+<PageTitle>Advanced</PageTitle>
+
+<center>
+    <br/>
+    <MudContainer>
+        <MudButton OnClick="@(() => ShowStrobePanel = !ShowStrobePanel)">
+            Strobe
+        </MudButton>
+        @if (ShowStrobePanel)
+        {
+            <MudContainer Style="background: #111f">
+                <br/>
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Red, x))">Red</MudSlider>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Green, x))">Green</MudSlider>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Blue, x))">Blue</MudSlider>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.White, x))">White</MudSlider>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Brightness, x))">Brightness</MudSlider>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Strobe, x))">Strobe</MudSlider>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Switch, x))">Switch</MudSlider>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Strobe.Speed, x))">Speed</MudSlider>
+                    </MudItem>
+                </MudGrid>
+            </MudContainer>
+        }
+    </MudContainer>
+    <br/>
+    <MudContainer>
+        <MudButton OnClick="@(() => ShowParPanel = !ShowParPanel)">
+            Par
+        </MudButton>
+        @if (ShowParPanel)
+        {
+            <MudContainer Style="background: #111f">
+                <br/>
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Par.Brightness, x))">Brightness</MudSlider>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Par.Strobe, x))">Strobe</MudSlider>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Par.UV, x))">UV</MudSlider>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSlider ValueChanged="@((double x) => Osc.SendDmx(PM.Par.Audio, x))">Audio</MudSlider>
+                    </MudItem>
+                </MudGrid>
+            </MudContainer>
+        }
+    </MudContainer>
+    @foreach (var bar in PM.Bar)
+    {
+        <br/>
+        <MudContainer>
+            <MudButton OnClick="@(() => ShowBarPanel[PM.Bar.IndexOf(bar)] = !ShowBarPanel[PM.Bar.IndexOf(bar)])">
+                Bar @(PM.Bar.IndexOf(bar) + 1)
+            </MudButton>
+            @if (ShowBarPanel[PM.Bar.IndexOf(bar)])
+            {
+                <MudContainer Style="background: #111f">
+                    <br/>
+                    <MudGrid>
+                        <MudItem xs="12">
+                            <MudSlider ValueChanged="@((double x) => Osc.SendDmx(bar.Brightness, x))">Brightness</MudSlider>
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudSlider ValueChanged="@((double x) => Osc.SendDmx(bar.Strobe, x))">Strobe</MudSlider>
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudSlider ValueChanged="@((double x) => Osc.SendDmx(bar.Macro, x))">Macro</MudSlider>
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudSlider ValueChanged="@((double x) => Osc.SendDmx(bar.Red, x))">Red</MudSlider>
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudSlider ValueChanged="@((double x) => Osc.SendDmx(bar.Green, x))">Green</MudSlider>
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudSlider ValueChanged="@((double x) => Osc.SendDmx(bar.Blue, x))">Blue</MudSlider>
+                        </MudItem>
+                    </MudGrid>
+                </MudContainer>
+            }
+        </MudContainer>
+    }
+</center>
+
+@code {
+    public bool ShowStrobePanel = false;
+    public bool ShowParPanel = false;
+    public List<bool> ShowBarPanel = new List<bool>() { false, false };
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Global.Page = Page.Advanced;
+    }
+
+}
+

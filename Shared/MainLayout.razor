@@ -1,20 +1,72 @@
-﻿@inherits LayoutComponentBase
+﻿@using Page = LightsControl.Page
+@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
 
-<MudThemeProvider/>
+<MudThemeProvider Theme="PlanetaManas"/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
 <MudLayout>
+    <MudAppBar>
+        <MudSpacer/>
+        @if (Global.Page == Page.Functions)
+        {
+            <MudButton Color="Color.Secondary" OnClick="@(() => NavigationManager.NavigateTo("/Functions"))">Functions</MudButton>
+        }
+        else
+        {
+            <MudButton OnClick="@(() => NavigationManager.NavigateTo("/Functions"))">Functions</MudButton>
+        }
+        @if (Global.Page == Page.Advanced)
+        {
+            <MudButton Color="Color.Secondary" OnClick="@(() => NavigationManager.NavigateTo("/Advanced"))">Advanced</MudButton>
+        }
+        else
+        {
+            <MudButton OnClick="@(() => NavigationManager.NavigateTo("/Advanced"))">Advanced</MudButton>
+        }
+        <MudSpacer/>
+    </MudAppBar>
     <MudMainContent>
         @Body
     </MudMainContent>
 </MudLayout>
 
-@*
+@code {
 
-<MudThemeProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Global.MainLayout = this;
+    }
+
+    public void Refresh()
+    {
+        StateHasChanged();
+    }
+
+    MudTheme PlanetaManas = new()
+    {
+        LayoutProperties = new LayoutProperties()
+        {
+            AppbarHeight = "30px"
+        },
+        Palette = new Palette()
+        {
+            Background = "000f",
+            Primary = "#ffff",
+            Secondary = "#0f0f",
+            Tertiary = "#777f",
+            TextPrimary = "ffff",
+            TextSecondary = "0f0f",
+            AppbarBackground = "000f",
+            DrawerBackground = "222f"
+        }
+    };
+
+}
+
+@*
 
 <MudLayout>
     <MudAppBar>

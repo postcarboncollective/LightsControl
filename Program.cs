@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Services;
@@ -34,7 +35,7 @@ public class Program
         app.MapFallbackToPage("/_Host");
 
         Osc.Init("127.0.0.1", 7700, 9000);
-
+        
         app.Run();
     }
 }
