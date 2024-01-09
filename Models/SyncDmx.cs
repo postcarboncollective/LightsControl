@@ -4,7 +4,7 @@ using MudBlazor;
 
 namespace LightsControl;
 
-public class DmxChannel
+public class SyncDmx
 {
     public int Address;
     float val;
@@ -14,12 +14,12 @@ public class DmxChannel
         set
         {
             val = value;
-            Global.Sync.Invoke();
+            Global.Sync?.Invoke();
             Osc.SendDmx(Address, value);
         }
     }
 
-    public DmxChannel(int addr, int value)
+    public SyncDmx(int addr, int value)
     {
         Address = addr;
         Value = value;

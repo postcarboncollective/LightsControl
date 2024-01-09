@@ -2,12 +2,12 @@ namespace LightsControl;
 
 public class BarLight
 {
-    public List<DmxChannel> Brightness;
-    public List<DmxChannel> Strobe;
-    public List<DmxChannel> Red;
-    public List<DmxChannel> Green;
-    public List<DmxChannel> Blue;
-    public List<DmxChannel> Macro;
+    public List<SyncDmx> Brightness;
+    public List<SyncDmx> Strobe;
+    public List<SyncDmx> Red;
+    public List<SyncDmx> Green;
+    public List<SyncDmx> Blue;
+    public List<SyncDmx> Macro;
 
     public BarLight(int addr)
     {
@@ -19,12 +19,12 @@ public class BarLight
         Macro = new();
         for (int i = 0; i < 8; i++)
         {
-            Brightness.Add(new DmxChannel(addr + (i * 6), 0));
-            Strobe.Add(new DmxChannel((addr + 1) + (i * 6), 0));
-            Red.Add(new DmxChannel((addr + 2) + (i * 6), 0));
-            Green.Add(new DmxChannel((addr + 3) + (i * 6), 0));
-            Blue.Add(new DmxChannel((addr + 4) + (i * 6), 0));
-            Macro.Add(new DmxChannel((addr + 5) + (i * 6), 0));
+            Brightness.Add(new SyncDmx(addr + (i * 6), 0));
+            Strobe.Add(new SyncDmx((addr + 1) + (i * 6), 0));
+            Red.Add(new SyncDmx((addr + 2) + (i * 6), 0));
+            Green.Add(new SyncDmx((addr + 3) + (i * 6), 0));
+            Blue.Add(new SyncDmx((addr + 4) + (i * 6), 0));
+            Macro.Add(new SyncDmx((addr + 5) + (i * 6), 0));
         }
     }
 

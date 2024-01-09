@@ -2,17 +2,17 @@ namespace LightsControl;
 
 public class ParLight
 {
-    public DmxChannel Brightness;
-    public DmxChannel Strobe;
-    public DmxChannel UV;
-    public DmxChannel Audio;
+    public SyncDmx Brightness;
+    public SyncDmx Strobe;
+    public SyncDmx UV;
+    public SyncDmx Audio;
 
     public ParLight(int addr)
     {
-        Brightness = new DmxChannel(addr, 0);
-        Strobe = new DmxChannel(addr + 1, 0);
-        UV = new DmxChannel(addr + 2, 0);
-        Audio = new DmxChannel(addr + 3, 0);
+        Brightness = new SyncDmx(addr, 0);
+        Strobe = new SyncDmx(addr + 1, 0);
+        UV = new SyncDmx(addr + 2, 0);
+        Audio = new SyncDmx(addr + 3, 0);
     }
 
     public void Set(float brightness, float strobe, float uv, float audio)

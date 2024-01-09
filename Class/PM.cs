@@ -1,5 +1,13 @@
 namespace LightsControl;
 
+public enum Lights : byte
+{
+    Strobe = 0,
+    Par = 1,
+    Bar1 = 2,
+    Bar2 = 3,
+}
+
 public static class PM
 {
     public static StrobeLight Strobe = new(1);

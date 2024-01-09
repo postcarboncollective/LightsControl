@@ -1,6 +1,7 @@
 ﻿@page "/"
 @page "/Functions"
 @using MudBlazor.Utilities
+@using System.Runtime.InteropServices.JavaScript
 
 <PageTitle>Functions</PageTitle>
 
@@ -15,22 +16,19 @@
             <MudContainer Style="background: #111f">
                 <br/>
                 <MudGrid>
-                    <MudItem xs="6">
-                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Strobe" LabelPosition="LabelPosition.Start" @bind-Value="@BlackoutStrobe" Style="align-items: center"/>
-                    </MudItem>
-                    <MudItem xs="6">
-                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Par" LabelPosition="LabelPosition.Start" @bind-Value="@BlackoutPar" Style="align-items: center"/>
-                    </MudItem>
-                    <MudItem xs="6">
-                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 1" LabelPosition="LabelPosition.Start" @bind-Value="@BlackoutBar1" Style="align-items: center"/>
-                    </MudItem>
-                    <MudItem xs="6">
-                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 2" LabelPosition="LabelPosition.Start" @bind-Value="@BlackoutBar2" Style="align-items: center"/>
-                    </MudItem>
+                    @foreach (var name in Enum.GetNames(typeof(Lights)))
+                    {
+                        <MudItem xs="6">
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@LightsControl.Function.BlackoutToggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                        </MudItem>
+                    }
                 </MudGrid>
                 <br/>
-                <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="Blackout">Execute</MudButton>
-                <br/>
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="LightsControl.Function.Blackout">Execute</MudButton>
+                    </MudItem>
+                </MudGrid>
                 <br/>
             </MudContainer>
         }
@@ -45,25 +43,58 @@
             <MudContainer Style="background: #111f">
                 <br/>
                 <MudGrid>
-                    <MudItem xs="6">
-                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Strobe" LabelPosition="LabelPosition.Start" @bind-Value="@ExpulsadeiraStrobe" Style="align-items: center"/>
-                    </MudItem>
-                    <MudItem xs="6">
-                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Par" LabelPosition="LabelPosition.Start" @bind-Value="@ExpulsadeiraPar" Style="align-items: center"/>
-                    </MudItem>
-                    <MudItem xs="6">
-                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 1" LabelPosition="LabelPosition.Start" @bind-Value="@ExpulsadeiraBar1" Style="align-items: center"/>
-                    </MudItem>
-                    <MudItem xs="6">
-                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="Bar 2" LabelPosition="LabelPosition.Start" @bind-Value="@ExpulsadeiraBar2" Style="align-items: center"/>
-                    </MudItem>
+                    @foreach (var name in Enum.GetNames(typeof(Lights)))
+                    {
+                        <MudItem xs="6">
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Function.ExpulsadeiraToggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                        </MudItem>
+                    }
                     <MudItem xs="12" Class="d-flex justify-center">
-                        <MudColorPicker @bind-Value="ExpulsadeiraColor" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
+                        <MudColorPicker @bind-Value="Function.ExpulsadeiraColor.Value" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
                     </MudItem>
                 </MudGrid>
                 <br/>
-                <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="Expulsadeira">Execute</MudButton>
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="Function.Expulsadeira">Execute</MudButton>
+                    </MudItem>
+                </MudGrid>
                 <br/>
+            </MudContainer>
+        }
+    </MudContainer>
+    <br/>
+    <MudContainer>
+        <MudButton OnClick="@(() => ShowStrobePanel = !ShowStrobePanel)" EndIcon="@(ShowStrobePanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)" Color="@(Function.StrobeExecuting.Value ? Color.Secondary : Color.Primary)">
+            Strobe
+        </MudButton>
+        @if (ShowStrobePanel)
+        {
+            <MudContainer Style="background: #111f">
+                <br/>
+                <MudGrid>
+                    @foreach (var name in Enum.GetNames(typeof(Lights)))
+                    {
+                        <MudItem xs="6">
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Function.StrobeToggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                        </MudItem>
+                    }
+                    <MudItem xs="12" Class="d-flex justify-center">
+                        <MudColorPicker @bind-Value="Function.StrobeColor.Value" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
+                    </MudItem>
+                </MudGrid>
+                <br/>
+                <MudGrid>
+                    <MudItem xs="@(Function.StrobeExecuting.Value ? 6 : 12)">
+                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="Function.Strobe">Execute</MudButton>
+                    </MudItem>
+                    @if (Function.StrobeExecuting.Value)
+                    {
+                        <MudItem xs="6">
+                            <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Stop" OnClick="LightsControl.Function.StrobeCancel">Cancel</MudButton>
+                        </MudItem>
+                    }
+                </MudGrid>
                 <br/>
             </MudContainer>
         }
@@ -72,14 +103,18 @@
 
 @code {
     public bool ShowBlackoutPanel = false;
-    public bool BlackoutStrobe { get; set; } = true;
-    public bool BlackoutPar { get; set; } = true;
-    public bool BlackoutBar1 { get; set; } = true;
-    public bool BlackoutBar2 { get; set; } = true;
     public bool ShowExpulsadeiraPanel = false;
-    public bool ExpulsadeiraStrobe { get; set; } = true;
-    public bool ExpulsadeiraPar { get; set; } = true;
-    public bool ExpulsadeiraBar1 { get; set; } = true;
-    public bool ExpulsadeiraBar2 { get; set; } = true;
-    public MudColor ExpulsadeiraColor = new MudColor(255, 255, 255, 255);
+    public bool ShowStrobePanel = false;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Global.Sync += Refresh;
+    }
+
+    public void Refresh()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
 }

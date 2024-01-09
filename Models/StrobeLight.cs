@@ -2,14 +2,14 @@ namespace LightsControl;
 
 public class StrobeLight
 {
-    public DmxChannel Red;
-    public DmxChannel Green;
-    public DmxChannel Blue;
-    public DmxChannel White;
-    public DmxChannel Brightness;
-    public DmxChannel Strobe;
-    public DmxChannel Switch;
-    public DmxChannel Speed;
+    public SyncDmx Red;
+    public SyncDmx Green;
+    public SyncDmx Blue;
+    public SyncDmx White;
+    public SyncDmx Brightness;
+    public SyncDmx Strobe;
+    public SyncDmx Switch;
+    public SyncDmx Speed;
 
     public StrobeLight(int addr)
     {
