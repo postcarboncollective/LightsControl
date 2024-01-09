@@ -14,28 +14,28 @@
                 <br/>
                 <MudGrid>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="PM.Strobe.Red.Value">Red</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Red.Value" Min="0" Max="1" Step="0.01">Red</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="PM.Strobe.Green.Value">Green</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Green.Value" Min="0" Max="1" Step="0.01">Green</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="PM.Strobe.Blue.Value">Blue</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Blue.Value" Min="0" Max="1" Step="0.01">Blue</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="PM.Strobe.White.Value">White</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.White.Value" Min="0" Max="1" Step="0.01">White</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="PM.Strobe.Brightness.Value">Brightness</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Brightness.Value" Min="0" Max="1" Step="0.01">Brightness</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="PM.Strobe.Strobe.Value">Strobe</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Strobe.Value" Min="0" Max="1" Step="0.01">Strobe</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="PM.Strobe.Switch.Value">Switch</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Switch.Value" Min="0" Max="1" Step="0.01">Switch</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="PM.Strobe.Speed.Value">Speed</MudSlider>
+                        <MudSlider @bind-Value="PM.Strobe.Speed.Value" Min="0" Max="1" Step="0.01">Speed</MudSlider>
                     </MudItem>
                 </MudGrid>
             </MudContainer>
@@ -52,16 +52,16 @@
                 <br/>
                 <MudGrid>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="PM.Par.Brightness.Value">Brightness</MudSlider>
+                        <MudSlider @bind-Value="PM.Par.Brightness.Value" Min="0" Max="1" Step="0.01">Brightness</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="PM.Par.Strobe.Value">Strobe</MudSlider>
+                        <MudSlider @bind-Value="PM.Par.Strobe.Value" Min="0" Max="1" Step="0.01">Strobe</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="PM.Par.UV.Value">UV</MudSlider>
+                        <MudSlider @bind-Value="PM.Par.UV.Value" Min="0" Max="1" Step="0.01">UV</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="PM.Par.Audio.Value">Audio</MudSlider>
+                        <MudSlider @bind-Value="PM.Par.Audio.Value" Min="0" Max="1" Step="0.01">Audio</MudSlider>
                     </MudItem>
                 </MudGrid>
             </MudContainer>
@@ -85,14 +85,14 @@
                             </MudButton>
                             @if (!ShowSingleBarPanel[PM.Bar.IndexOf(bar)][0])
                             {
-                                <MudSlider Value="bar.Brightness[0].Value" ValueChanged="@((double x) => bar.SetBrightness((float)x))"/>
+                                <MudSlider Value="bar.Brightness[0].Value" ValueChanged="@((double x) => bar.SetBrightness(x))" Min="0" Max="1" Step="0.01"/>
                             }
                             else
                             {
                                 <MudContainer Style="background: #222f">
                                     @foreach (var brightness in bar.Brightness)
                                     {
-                                        <MudSlider @bind-Value="bar.Brightness[bar.Brightness.IndexOf(brightness)].Value">Brightness @(bar.Brightness.IndexOf(brightness) + 1)</MudSlider>
+                                        <MudSlider @bind-Value="bar.Brightness[bar.Brightness.IndexOf(brightness)].Value" Min="0" Max="1" Step="0.01">Brightness @(bar.Brightness.IndexOf(brightness) + 1)</MudSlider>
                                     }
                                 </MudContainer>
                             }
@@ -103,14 +103,14 @@
                             </MudButton>
                             @if (!ShowSingleBarPanel[PM.Bar.IndexOf(bar)][1])
                             {
-                                <MudSlider Value="bar.Strobe[0].Value" ValueChanged="@((double x) => bar.SetStrobe((float)x))"/>
+                                <MudSlider Value="bar.Strobe[0].Value" ValueChanged="@((double x) => bar.SetStrobe(x))" Min="0" Max="1" Step="0.01"/>
                             }
                             else
                             {
                                 <MudContainer Style="background: #222f">
                                     @foreach (var strobe in bar.Strobe)
                                     {
-                                        <MudSlider @bind-Value="bar.Strobe[bar.Strobe.IndexOf(strobe)].Value">Strobe @(bar.Strobe.IndexOf(strobe) + 1)</MudSlider>
+                                        <MudSlider @bind-Value="bar.Strobe[bar.Strobe.IndexOf(strobe)].Value" Min="0" Max="1" Step="0.01">Strobe @(bar.Strobe.IndexOf(strobe) + 1)</MudSlider>
                                     }
                                 </MudContainer>
                             }
@@ -121,14 +121,14 @@
                             </MudButton>
                             @if (!ShowSingleBarPanel[PM.Bar.IndexOf(bar)][5])
                             {
-                                <MudSlider Value="bar.Macro[0].Value" ValueChanged="@((double x) => bar.SetMacro((float)x))"/>
+                                <MudSlider Value="bar.Macro[0].Value" ValueChanged="@((double x) => bar.SetMacro(x))" Min="0" Max="1" Step="0.01"/>
                             }
                             else
                             {
                                 <MudContainer Style="background: #222f">
                                     @foreach (var macro in bar.Macro)
                                     {
-                                        <MudSlider @bind-Value="bar.Macro[bar.Macro.IndexOf(macro)].Value">Macro @(bar.Macro.IndexOf(macro) + 1)</MudSlider>
+                                        <MudSlider @bind-Value="bar.Macro[bar.Macro.IndexOf(macro)].Value" Min="0" Max="1" Step="0.01">Macro @(bar.Macro.IndexOf(macro) + 1)</MudSlider>
                                     }
                                 </MudContainer>
                             }
@@ -139,14 +139,14 @@
                             </MudButton>
                             @if (!ShowSingleBarPanel[PM.Bar.IndexOf(bar)][2])
                             {
-                                <MudSlider Value="bar.Red[0].Value" ValueChanged="@((double x) => bar.SetRed((float)x))"/>
+                                <MudSlider Value="bar.Red[0].Value" ValueChanged="@((double x) => bar.SetRed(x))" Min="0" Max="1" Step="0.01"/>
                             }
                             else
                             {
                                 <MudContainer Style="background: #222f">
                                     @foreach (var red in bar.Red)
                                     {
-                                        <MudSlider @bind-Value="bar.Red[bar.Red.IndexOf(red)].Value">Red @(bar.Red.IndexOf(red) + 1)</MudSlider>
+                                        <MudSlider @bind-Value="bar.Red[bar.Red.IndexOf(red)].Value" Min="0" Max="1" Step="0.01">Red @(bar.Red.IndexOf(red) + 1)</MudSlider>
                                     }
                                 </MudContainer>
                             }
@@ -157,14 +157,14 @@
                             </MudButton>
                             @if (!ShowSingleBarPanel[PM.Bar.IndexOf(bar)][3])
                             {
-                                <MudSlider Value="bar.Green[0].Value" ValueChanged="@((double x) => bar.SetGreen((float)x))"/>
+                                <MudSlider Value="bar.Green[0].Value" ValueChanged="@((double x) => bar.SetGreen(x))" Min="0" Max="1" Step="0.01"/>
                             }
                             else
                             {
                                 <MudContainer Style="background: #222f">
                                     @foreach (var green in bar.Green)
                                     {
-                                        <MudSlider @bind-Value="bar.Green[bar.Green.IndexOf(green)].Value">Green @(bar.Green.IndexOf(green) + 1)</MudSlider>
+                                        <MudSlider @bind-Value="bar.Green[bar.Green.IndexOf(green)].Value" Min="0" Max="1" Step="0.01">Green @(bar.Green.IndexOf(green) + 1)</MudSlider>
                                     }
                                 </MudContainer>
                             }
@@ -175,14 +175,14 @@
                             </MudButton>
                             @if (!ShowSingleBarPanel[PM.Bar.IndexOf(bar)][4])
                             {
-                                <MudSlider Value="bar.Blue[0].Value" ValueChanged="@((double x) => bar.SetBlue((float)x))"/>
+                                <MudSlider Value="bar.Blue[0].Value" ValueChanged="@((double x) => bar.SetBlue(x))" Min="0" Max="1" Step="0.01"/>
                             }
                             else
                             {
                                 <MudContainer Style="background: #222f">
                                     @foreach (var blue in bar.Blue)
                                     {
-                                        <MudSlider @bind-Value="bar.Blue[bar.Blue.IndexOf(blue)].Value">Blue @(bar.Blue.IndexOf(blue) + 1)</MudSlider>
+                                        <MudSlider @bind-Value="bar.Blue[bar.Blue.IndexOf(blue)].Value" Min="0" Max="1" Step="0.01">Blue @(bar.Blue.IndexOf(blue) + 1)</MudSlider>
                                     }
                                 </MudContainer>
                             }

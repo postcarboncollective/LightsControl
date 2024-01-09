@@ -1,9 +1,9 @@
 namespace LightsControl;
 
-public class SyncFloat
+public class SyncDouble
 {
-    float val;
-    public float Value
+    double val;
+    public double Value
     {
         get => val;
         set
@@ -13,7 +13,7 @@ public class SyncFloat
         }
     }
 
-    public SyncFloat(float value)
+    public SyncDouble(double value)
     {
         Value = value;
     }

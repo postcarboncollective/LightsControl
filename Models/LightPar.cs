@@ -15,7 +15,7 @@ public class LightPar
         Audio = new SyncDmx(addr + 3, 0);
     }
 
-    public void Set(float brightness, float strobe, float uv, float audio)
+    public void Set(double brightness, double strobe, double uv, double audio)
     {
         Brightness.Value = brightness;
         Strobe.Value = strobe;

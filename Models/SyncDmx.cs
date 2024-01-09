@@ -3,8 +3,8 @@ namespace LightsControl;
 public class SyncDmx
 {
     public int Address;
-    float val;
-    public float Value
+    double val;
+    public double Value
     {
         get => val;
         set

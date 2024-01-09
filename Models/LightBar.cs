@@ -28,7 +28,7 @@ public class LightBar
         }
     }
 
-    public void Set(float r, float g, float b, float brightness, float strobe, float macro)
+    public void Set(double r, double g, double b, double brightness, double strobe, double macro)
     {
         for (int i = 0; i < Red.Count; i++)
         {
@@ -41,32 +41,32 @@ public class LightBar
         }
     }
 
-    public void SetRed(float val)
+    public void SetRed(double val)
     {
         foreach (var x in Red) x.Value = val;
     }
 
-    public void SetGreen(float val)
+    public void SetGreen(double val)
     {
         foreach (var x in Green) x.Value = val;
     }
 
-    public void SetBlue(float val)
+    public void SetBlue(double val)
     {
         foreach (var x in Blue) x.Value = val;
     }
 
-    public void SetBrightness(float val)
+    public void SetBrightness(double val)
     {
         foreach (var x in Brightness) x.Value = val;
     }
 
-    public void SetStrobe(float val)
+    public void SetStrobe(double val)
     {
         foreach (var x in Strobe) x.Value = val;
     }
 
-    public void SetMacro(float val)
+    public void SetMacro(double val)
     {
         foreach (var x in Macro) x.Value = val;
     }

@@ -33,16 +33,16 @@ public static class Osc
         Sender.Send(bundle);
     }
 
-    public static void SendDmx(int addr, float val)
+    public static void SendDmx(int addr, double val)
     {
-        Send("/dmx" + addr, new object[] { val / 100 });
+        Send("/dmx" + addr, new object[] { val });
     }
 
-    public static void SendDmx(List<int> addr, float val)
+    public static void SendDmx(List<int> addr, double val)
     {
         foreach (var x in addr)
         {
-            Send("/dmx" + x, new object[] { val / 100 });
+            Send("/dmx" + x, new object[] { val });
         }
     }
 

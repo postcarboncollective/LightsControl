@@ -23,7 +23,7 @@ public class LightStrobe
         Speed = new(addr + 7, 0);
     }
 
-    public void Set(float r, float g, float b, float white, float brightness, float strobe, float swtch, float speed)
+    public void Set(double r, double g, double b, double white, double brightness, double strobe, double swtch, double speed)
     {
         Red.Value = r;
         Green.Value = g;

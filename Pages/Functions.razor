@@ -82,7 +82,7 @@
                         <MudColorPicker @bind-Value="Function.Strobe.Color.Value" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="Function.Strobe.Speed.Value">Speed</MudSlider>
+                        <MudSlider @bind-Value="Function.Strobe.Speed.Value" Min="0" Max="1" Step="0.01">Speed</MudSlider>
                     </MudItem>
                 </MudGrid>
                 <br/>
