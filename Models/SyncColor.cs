@@ -1,6 +1,3 @@
-using LightsControl.Shared;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
 using MudBlazor.Utilities;
 
 namespace LightsControl;

@@ -1,7 +1,3 @@
-using LightsControl.Shared;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-
 namespace LightsControl;
 
 public class SyncBool
