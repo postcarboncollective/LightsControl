@@ -5,7 +5,7 @@ namespace LightsControl;
 public class PresetStrobe : Preset
 {
     public SyncColor Color = new SyncColor(new MudColor(255, 255, 255, 255));
-    public SyncDouble Speed = new SyncDouble(0.125f);
+    public SyncDouble Speed = new SyncDouble(0.5f);
     public SyncBool Executing = new SyncBool(false);
     static CancellationTokenSource Token = new();
 
