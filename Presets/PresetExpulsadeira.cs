@@ -8,6 +8,7 @@ public class PresetExpulsadeira : Preset
 
     public override void Run()
     {
+        Function.StopAll();
         float r = (Color.Value.R / 255f);
         float g = (Color.Value.G / 255f);
         float b = (Color.Value.B / 255f);
