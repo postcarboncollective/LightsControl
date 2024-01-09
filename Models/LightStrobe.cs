@@ -1,6 +1,6 @@
 namespace LightsControl;
 
-public class StrobeLight
+public class LightStrobe
 {
     public SyncDmx Red;
     public SyncDmx Green;
@@ -11,7 +11,7 @@ public class StrobeLight
     public SyncDmx Switch;
     public SyncDmx Speed;
 
-    public StrobeLight(int addr)
+    public LightStrobe(int addr)
     {
         Red = new(addr, 0);
         Green = new(addr + 1, 0);

@@ -1,6 +1,6 @@
 namespace LightsControl;
 
-public class BarLight
+public class LightBar
 {
     public List<SyncDmx> Brightness;
     public List<SyncDmx> Strobe;
@@ -9,7 +9,7 @@ public class BarLight
     public List<SyncDmx> Blue;
     public List<SyncDmx> Macro;
 
-    public BarLight(int addr)
+    public LightBar(int addr)
     {
         Brightness = new();
         Strobe = new();

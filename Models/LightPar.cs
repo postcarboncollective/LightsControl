@@ -1,13 +1,13 @@
 namespace LightsControl;
 
-public class ParLight
+public class LightPar
 {
     public SyncDmx Brightness;
     public SyncDmx Strobe;
     public SyncDmx UV;
     public SyncDmx Audio;
 
-    public ParLight(int addr)
+    public LightPar(int addr)
     {
         Brightness = new SyncDmx(addr, 0);
         Strobe = new SyncDmx(addr + 1, 0);
