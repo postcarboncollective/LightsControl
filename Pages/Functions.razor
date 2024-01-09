@@ -19,14 +19,14 @@
                     @foreach (var name in Enum.GetNames(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@LightsControl.Function.BlackoutToggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Function.BlackoutToggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
                         </MudItem>
                     }
                 </MudGrid>
                 <br/>
                 <MudGrid>
                     <MudItem xs="12">
-                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="LightsControl.Function.Blackout">Execute</MudButton>
+                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="Function.Blackout">Execute</MudButton>
                     </MudItem>
                 </MudGrid>
                 <br/>
@@ -91,7 +91,7 @@
                     @if (Function.StrobeExecuting.Value)
                     {
                         <MudItem xs="6">
-                            <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Stop" OnClick="LightsControl.Function.StrobeCancel">Cancel</MudButton>
+                            <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Stop" OnClick="Function.StrobeCancel">Cancel</MudButton>
                         </MudItem>
                     }
                 </MudGrid>

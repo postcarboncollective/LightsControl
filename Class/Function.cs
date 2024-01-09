@@ -65,23 +65,32 @@ public static class Function
     {
         while (StrobeExecuting.Value)
         {
-            float r = (StrobeColor.Value.R / 255f) * 100;
-            float g = (StrobeColor.Value.G / 255f) * 100;
-            float b = (StrobeColor.Value.B / 255f) * 100;
-
-            // Console.WriteLine("Strobe On");
-            if (StrobeToggle[(int)Lights.Strobe].Value) PM.Strobe.Set(r, g, b, 0, 100, 0, 0, 0);
-            if (StrobeToggle[(int)Lights.Par].Value) PM.Par.Set(100, 0, 100, 0);
-            if (StrobeToggle[(int)Lights.Bar1].Value) PM.Bar[0].Set(r, g, b, 100, 0, 0);
-            if (StrobeToggle[(int)Lights.Bar2].Value) PM.Bar[1].Set(r, g, b, 100, 0, 0);
+            StrobeOn();
             await Task.Delay(TimeSpan.FromSeconds(StrobeSpeed.Value / 2), StrobeToken.Token);
-
-            // Console.WriteLine("Strobe Off");
-            if (StrobeToggle[(int)Lights.Strobe].Value) PM.Strobe.Set(0, 0, 0, 0, 0, 0, 0, 0);
-            if (StrobeToggle[(int)Lights.Par].Value) PM.Par.Set(0, 0, 0, 0);
-            if (StrobeToggle[(int)Lights.Bar1].Value) PM.Bar[0].Set(0, 0, 0, 0, 0, 0);
-            if (StrobeToggle[(int)Lights.Bar2].Value) PM.Bar[1].Set(0, 0, 0, 0, 0, 0);
+            StrobeOff();
             await Task.Delay(TimeSpan.FromSeconds(StrobeSpeed.Value / 2), StrobeToken.Token);
         }
+        StrobeOff();
+    }
+
+    static void StrobeOn()
+    {
+        // Console.WriteLine("Strobe On");
+        float r = (StrobeColor.Value.R / 255f) * 100;
+        float g = (StrobeColor.Value.G / 255f) * 100;
+        float b = (StrobeColor.Value.B / 255f) * 100;
+        if (StrobeToggle[(int)Lights.Strobe].Value) PM.Strobe.Set(r, g, b, 0, 100, 0, 0, 0);
+        if (StrobeToggle[(int)Lights.Par].Value) PM.Par.Set(100, 0, 100, 0);
+        if (StrobeToggle[(int)Lights.Bar1].Value) PM.Bar[0].Set(r, g, b, 100, 0, 0);
+        if (StrobeToggle[(int)Lights.Bar2].Value) PM.Bar[1].Set(r, g, b, 100, 0, 0);
+    }
+
+    static void StrobeOff()
+    {
+        // Console.WriteLine("Strobe Off");
+        if (StrobeToggle[(int)Lights.Strobe].Value) PM.Strobe.Set(0, 0, 0, 0, 0, 0, 0, 0);
+        if (StrobeToggle[(int)Lights.Par].Value) PM.Par.Set(0, 0, 0, 0);
+        if (StrobeToggle[(int)Lights.Bar1].Value) PM.Bar[0].Set(0, 0, 0, 0, 0, 0);
+        if (StrobeToggle[(int)Lights.Bar2].Value) PM.Bar[1].Set(0, 0, 0, 0, 0, 0);
     }
 }
