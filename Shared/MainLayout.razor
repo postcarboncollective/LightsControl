@@ -1,5 +1,4 @@
-﻿@using Page = LightsControl.Page
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
 
 <MudThemeProvider Theme="PlanetaManas"/>
@@ -9,7 +8,7 @@
 <MudLayout>
     <MudAppBar>
         <MudSpacer/>
-        @if (Global.Page == Page.Functions)
+        @if (NavigationManager.Uri.EndsWith("/Functions") | NavigationManager.Uri.EndsWith("/"))
         {
             <MudButton Color="Color.Secondary" OnClick="@(() => NavigationManager.NavigateTo("/Functions"))">Functions</MudButton>
         }
@@ -17,7 +16,7 @@
         {
             <MudButton OnClick="@(() => NavigationManager.NavigateTo("/Functions"))">Functions</MudButton>
         }
-        @if (Global.Page == Page.Advanced)
+        @if (NavigationManager.Uri.EndsWith("Advanced"))
         {
             <MudButton Color="Color.Secondary" OnClick="@(() => NavigationManager.NavigateTo("/Advanced"))">Advanced</MudButton>
         }
@@ -33,12 +32,6 @@
 </MudLayout>
 
 @code {
-
-    public void Refresh()
-    {
-        StateHasChanged();
-    }
-
     MudTheme PlanetaManas = new()
     {
         LayoutProperties = new LayoutProperties()
@@ -57,7 +50,6 @@
             DrawerBackground = "222f"
         }
     };
-
 }
 
 @*

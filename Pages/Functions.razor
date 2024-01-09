@@ -1,6 +1,5 @@
 ﻿@page "/"
 @page "/Functions"
-@using Page = LightsControl.Page
 @using MudBlazor.Utilities
 
 <PageTitle>Functions</PageTitle>
@@ -83,11 +82,4 @@
     public bool ExpulsadeiraBar1 { get; set; } = true;
     public bool ExpulsadeiraBar2 { get; set; } = true;
     public MudColor ExpulsadeiraColor = new MudColor(255, 255, 255, 255);
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        Global.Page = Page.Functions;
-    }
-
 }

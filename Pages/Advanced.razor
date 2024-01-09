@@ -1,6 +1,4 @@
 ﻿@page "/Advanced"
-@using Page = LightsControl.Page
-@using System.Security.Cryptography
 @using Microsoft.AspNetCore.Mvc.RazorPages
 
 <PageTitle>Advanced</PageTitle>
@@ -206,7 +204,12 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        Global.Page = Page.Advanced;
+        Global.Sync += Refresh;
+    }
+
+    public void Refresh()
+    {
+        InvokeAsync(StateHasChanged);
     }
 
 }

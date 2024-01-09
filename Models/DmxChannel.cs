@@ -1,4 +1,5 @@
 using LightsControl.Shared;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
 namespace LightsControl;
@@ -13,6 +14,7 @@ public class DmxChannel
         set
         {
             val = value;
+            Global.Sync.Invoke();
             Osc.SendDmx(Address, value);
         }
     }
