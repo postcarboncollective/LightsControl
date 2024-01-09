@@ -84,6 +84,13 @@
                     <MudItem xs="12">
                         <MudSlider @bind-Value="Function.Strobe.Speed.Value" Min="0.01" Max="0.99" Step="0.01">Speed</MudSlider>
                     </MudItem>
+                    @foreach (var name in Enum.GetNames(typeof(Lights)))
+                    {
+                        <MudItem xs="6">
+                            <MudText>@(name) @(Function.Strobe.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value ? "Inverted" : "Normal")</MudText>
+                            <MudToggleIconButton @bind-Toggled="@Function.Strobe.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error" ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success"/>
+                        </MudItem>
+                    }
                 </MudGrid>
                 <br/>
                 <MudGrid>
@@ -101,12 +108,60 @@
             </MudContainer>
         }
     </MudContainer>
+    <br/>
+    <MudContainer>
+        <MudButton OnClick="@(() => ShowOscillatorPanel = !ShowOscillatorPanel)" EndIcon="@(ShowOscillatorPanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)" Color="@(Function.Oscillator.Executing.Value ? Color.Secondary : Color.Primary)">
+            Oscillator
+        </MudButton>
+        @if (ShowOscillatorPanel)
+        {
+            <MudContainer Style="background: #111f">
+                <br/>
+                <MudGrid>
+                    @foreach (var name in Enum.GetNames(typeof(Lights)))
+                    {
+                        <MudItem xs="6">
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Function.Oscillator.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                        </MudItem>
+                    }
+                    <MudItem xs="12" Class="d-flex justify-center">
+                        <MudColorPicker @bind-Value="Function.Oscillator.Color.Value" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSlider @bind-Value="Function.Oscillator.Speed.Value" Min="0.001" Max="0.249" Step="0.001">Speed</MudSlider>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudRadioGroup @bind-Value="Function.Oscillator.Type.Value">
+                            <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary">Sine</MudRadio>
+                            <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary">Saw</MudRadio>
+                            @* <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary">Log</MudRadio> *@
+                            @* <MudRadio Value="4" Color="Color.Secondary" UnCheckedColor="Color.Primary">Four</MudRadio> *@
+                        </MudRadioGroup>
+                    </MudItem>
+                </MudGrid>
+                <br/>
+                <MudGrid>
+                    <MudItem xs="@(Function.Oscillator.Executing.Value ? 6 : 12)">
+                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="Function.Oscillator.Run">Run</MudButton>
+                    </MudItem>
+                    @if (Function.Oscillator.Executing.Value)
+                    {
+                        <MudItem xs="6">
+                            <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Stop" OnClick="Function.Oscillator.Stop">Stop</MudButton>
+                        </MudItem>
+                    }
+                </MudGrid>
+                <br/>
+            </MudContainer>
+        }
+    </MudContainer>
 </center>
 
 @code {
     public bool ShowBlackoutPanel = false;
     public bool ShowExpulsadeiraPanel = false;
     public bool ShowStrobePanel = false;
+    public bool ShowOscillatorPanel = false;
 
     protected override void OnInitialized()
     {
