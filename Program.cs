@@ -33,7 +33,6 @@ public class Program
         Osc.Init("127.0.0.1", 7700, 9000);
         Osc.SendDmx(Enumerable.Range(1, 512).ToList(), 0);
 
-
         app.Run();
     }
 }
