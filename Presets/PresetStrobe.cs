@@ -1,51 +1,66 @@
+using System.Timers;
 using MudBlazor.Utilities;
 
 namespace LightsControl;
 
 public class PresetStrobe : Preset
 {
+    public System.Timers.Timer Timer = new();
     public MudColor Color = new MudColor(255, 255, 255, 255);
-    public double Speed = 0.5f;
     public List<bool> Inverted = new List<bool>();
-    public bool Executing = false;
-    static CancellationTokenSource Token = new();
+    public bool State = false;
+
+    bool executing = false;
+    public bool Executing
+    {
+        get => executing;
+        set
+        {
+            executing = value;
+            if (executing) Timer.Start();
+            else Timer.Stop();
+        }
+    }
+
+    double speed = 0.5f;
+    public double Speed
+    {
+        get => speed;
+        set
+        {
+            speed = value;
+            Timer.Interval = ((1 - speed) / 2) * 1000;
+        }
+    }
 
     public PresetStrobe()
     {
         for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Inverted.Add(false);
+        Speed = speed;
+        Timer.Elapsed += Execute;
     }
 
     public override void Run()
     {
         Function.StopAll();
         Executing = true;
-        Execute().WaitAsync(Token.Token);
     }
 
     public override void Stop()
     {
-        if (Token.Token.CanBeCanceled)
-        {
-            Executing = false;
-            Token.Cancel();
-            Token = new();
-        }
+        Executing = false;
+        Kill();
     }
 
-    public override async Task Execute()
+    public void Execute(object? sender, ElapsedEventArgs args)
     {
-        while (Executing)
-        {
-            On();
-            await Task.Delay(TimeSpan.FromSeconds((1 - Speed) / 2), Token.Token);
-            Off();
-            await Task.Delay(TimeSpan.FromSeconds((1 - Speed) / 2), Token.Token);
-        }
-        Kill();
+        if (State) Off();
+        else On();
     }
 
     void On()
     {
+        State = true;
         double r = (Color.R / 255f);
         double g = (Color.G / 255f);
         double b = (Color.B / 255f);
@@ -73,6 +88,7 @@ public class PresetStrobe : Preset
 
     void Off()
     {
+        State = false;
         double r = (Color.R / 255f);
         double g = (Color.G / 255f);
         double b = (Color.B / 255f);
@@ -100,6 +116,7 @@ public class PresetStrobe : Preset
 
     void Kill()
     {
+        State = false;
         if (Toggle[(int)Lights.Strobe]) PM.Strobe.Set(0, 0, 0, 0, 0, 0, 0, 0);
         if (Toggle[(int)Lights.Par]) PM.Par.Set(0, 0, 0, 0);
         if (Toggle[(int)Lights.Bar1]) PM.Bar[0].Set(0, 0, 0, 0, 0, 0);
