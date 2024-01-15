@@ -10,7 +10,6 @@ public class SyncDmx
         set
         {
             val = value;
-            // Global.Sync?.Invoke();
             Osc.SendDmx(Address, value);
         }
     }
