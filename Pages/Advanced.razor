@@ -203,16 +203,20 @@
     public List<bool> ShowBarPanel = new List<bool>() { false, false };
     public List<List<bool>> ShowSingleBarPanel = new List<List<bool>> { new List<bool> { false, false, false, false, false, false, false, false }, new List<bool> { false, false, false, false, false, false, false, false } };
 
-    public System.Timers.Timer Timer = new();
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
         MainLayout.Timer.Elapsed += RefreshTimer;
     }
-    
+
+    public void Refresh()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
     public void RefreshTimer(object? sender, ElapsedEventArgs args)
     {
+        Console.WriteLine("Advanced Refresh!");
         InvokeAsync(StateHasChanged);
     }
 
@@ -220,4 +224,5 @@
     {
         MainLayout.Timer.Elapsed -= RefreshTimer;
     }
+
 }

@@ -178,8 +178,14 @@
         MainLayout.Timer.Elapsed += RefreshTimer;
     }
 
+    public void Refresh()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
     public void RefreshTimer(object? sender, ElapsedEventArgs args)
     {
+        Console.WriteLine("Functions Refresh!");
         InvokeAsync(StateHasChanged);
     }
 
