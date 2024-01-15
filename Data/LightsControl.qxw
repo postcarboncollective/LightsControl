@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Workspace>
+<Workspace xmlns="http://www.qlcplus.org/Workspace" CurrentWindow="SimpleDesk">
+ <Creator>
+  <Name>Q Light Controller Plus</Name>
+  <Version>4.12.4</Version>
+  <Author>esquilo</Author>
+ </Creator>
+ <Engine Autostart="0">
+  <InputOutputMap>
+   <Universe Name="Universe 1" ID="0">
+    <Input Plugin="OSC" Line="0"/>
+   </Universe>
+   <Universe Name="Universe 2" ID="1"/>
+   <Universe Name="Universe 3" ID="2"/>
+   <Universe Name="Universe 4" ID="3"/>
+  </InputOutputMap>
+  <Fixture>
+   <Manufacturer>Generic</Manufacturer>
+   <Model>Generic</Model>
+   <Mode>128 Channel</Mode>
+   <ID>0</ID>
+   <Name>Dimmers</Name>
+   <Universe>0</Universe>
+   <Address>0</Address>
+   <Channels>128</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Generic</Manufacturer>
+   <Model>Generic</Model>
+   <Mode>128 Channel</Mode>
+   <ID>1</ID>
+   <Name>Dimmers</Name>
+   <Universe>0</Universe>
+   <Address>128</Address>
+   <Channels>128</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Generic</Manufacturer>
+   <Model>Generic</Model>
+   <Mode>128 Channel</Mode>
+   <ID>2</ID>
+   <Name>Dimmers</Name>
+   <Universe>0</Universe>
+   <Address>256</Address>
+   <Channels>128</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Generic</Manufacturer>
+   <Model>Generic</Model>
+   <Mode>128 Channel</Mode>
+   <ID>3</ID>
+   <Name>Dimmers</Name>
+   <Universe>0</Universe>
+   <Address>384</Address>
+   <Channels>128</Channels>
+  </Fixture>
+  <ChannelsGroup ID="10" Name="1" Value="0" InputUniverse="0" InputChannel="51758">0,0</ChannelsGroup>
+  <ChannelsGroup ID="11" Name="2" Value="0" InputUniverse="0" InputChannel="63669">0,1</ChannelsGroup>
+  <ChannelsGroup ID="12" Name="3" Value="0" InputUniverse="0" InputChannel="59708">0,2</ChannelsGroup>
+  <ChannelsGroup ID="13" Name="4" Value="0" InputUniverse="0" InputChannel="40323">0,3</ChannelsGroup>
+  <ChannelsGroup ID="14" Name="5" Value="0" InputUniverse="0" InputChannel="35850">0,4</ChannelsGroup>
+  <ChannelsGroup ID="15" Name="6" Value="0" InputUniverse="0" InputChannel="48785">0,5</ChannelsGroup>
+  <ChannelsGroup ID="16" Name="7" Value="0" InputUniverse="0" InputChannel="44824">0,6</ChannelsGroup>
+  <ChannelsGroup ID="17" Name="8" Value="0" InputUniverse="0" InputChannel="22511">0,7</ChannelsGroup>
+  <ChannelsGroup ID="18" Name="9" Value="0" InputUniverse="0" InputChannel="18022">0,8</ChannelsGroup>
+  <ChannelsGroup ID="19" Name="10" Value="0" InputUniverse="0" InputChannel="2381">0,9</ChannelsGroup>
+  <ChannelsGroup ID="20" Name="11" Value="0" InputUniverse="0" InputChannel="6340">0,10</ChannelsGroup>
+  <ChannelsGroup ID="21" Name="12" Value="0" InputUniverse="0" InputChannel="10847">0,11</ChannelsGroup>
+  <ChannelsGroup ID="0" Name="13" Value="0" InputUniverse="0" InputChannel="15318">0,12</ChannelsGroup>
+  <ChannelsGroup ID="1" Name="14" Value="0" InputUniverse="0" InputChannel="20329">0,13</ChannelsGroup>
+  <ChannelsGroup ID="2" Name="15" Value="0" InputUniverse="0" InputChannel="24288">0,14</ChannelsGroup>
+  <ChannelsGroup ID="3" Name="16" Value="0" InputUniverse="0" InputChannel="27771">0,15</ChannelsGroup>
+  <ChannelsGroup ID="4" Name="17" Value="0" InputUniverse="0" InputChannel="32242">0,16</ChannelsGroup>
+  <ChannelsGroup ID="22" Name="18" Value="0" InputUniverse="0" InputChannel="34053">0,17</ChannelsGroup>
+  <ChannelsGroup ID="5" Name="19" Value="0" InputUniverse="0" InputChannel="38028">0,18</ChannelsGroup>
+  <ChannelsGroup ID="6" Name="20" Value="0" InputUniverse="0" InputChannel="8997">0,19</ChannelsGroup>
+  <ChannelsGroup ID="7" Name="21" Value="0" InputUniverse="0" InputChannel="12972">0,20</ChannelsGroup>
+  <ChannelsGroup ID="8" Name="22" Value="0" InputUniverse="0" InputChannel="55">0,21</ChannelsGroup>
+  <ChannelsGroup ID="9" Name="23" Value="0" InputUniverse="0" InputChannel="4542">0,22</ChannelsGroup>
+  <ChannelsGroup ID="23" Name="24" Value="0" InputUniverse="0" InputChannel="25857">0,23</ChannelsGroup>
+  <ChannelsGroup ID="24" Name="25" Value="0" InputUniverse="0" InputChannel="29832">0,24</ChannelsGroup>
+  <ChannelsGroup ID="25" Name="26" Value="0" InputUniverse="0" InputChannel="17939">0,25</ChannelsGroup>
+  <ChannelsGroup ID="26" Name="27" Value="0" InputUniverse="0" InputChannel="22426">0,26</ChannelsGroup>
+  <ChannelsGroup ID="27" Name="28" Value="0" InputUniverse="0" InputChannel="44909">0,27</ChannelsGroup>
+  <ChannelsGroup ID="28" Name="29" Value="0" InputUniverse="0" InputChannel="48868">0,28</ChannelsGroup>
+  <ChannelsGroup ID="29" Name="30" Value="0" InputUniverse="0" InputChannel="15101">0,29</ChannelsGroup>
+  <ChannelsGroup ID="30" Name="31" Value="0" InputUniverse="0" InputChannel="11124">0,30</ChannelsGroup>
+  <ChannelsGroup ID="31" Name="32" Value="0" InputUniverse="0" InputChannel="6639">0,31</ChannelsGroup>
+  <ChannelsGroup ID="32" Name="33" Value="0" InputUniverse="0" InputChannel="2150">0,32</ChannelsGroup>
+  <ChannelsGroup ID="33" Name="34" Value="0" InputUniverse="0" InputChannel="31961">0,33</ChannelsGroup>
+  <ChannelsGroup ID="34" Name="35" Value="0" InputUniverse="0" InputChannel="27984">0,34</ChannelsGroup>
+  <ChannelsGroup ID="35" Name="36" Value="0" InputUniverse="0" InputChannel="24523">0,35</ChannelsGroup>
+  <ChannelsGroup ID="36" Name="37" Value="0" InputUniverse="0" InputChannel="20034">0,36</ChannelsGroup>
+  <ChannelsGroup ID="37" Name="38" Value="0" InputUniverse="0" InputChannel="46773">0,37</ChannelsGroup>
+  <ChannelsGroup ID="38" Name="39" Value="0" InputUniverse="0" InputChannel="42812">0,38</ChannelsGroup>
+  <ChannelsGroup ID="39" Name="40" Value="0" InputUniverse="0" InputChannel="30709">0,39</ChannelsGroup>
+  <ChannelsGroup ID="40" Name="41" Value="0" InputUniverse="0" InputChannel="26236">0,40</ChannelsGroup>
+  <ChannelsGroup ID="41" Name="42" Value="0" InputUniverse="0" InputChannel="21735">0,41</ChannelsGroup>
+  <ChannelsGroup ID="42" Name="43" Value="0" InputUniverse="0" InputChannel="17774">0,42</ChannelsGroup>
+  <ChannelsGroup ID="43" Name="44" Value="0" InputUniverse="0" InputChannel="12753">0,43</ChannelsGroup>
+  <ChannelsGroup ID="44" Name="45" Value="0" InputUniverse="0" InputChannel="8280">0,44</ChannelsGroup>
+  <ChannelsGroup ID="45" Name="46" Value="0" InputUniverse="0" InputChannel="4803">0,45</ChannelsGroup>
+  <ChannelsGroup ID="46" Name="47" Value="0" InputUniverse="0" InputChannel="842">0,46</ChannelsGroup>
+  <ChannelsGroup ID="47" Name="48" Value="0" InputUniverse="0" InputChannel="64445">0,47</ChannelsGroup>
+  <ChannelsGroup ID="48" Name="49" Value="0" InputUniverse="0" InputChannel="59956">0,48</ChannelsGroup>
+  <ChannelsGroup ID="49" Name="50" Value="0" InputUniverse="0" InputChannel="28205">0,49</ChannelsGroup>
+  <ChannelsGroup ID="50" Name="51" Value="0" InputUniverse="0" InputChannel="32676">0,50</ChannelsGroup>
+  <ChannelsGroup ID="51" Name="52" Value="0" InputUniverse="0" InputChannel="19775">0,51</ChannelsGroup>
+  <ChannelsGroup ID="52" Name="53" Value="0" InputUniverse="0" InputChannel="23734">0,52</ChannelsGroup>
+  <ChannelsGroup ID="53" Name="54" Value="0" InputUniverse="0" InputChannel="10249">0,53</ChannelsGroup>
+  <ChannelsGroup ID="54" Name="55" Value="0" InputUniverse="0" InputChannel="14720">0,54</ChannelsGroup>
+  <ChannelsGroup ID="55" Name="56" Value="0" InputUniverse="0" InputChannel="2843">0,55</ChannelsGroup>
+  <ChannelsGroup ID="56" Name="57" Value="0" InputUniverse="0" InputChannel="6802">0,56</ChannelsGroup>
+  <ChannelsGroup ID="57" Name="58" Value="0" InputUniverse="0" InputChannel="57957">0,57</ChannelsGroup>
+  <ChannelsGroup ID="58" Name="59" Value="0" InputUniverse="0" InputChannel="62444">0,58</ChannelsGroup>
+  <ChannelsGroup ID="59" Name="60" Value="0" InputUniverse="0" InputChannel="17477">0,59</ChannelsGroup>
+  <ChannelsGroup ID="60" Name="61" Value="0" InputUniverse="0" InputChannel="21964">0,60</ChannelsGroup>
+  <ChannelsGroup ID="61" Name="62" Value="0" InputUniverse="0" InputChannel="26455">0,61</ChannelsGroup>
+  <ChannelsGroup ID="62" Name="63" Value="0" InputUniverse="0" InputChannel="30430">0,62</ChannelsGroup>
+  <ChannelsGroup ID="63" Name="64" Value="0" InputUniverse="0" InputChannel="609">0,63</ChannelsGroup>
+  <ChannelsGroup ID="64" Name="65" Value="0" InputUniverse="0" InputChannel="5096">0,64</ChannelsGroup>
+  <ChannelsGroup ID="65" Name="66" Value="0" InputUniverse="0" InputChannel="8563">0,65</ChannelsGroup>
+  <ChannelsGroup ID="66" Name="67" Value="0" InputUniverse="0" InputChannel="12538">0,66</ChannelsGroup>
+  <ChannelsGroup ID="67" Name="68" Value="0" InputUniverse="0" InputChannel="51213">0,67</ChannelsGroup>
+  <ChannelsGroup ID="68" Name="69" Value="0" InputUniverse="0" InputChannel="55684">0,68</ChannelsGroup>
+  <ChannelsGroup ID="69" Name="70" Value="0" InputUniverse="0" InputChannel="23965">0,69</ChannelsGroup>
+  <ChannelsGroup ID="70" Name="71" Value="0" InputUniverse="0" InputChannel="19476">0,70</ChannelsGroup>
+  <ChannelsGroup ID="71" Name="72" Value="0" InputUniverse="0" InputChannel="32399">0,71</ChannelsGroup>
+  <ChannelsGroup ID="72" Name="73" Value="0" InputUniverse="0" InputChannel="28422">0,72</ChannelsGroup>
+  <ChannelsGroup ID="73" Name="74" Value="0" InputUniverse="0" InputChannel="7097">0,73</ChannelsGroup>
+  <ChannelsGroup ID="74" Name="75" Value="0" InputUniverse="0" InputChannel="2608">0,74</ChannelsGroup>
+  <ChannelsGroup ID="75" Name="76" Value="0" InputUniverse="0" InputChannel="14507">0,75</ChannelsGroup>
+  <ChannelsGroup ID="76" Name="77" Value="0" InputUniverse="0" InputChannel="10530">0,76</ChannelsGroup>
+  <ChannelsGroup ID="77" Name="78" Value="0" InputUniverse="0" InputChannel="53717">0,77</ChannelsGroup>
+  <ChannelsGroup ID="78" Name="79" Value="0" InputUniverse="0" InputChannel="49244">0,78</ChannelsGroup>
+  <ChannelsGroup ID="79" Name="80" Value="0" InputUniverse="0" InputChannel="56917">0,79</ChannelsGroup>
+  <ChannelsGroup ID="80" Name="81" Value="0" InputUniverse="0" InputChannel="53212">0,80</ChannelsGroup>
+  <ChannelsGroup ID="81" Name="82" Value="0" InputUniverse="0" InputChannel="64839">0,81</ChannelsGroup>
+  <ChannelsGroup ID="82" Name="83" Value="0" InputUniverse="0" InputChannel="60622">0,82</ChannelsGroup>
+  <ChannelsGroup ID="83" Name="84" Value="0" InputUniverse="0" InputChannel="39025">0,83</ChannelsGroup>
+  <ChannelsGroup ID="84" Name="85" Value="0" InputUniverse="0" InputChannel="35320">0,84</ChannelsGroup>
+  <ChannelsGroup ID="85" Name="86" Value="0" InputUniverse="0" InputChannel="47971">0,85</ChannelsGroup>
+  <ChannelsGroup ID="86" Name="87" Value="0" InputUniverse="0" InputChannel="43754">0,86</ChannelsGroup>
+  <ChannelsGroup ID="87" Name="88" Value="0" InputUniverse="0" InputChannel="21021">0,87</ChannelsGroup>
+  <ChannelsGroup ID="88" Name="89" Value="0" InputUniverse="0" InputChannel="17300">0,88</ChannelsGroup>
+  <ChannelsGroup ID="89" Name="90" Value="0" InputUniverse="0" InputChannel="51085">0,89</ChannelsGroup>
+  <ChannelsGroup ID="90" Name="91" Value="0" InputUniverse="0" InputChannel="54788">0,90</ChannelsGroup>
+  <ChannelsGroup ID="91" Name="92" Value="0" InputUniverse="0" InputChannel="58527">0,91</ChannelsGroup>
+  <ChannelsGroup ID="92" Name="93" Value="0" InputUniverse="0" InputChannel="62742">0,92</ChannelsGroup>
+  <ChannelsGroup ID="93" Name="94" Value="0" InputUniverse="0" InputChannel="33193">0,93</ChannelsGroup>
+  <ChannelsGroup ID="94" Name="95" Value="0" InputUniverse="0" InputChannel="36896">0,94</ChannelsGroup>
+  <ChannelsGroup ID="95" Name="96" Value="0" InputUniverse="0" InputChannel="41659">0,95</ChannelsGroup>
+  <ChannelsGroup ID="96" Name="97" Value="0" InputUniverse="0" InputChannel="45874">0,96</ChannelsGroup>
+  <ChannelsGroup ID="97" Name="98" Value="0" InputUniverse="0" InputChannel="19397">0,97</ChannelsGroup>
+  <ChannelsGroup ID="98" Name="99" Value="0" InputUniverse="0" InputChannel="23116">0,98</ChannelsGroup>
+  <ChannelsGroup ID="99" Name="100" Value="0" InputUniverse="0" InputChannel="22547">0,99</ChannelsGroup>
+  <ChannelsGroup ID="100" Name="101" Value="0" InputUniverse="0" InputChannel="18842">0,100</ChannelsGroup>
+  <ChannelsGroup ID="101" Name="102" Value="0" InputUniverse="0" InputChannel="31489">0,101</ChannelsGroup>
+  <ChannelsGroup ID="102" Name="103" Value="0" InputUniverse="0" InputChannel="27272">0,102</ChannelsGroup>
+  <ChannelsGroup ID="103" Name="104" Value="0" InputUniverse="0" InputChannel="7735">0,103</ChannelsGroup>
+  <ChannelsGroup ID="104" Name="105" Value="0" InputUniverse="0" InputChannel="4030">0,104</ChannelsGroup>
+  <ChannelsGroup ID="105" Name="106" Value="0" InputUniverse="0" InputChannel="15653">0,105</ChannelsGroup>
+  <ChannelsGroup ID="106" Name="107" Value="0" InputUniverse="0" InputChannel="11436">0,106</ChannelsGroup>
+  <ChannelsGroup ID="107" Name="108" Value="0" InputUniverse="0" InputChannel="54363">0,107</ChannelsGroup>
+  <ChannelsGroup ID="108" Name="109" Value="0" InputUniverse="0" InputChannel="50642">0,108</ChannelsGroup>
+  <ChannelsGroup ID="109" Name="110" Value="0" InputUniverse="0" InputChannel="16843">0,109</ChannelsGroup>
+  <ChannelsGroup ID="110" Name="111" Value="0" InputUniverse="0" InputChannel="20546">0,110</ChannelsGroup>
+  <ChannelsGroup ID="111" Name="112" Value="0" InputUniverse="0" InputChannel="25305">0,111</ChannelsGroup>
+  <ChannelsGroup ID="112" Name="113" Value="0" InputUniverse="0" InputChannel="29520">0,112</ChannelsGroup>
+  <ChannelsGroup ID="113" Name="114" Value="0" InputUniverse="0" InputChannel="2031">0,113</ChannelsGroup>
+  <ChannelsGroup ID="114" Name="115" Value="0" InputUniverse="0" InputChannel="5734">0,114</ChannelsGroup>
+  <ChannelsGroup ID="115" Name="116" Value="0" InputUniverse="0" InputChannel="9469">0,115</ChannelsGroup>
+  <ChannelsGroup ID="116" Name="117" Value="0" InputUniverse="0" InputChannel="13684">0,116</ChannelsGroup>
+  <ChannelsGroup ID="117" Name="118" Value="0" InputUniverse="0" InputChannel="52611">0,117</ChannelsGroup>
+  <ChannelsGroup ID="118" Name="119" Value="0" InputUniverse="0" InputChannel="56330">0,118</ChannelsGroup>
+  <ChannelsGroup ID="119" Name="120" Value="0" InputUniverse="0" InputChannel="27555">0,119</ChannelsGroup>
+  <ChannelsGroup ID="120" Name="121" Value="0" InputUniverse="0" InputChannel="31274">0,120</ChannelsGroup>
+  <ChannelsGroup ID="121" Name="122" Value="0" InputUniverse="0" InputChannel="18609">0,121</ChannelsGroup>
+  <ChannelsGroup ID="122" Name="123" Value="0" InputUniverse="0" InputChannel="22840">0,122</ChannelsGroup>
+  <ChannelsGroup ID="123" Name="124" Value="0" InputUniverse="0" InputChannel="11655">0,123</ChannelsGroup>
+  <ChannelsGroup ID="124" Name="125" Value="0" InputUniverse="0" InputChannel="15374">0,124</ChannelsGroup>
+  <ChannelsGroup ID="125" Name="126" Value="0" InputUniverse="0" InputChannel="3733">0,125</ChannelsGroup>
+  <ChannelsGroup ID="126" Name="127" Value="0" InputUniverse="0" InputChannel="7964">0,126</ChannelsGroup>
+  <ChannelsGroup ID="127" Name="128" Value="0" InputUniverse="0" InputChannel="59371">0,127</ChannelsGroup>
+  <ChannelsGroup ID="128" Name="129" Value="0" InputUniverse="0" InputChannel="63074">1,0</ChannelsGroup>
+  <ChannelsGroup ID="129" Name="130" Value="0" InputUniverse="0" InputChannel="29307">1,1</ChannelsGroup>
+  <ChannelsGroup ID="130" Name="131" Value="0" InputUniverse="0" InputChannel="25586">1,2</ChannelsGroup>
+  <ChannelsGroup ID="131" Name="132" Value="0" InputUniverse="0" InputChannel="20841">1,3</ChannelsGroup>
+  <ChannelsGroup ID="132" Name="133" Value="0" InputUniverse="0" InputChannel="16608">1,4</ChannelsGroup>
+  <ChannelsGroup ID="133" Name="134" Value="0" InputUniverse="0" InputChannel="13407">1,5</ChannelsGroup>
+  <ChannelsGroup ID="134" Name="135" Value="0" InputUniverse="0" InputChannel="9686">1,6</ChannelsGroup>
+  <ChannelsGroup ID="135" Name="136" Value="0" InputUniverse="0" InputChannel="5965">1,7</ChannelsGroup>
+  <ChannelsGroup ID="136" Name="137" Value="0" InputUniverse="0" InputChannel="1732">1,8</ChannelsGroup>
+  <ChannelsGroup ID="137" Name="138" Value="0" InputUniverse="0" InputChannel="65075">1,9</ChannelsGroup>
+  <ChannelsGroup ID="138" Name="139" Value="0" InputUniverse="0" InputChannel="61370">1,10</ChannelsGroup>
+  <ChannelsGroup ID="139" Name="140" Value="0" InputUniverse="0" InputChannel="16243">1,11</ChannelsGroup>
+  <ChannelsGroup ID="140" Name="141" Value="0" InputUniverse="0" InputChannel="12026">1,12</ChannelsGroup>
+  <ChannelsGroup ID="141" Name="142" Value="0" InputUniverse="0" InputChannel="7265">1,13</ChannelsGroup>
+  <ChannelsGroup ID="142" Name="143" Value="0" InputUniverse="0" InputChannel="3560">1,14</ChannelsGroup>
+  <ChannelsGroup ID="143" Name="144" Value="0" InputUniverse="0" InputChannel="31063">1,15</ChannelsGroup>
+  <ChannelsGroup ID="144" Name="145" Value="0" InputUniverse="0" InputChannel="26846">1,16</ChannelsGroup>
+  <ChannelsGroup ID="145" Name="146" Value="0" InputUniverse="0" InputChannel="23109">1,17</ChannelsGroup>
+  <ChannelsGroup ID="146" Name="147" Value="0" InputUniverse="0" InputChannel="19404">1,18</ChannelsGroup>
+  <Function ID="0" Type="Scene" Name="Dump">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <ChannelGroupsVal>10,0,11,0,12,0,13,0,14,0,15,0,16,0,17,0,18,0,19,0,20,0,21,0,0,0,1,0,2,0,3,0,4,0,22,0,5,0,6,0,7,0,8,0,9,0,23,0,24,0,25,0,26,0,27,0,28,0,29,0,30,0,31,0,32,0,33,0,34,0,35,0,36,0,37,0,38,0,39,0,40,0,41,0,42,0,43,0,44,0,45,0,46,0,47,0,48,0,49,0,50,0,51,0,52,0,53,0,54,0,55,0,56,0,57,0,58,0,59,0,60,0,61,0,62,0,63,0,64,0,65,0,66,0,67,0,68,0,69,0,70,0,71,0,72,0,73,0,74,0,75,0,76,0,77,0,78,0,79,0,80,0,81,0,82,0,83,0,84,0,85,0,86,0,87,0,88,0,89,0,90,0,91,0,92,0,93,0,94,0,95,0,96,0,97,0,98,0,99,0,100,0,101,0,102,0,103,0,104,0,105,0,106,0,107,0,108,0,109,0,110,0,111,0,112,0,113,0,114,0,115,0,116,0,117,0,118,0,119,0,120,0,121,0,122,0,123,0,124,0,125,0,126,0,127,0,128,0,129,0,130,0,131,0,132,0,133,0,134,0,135,0,136,0,137,0,138,0,139,0,140,0,141,0,142,0,143,0,144,0,145,0,146,0</ChannelGroupsVal>
+   <FixtureVal ID="0">0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15,0,16,0,17,0,18,0,19,0,20,0,21,0,22,0,23,0,24,0,25,0,26,0,27,0,28,0,29,0,30,0,31,0,32,0,33,0,34,0,35,0,36,0,37,0,38,0,39,0,40,0,41,0,42,0,43,0,44,0,45,0,46,0,47,0,48,0,49,0,50,0,51,0,52,0,53,0,54,0,55,0,56,0,57,0,58,0,59,0,60,0,61,0,62,0,63,0,64,0,65,0,66,0,67,0,68,0,69,0,70,0,71,0,72,0,73,0,74,0,75,0,76,0,77,0,78,0,79,0,80,0,81,0,82,0,83,0,84,0,85,0,86,0,87,0,88,0,89,0,90,0,91,0,92,0,93,0,94,0,95,0,96,0,97,0,98,0,99,0,100,0,101,0,102,0,103,0,104,0,105,0,106,0,107,0,108,0,109,0,110,0,111,0,112,0,113,0,114,0,115,0,116,0,117,0,118,0,119,0,120,0,121,0,122,0,123,0,124,0,125,0,126,0,127,0</FixtureVal>
+   <FixtureVal ID="1">0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15,0,16,0,17,0,18,0,19,0,20,0,21,0,22,0,23,0,24,0,25,0,26,0,27,0,28,0,29,0,30,0,31,0,32,0,33,0,34,0,35,0,36,0,37,0,38,0,39,0,40,0,41,0,42,0,43,0,44,0,45,0,46,0,47,0,48,0,49,0,50,0,51,0,52,0,53,0,54,0,55,0,56,0,57,0,58,0,59,0,60,0,61,0,62,0,63,0,64,0,65,0,66,0,67,0,68,0,69,0,70,0,71,0,72,0,73,0,74,0,75,0,76,0,77,0,78,0,79,0,80,0,81,0,82,0,83,0,84,0,85,0,86,0,87,0,88,0,89,0,90,0,91,0,92,0,93,0,94,0,95,0,96,0,97,0,98,0,99,0,100,0,101,0,102,0,103,0,104,0,105,0,106,0,107,0,108,0,109,0,110,0,111,0,112,0,113,0,114,0,115,0,116,0,117,0,118,0,119,0,120,0,121,0,122,0,123,0,124,0,125,0,126,0,127,0</FixtureVal>
+   <FixtureVal ID="2">0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15,0,16,0,17,0,18,0,19,0,20,0,21,0,22,0,23,0,24,0,25,0,26,0,27,0,28,0,29,0,30,0,31,0,32,0,33,0,34,0,35,0,36,0,37,0,38,0,39,0,40,0,41,0,42,0,43,0,44,0,45,0,46,0,47,0,48,0,49,0,50,0,51,0,52,0,53,0,54,0,55,0,56,0,57,0,58,0,59,0,60,0,61,0,62,0,63,0,64,0,65,0,66,0,67,0,68,0,69,0,70,0,71,0,72,0,73,0,74,0,75,0,76,0,77,0,78,0,79,0,80,0,81,0,82,0,83,0,84,0,85,0,86,0,87,0,88,0,89,0,90,0,91,0,92,0,93,0,94,0,95,0,96,0,97,0,98,0,99,0,100,0,101,0,102,0,103,0,104,0,105,0,106,0,107,0,108,0,109,0,110,0,111,0,112,0,113,0,114,0,115,0,116,0,117,0,118,0,119,0,120,0,121,0,122,0,123,0,124,0,125,0,126,0,127,0</FixtureVal>
+   <FixtureVal ID="3">0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0,15,0,16,0,17,0,18,0,19,0,20,0,21,0,22,0,23,0,24,0,25,0,26,0,27,0,28,0,29,0,30,0,31,0,32,0,33,0,34,0,35,0,36,0,37,0,38,0,39,0,40,0,41,0,42,0,43,0,44,0,45,0,46,0,47,0,48,0,49,0,50,0,51,0,52,0,53,0,54,0,55,0,56,0,57,0,58,0,59,0,60,0,61,0,62,0,63,0,64,0,65,0,66,0,67,0,68,0,69,0,70,0,71,0,72,0,73,0,74,0,75,0,76,0,77,0,78,0,79,0,80,0,81,0,82,0,83,0,84,0,85,0,86,0,87,0,88,0,89,0,90,0,91,0,92,0,93,0,94,0,95,0,96,0,97,0,98,0,99,0,100,0,101,0,102,0,103,0,104,0,105,0,106,0,107,0,108,0,109,0,110,0,111,0,112,0,113,0,114,0,115,0,116,0,117,0,118,0,119,0,120,0,121,0,122,0,123,0,124,0,125,0,126,0,127,0</FixtureVal>
+  </Function>
+  <Monitor DisplayMode="0" ShowLabels="0">
+   <Font>Arial,12,-1,5,50,0,0,0,0,0</Font>
+   <ChannelStyle>0</ChannelStyle>
+   <ValueStyle>0</ValueStyle>
+   <Grid Width="5" Height="3" Depth="5" Units="0"/>
+  </Monitor>
+ </Engine>
+ <VirtualConsole>
+  <Frame Caption="">
+   <Appearance>
+    <FrameStyle>None</FrameStyle>
+    <ForegroundColor>Default</ForegroundColor>
+    <BackgroundColor>Default</BackgroundColor>
+    <BackgroundImage>None</BackgroundImage>
+    <Font>Default</Font>
+   </Appearance>
+   <Button Caption="Dump" ID="0" Icon="">
+    <WindowState Visible="False" X="0" Y="0" Width="50" Height="50"/>
+    <Appearance>
+     <FrameStyle>None</FrameStyle>
+     <ForegroundColor>Default</ForegroundColor>
+     <BackgroundColor>Default</BackgroundColor>
+     <BackgroundImage>None</BackgroundImage>
+     <Font>Default</Font>
+    </Appearance>
+    <Function ID="0"/>
+    <Action>Flash</Action>
+    <Intensity Adjust="False">100</Intensity>
+   </Button>
+  </Frame>
+  <Properties>
+   <Size Width="1920" Height="1080"/>
+   <GrandMaster ChannelMode="Intensity" ValueMode="Reduce" SliderMode="Normal"/>
+  </Properties>
+ </VirtualConsole>
+ <SimpleDesk>
+  <Engine/>
+ </SimpleDesk>
+</Workspace>
