@@ -19,15 +19,9 @@
                     @foreach (var name in Enum.GetNames(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Function.Blackout.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)]" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Blackout.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
                         </MudItem>
                     }
-                </MudGrid>
-                <br/>
-                <MudGrid>
-                    <MudItem xs="12">
-                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="Function.Blackout.Run">Run</MudButton>
-                    </MudItem>
                 </MudGrid>
                 <br/>
             </MudContainer>
@@ -46,17 +40,11 @@
                     @foreach (var name in Enum.GetNames(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Function.Expulsadeira.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)]" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Expulsadeira.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">
-                        <MudColorPicker @bind-Value="Function.Expulsadeira.Color" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
-                    </MudItem>
-                </MudGrid>
-                <br/>
-                <MudGrid>
-                    <MudItem xs="12">
-                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="Function.Expulsadeira.Run">Run</MudButton>
+                        <MudColorPicker @bind-Value="Global.Expulsadeira.Color" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
                     </MudItem>
                 </MudGrid>
                 <br/>
@@ -65,7 +53,7 @@
     </MudContainer>
     <br/>
     <MudContainer>
-        <MudButton OnClick="@(() => ShowStrobePanel = !ShowStrobePanel)" EndIcon="@(ShowStrobePanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)" Color="@(Function.Strobe.Executing ? Color.Secondary : Color.Primary)">
+        <MudButton OnClick="@(() => ShowStrobePanel = !ShowStrobePanel)" EndIcon="@(ShowStrobePanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)" Color="@(Global.Strobe.Executing ? Color.Secondary : Color.Primary)">
             Strobe
         </MudButton>
         @if (ShowStrobePanel)
@@ -76,32 +64,20 @@
                     @foreach (var name in Enum.GetNames(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Function.Strobe.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)]" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Strobe.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">
-                        <MudColorPicker @bind-Value="Function.Strobe.Color" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
+                        <MudColorPicker @bind-Value="Global.Strobe.Color" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="Function.Strobe.Speed" Min="0.01" Max="0.99" Step="0.01">Speed</MudSlider>
+                        <MudSlider @bind-Value="Global.Strobe.Speed" Min="0.01" Max="0.99" Step="0.01">Speed</MudSlider>
                     </MudItem>
                     @foreach (var name in Enum.GetNames(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudText>@(name) @(Function.Strobe.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)] ? "Inverted" : "Normal")</MudText>
-                            <MudToggleIconButton @bind-Toggled="@Function.Strobe.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)]" Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error" ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success"/>
-                        </MudItem>
-                    }
-                </MudGrid>
-                <br/>
-                <MudGrid>
-                    <MudItem xs="@(Function.Strobe.Executing ? 6 : 12)">
-                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="Function.Strobe.Run">Run</MudButton>
-                    </MudItem>
-                    @if (Function.Strobe.Executing)
-                    {
-                        <MudItem xs="6">
-                            <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Stop" OnClick="Function.Strobe.Stop">Stop</MudButton>
+                            <MudText>@(name) @(Global.Strobe.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)] ? "Inverted" : "Normal")</MudText>
+                            <MudToggleIconButton @bind-Toggled="@Global.Strobe.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)]" Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error" ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success"/>
                         </MudItem>
                     }
                 </MudGrid>
@@ -111,7 +87,7 @@
     </MudContainer>
     <br/>
     <MudContainer>
-        <MudButton OnClick="@(() => ShowOscillatorPanel = !ShowOscillatorPanel)" EndIcon="@(ShowOscillatorPanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)" Color="@(Function.Oscillator.Executing ? Color.Secondary : Color.Primary)">
+        <MudButton OnClick="@(() => ShowOscillatorPanel = !ShowOscillatorPanel)" EndIcon="@(ShowOscillatorPanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)" Color="@(Global.Oscillator.Executing ? Color.Secondary : Color.Primary)">
             Oscillator
         </MudButton>
         @if (ShowOscillatorPanel)
@@ -122,17 +98,17 @@
                     @foreach (var name in Enum.GetNames(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Function.Oscillator.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)]" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Oscillator.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">
-                        <MudColorPicker @bind-Value="Function.Oscillator.Color" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
+                        <MudColorPicker @bind-Value="Global.Oscillator.Color" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudSlider @bind-Value="Function.Oscillator.Speed" Min="0.001" Max="0.249" Step="0.001">Speed</MudSlider>
+                        <MudSlider @bind-Value="Global.Oscillator.Speed" Min="0.001" Max="0.249" Step="0.001">Speed</MudSlider>
                     </MudItem>
                     <MudItem xs="12">
-                        <MudRadioGroup @bind-Value="Function.Oscillator.Type">
+                        <MudRadioGroup @bind-Value="Global.Oscillator.Type">
                             <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary">Sine</MudRadio>
                             <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary">Saw</MudRadio>
                             @* <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary">Log</MudRadio> *@
@@ -142,20 +118,8 @@
                     @foreach (var name in Enum.GetNames(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudText>@(name) @(Function.Oscillator.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)] ? "Inverted" : "Normal")</MudText>
-                            <MudToggleIconButton @bind-Toggled="@Function.Oscillator.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)]" Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error" ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success"/>
-                        </MudItem>
-                    }
-                </MudGrid>
-                <br/>
-                <MudGrid>
-                    <MudItem xs="@(Function.Oscillator.Executing ? 6 : 12)">
-                        <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Send" OnClick="Function.Oscillator.Run">Run</MudButton>
-                    </MudItem>
-                    @if (Function.Oscillator.Executing)
-                    {
-                        <MudItem xs="6">
-                            <MudButton Variant="Variant.Filled" Color="Color.Tertiary" EndIcon="@Icons.Material.Filled.Stop" OnClick="Function.Oscillator.Stop">Stop</MudButton>
+                            <MudText>@(name) @(Global.Oscillator.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)] ? "Inverted" : "Normal")</MudText>
+                            <MudToggleIconButton @bind-Toggled="@Global.Oscillator.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)]" Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error" ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success"/>
                         </MudItem>
                     }
                 </MudGrid>
