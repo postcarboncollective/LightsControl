@@ -208,12 +208,7 @@
         base.OnInitialized();
         MainLayout.Timer.Elapsed += RefreshTimer;
     }
-
-    public void Refresh()
-    {
-        InvokeAsync(StateHasChanged);
-    }
-
+    
     public void RefreshTimer(object? sender, ElapsedEventArgs args)
     {
         InvokeAsync(StateHasChanged);

@@ -20,7 +20,7 @@ public abstract class Function
                 {
                     if (f != this)
                     {
-                        if (f.Switch[i].Value == true) f.Switch[i].Value = false;
+                        if (f.Switch[i].Value) f.Switch[i].Value = false;
                     }
                 }
             }
@@ -38,9 +38,9 @@ public abstract class Function
 
     public virtual void Kill()
     {
-        if (Switch[(int)Lights.Strobe].Value) PM.Strobe.Set(0, 0, 0, 0, 0, 0, 0, 0);
-        if (Switch[(int)Lights.Par].Value) PM.Par.Set(0, 0, 0, 0);
-        if (Switch[(int)Lights.Bar1].Value) PM.Bar[0].Set(0, 0, 0, 0, 0, 0);
-        if (Switch[(int)Lights.Bar2].Value) PM.Bar[1].Set(0, 0, 0, 0, 0, 0);
+        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        {
+            if (Switch[(int)light].Value) PM.KillLight(light);
+        }
     }
 }

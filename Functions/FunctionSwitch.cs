@@ -3,12 +3,12 @@ using MudBlazor.Utilities;
 
 namespace LightsControl;
 
-public class FunctionStrobe : Function
+public class FunctionSwitch : Function
 {
     public System.Timers.Timer Timer = new();
     public MudColor Color = new MudColor(255, 255, 255, 255);
-    public List<bool> Inverted = new List<bool>();
-    public bool State = false;
+    public Lights Index = Lights.Bar1;
+    Random rand = new Random();
 
     public bool Executing
     {
@@ -32,15 +32,15 @@ public class FunctionStrobe : Function
         }
     }
 
-    public FunctionStrobe()
+    public FunctionSwitch()
     {
-        for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Inverted.Add(false);
         Speed = speed;
         Timer.Elapsed += Execute;
     }
 
     protected override void Start()
     {
+        Kill();
         Executing = true;
     }
 
@@ -52,45 +52,25 @@ public class FunctionStrobe : Function
 
     public void Execute(object? sender, ElapsedEventArgs args)
     {
-        if (State) Off();
-        else On();
-    }
-
-    void On()
-    {
-        State = true;
         double r = (Color.R / 255f);
         double g = (Color.G / 255f);
         double b = (Color.B / 255f);
-        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        PM.KillLight(Index);
+        List<Lights> possibleLights = new();
+        foreach (var x in Switch)
         {
-            if (Switch[(int)light].Value)
+            if (x.Value)
             {
-                if (Inverted[(int)light]) PM.KillLight(light);
-                else PM.SetLight(light, r, g, b);
+                if (x.Index != Index)
+                {
+                    possibleLights.Add(x.Index);
+                }
             }
         }
-    }
-
-    void Off()
-    {
-        State = false;
-        double r = (Color.R / 255f);
-        double g = (Color.G / 255f);
-        double b = (Color.B / 255f);
-        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        if (possibleLights.Count > 0)
         {
-            if (Switch[(int)light].Value)
-            {
-                if (Inverted[(int)light]) PM.SetLight(light, r, g, b);
-                else PM.KillLight(light);
-            }
+            Index = possibleLights[rand.Next(possibleLights.Count)];
+            PM.SetLight(Index, r, g, b);
         }
-    }
-
-    public override void Kill()
-    {
-        base.Kill();
-        State = false;
     }
 }
