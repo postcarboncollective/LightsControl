@@ -8,7 +8,8 @@ public static class Global
     public static FunctionExpulsadeira Expulsadeira = new();
     public static FunctionStrobe Strobe = new();
     public static FunctionOscillator Oscillator = new();
-    public static List<Function> Functions = [Blackout, Expulsadeira, Strobe, Oscillator];
+    public static FunctionSwitch Switch = new();
+    public static List<Function> Functions = [Blackout, Expulsadeira, Strobe, Oscillator, Switch];
 
     public static void StopAllFunctions()
     {
