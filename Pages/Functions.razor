@@ -29,7 +29,7 @@
     </MudContainer>
     <br/>
     <MudContainer>
-        <MudButton OnClick="@(() => ShowExpulsadeiraPanel = !ShowExpulsadeiraPanel)" EndIcon="@(ShowExpulsadeiraPanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
+        <MudButton OnClick="@(() => ShowExpulsadeiraPanel = !ShowExpulsadeiraPanel)" EndIcon="@(ShowExpulsadeiraPanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)" Color="@(Global.Expulsadeira.Executing ? Color.Secondary : Color.Primary)">
             Expulsadeira
         </MudButton>
         @if (ShowExpulsadeiraPanel)
@@ -44,7 +44,7 @@
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">
-                        <MudColorPicker @bind-Value="Global.Expulsadeira.Color" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
+                        <MudColorPicker @bind-Value="Global.Expulsadeira.Color.Value" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
                     </MudItem>
                 </MudGrid>
                 <br/>

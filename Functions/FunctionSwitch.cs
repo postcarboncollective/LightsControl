@@ -10,6 +10,7 @@ public class FunctionSwitch : Function
     public Lights Index = Lights.Bar1;
     Random rand = new Random();
 
+    bool executing = false;
     public bool Executing
     {
         get => executing;

@@ -10,6 +10,7 @@ public class FunctionStrobe : Function
     public List<bool> Inverted = new List<bool>();
     public bool State = false;
 
+    bool executing = false;
     public bool Executing
     {
         get => executing;

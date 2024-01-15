@@ -15,6 +15,7 @@ public class FunctionOscillator : Function
     double val = 0;
     double inv = 1;
 
+    bool executing = false;
     public bool Executing
     {
         get => executing;

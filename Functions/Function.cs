@@ -2,12 +2,11 @@ namespace LightsControl;
 
 public abstract class Function
 {
-    public readonly List<Switch> Switch = new List<Switch>();
-    public bool executing = false;
+    public readonly List<SwitchFunction> Switch = new List<SwitchFunction>();
 
     protected Function()
     {
-        for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Switch.Add(new Switch(false, (Lights)i, this));
+        for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Switch.Add(new SwitchFunction(false, (Lights)i, this));
     }
 
     public void Run()

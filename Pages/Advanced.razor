@@ -82,60 +82,6 @@
                     <br/>
                     <MudGrid>
                         <MudItem xs="12">
-                            <MudButton Style="text-transform:none" OnClick="@(() => ShowSingleBarPanel[PM.Bar.IndexOf(bar)][0] = !ShowSingleBarPanel[PM.Bar.IndexOf(bar)][0])" EndIcon="@(ShowSingleBarPanel[PM.Bar.IndexOf(bar)][0] ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
-                                Brightness
-                            </MudButton>
-                            @if (!ShowSingleBarPanel[PM.Bar.IndexOf(bar)][0])
-                            {
-                                <MudSlider Value="bar.Brightness[0].Value" ValueChanged="@((double x) => bar.SetBrightness(x))" Min="0" Max="1" Step="0.01"/>
-                            }
-                            else
-                            {
-                                <MudContainer Style="background: #222f">
-                                    @foreach (var brightness in bar.Brightness)
-                                    {
-                                        <MudSlider @bind-Value="bar.Brightness[bar.Brightness.IndexOf(brightness)].Value" Min="0" Max="1" Step="0.01">Brightness @(bar.Brightness.IndexOf(brightness) + 1)</MudSlider>
-                                    }
-                                </MudContainer>
-                            }
-                        </MudItem>
-                        <MudItem xs="12">
-                            <MudButton Style="text-transform:none" OnClick="@(() => ShowSingleBarPanel[PM.Bar.IndexOf(bar)][1] = !ShowSingleBarPanel[PM.Bar.IndexOf(bar)][1])" EndIcon="@(ShowSingleBarPanel[PM.Bar.IndexOf(bar)][1] ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
-                                Strobe
-                            </MudButton>
-                            @if (!ShowSingleBarPanel[PM.Bar.IndexOf(bar)][1])
-                            {
-                                <MudSlider Value="bar.Strobe[0].Value" ValueChanged="@((double x) => bar.SetStrobe(x))" Min="0" Max="1" Step="0.01"/>
-                            }
-                            else
-                            {
-                                <MudContainer Style="background: #222f">
-                                    @foreach (var strobe in bar.Strobe)
-                                    {
-                                        <MudSlider @bind-Value="bar.Strobe[bar.Strobe.IndexOf(strobe)].Value" Min="0" Max="1" Step="0.01">Strobe @(bar.Strobe.IndexOf(strobe) + 1)</MudSlider>
-                                    }
-                                </MudContainer>
-                            }
-                        </MudItem>
-                        <MudItem xs="12">
-                            <MudButton Style="text-transform:none" OnClick="@(() => ShowSingleBarPanel[PM.Bar.IndexOf(bar)][5] = !ShowSingleBarPanel[PM.Bar.IndexOf(bar)][5])" EndIcon="@(ShowSingleBarPanel[PM.Bar.IndexOf(bar)][5] ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
-                                Macro
-                            </MudButton>
-                            @if (!ShowSingleBarPanel[PM.Bar.IndexOf(bar)][5])
-                            {
-                                <MudSlider Value="bar.Macro[0].Value" ValueChanged="@((double x) => bar.SetMacro(x))" Min="0" Max="1" Step="0.01"/>
-                            }
-                            else
-                            {
-                                <MudContainer Style="background: #222f">
-                                    @foreach (var macro in bar.Macro)
-                                    {
-                                        <MudSlider @bind-Value="bar.Macro[bar.Macro.IndexOf(macro)].Value" Min="0" Max="1" Step="0.01">Macro @(bar.Macro.IndexOf(macro) + 1)</MudSlider>
-                                    }
-                                </MudContainer>
-                            }
-                        </MudItem>
-                        <MudItem xs="12">
                             <MudButton Style="text-transform:none" OnClick="@(() => ShowSingleBarPanel[PM.Bar.IndexOf(bar)][2] = !ShowSingleBarPanel[PM.Bar.IndexOf(bar)][2])" EndIcon="@(ShowSingleBarPanel[PM.Bar.IndexOf(bar)][2] ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
                                 Red
                             </MudButton>
@@ -189,6 +135,60 @@
                                 </MudContainer>
                             }
                         </MudItem>
+                        <MudItem xs="12">
+                            <MudButton Style="text-transform:none" OnClick="@(() => ShowSingleBarPanel[PM.Bar.IndexOf(bar)][0] = !ShowSingleBarPanel[PM.Bar.IndexOf(bar)][0])" EndIcon="@(ShowSingleBarPanel[PM.Bar.IndexOf(bar)][0] ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
+                                Brightness
+                            </MudButton>
+                            @if (!ShowSingleBarPanel[PM.Bar.IndexOf(bar)][0])
+                            {
+                                <MudSlider Value="bar.Brightness[0].Value" ValueChanged="@((double x) => bar.SetBrightness(x))" Min="0" Max="1" Step="0.01"/>
+                            }
+                            else
+                            {
+                                <MudContainer Style="background: #222f">
+                                    @foreach (var brightness in bar.Brightness)
+                                    {
+                                        <MudSlider @bind-Value="bar.Brightness[bar.Brightness.IndexOf(brightness)].Value" Min="0" Max="1" Step="0.01">Brightness @(bar.Brightness.IndexOf(brightness) + 1)</MudSlider>
+                                    }
+                                </MudContainer>
+                            }
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudButton Style="text-transform:none" OnClick="@(() => ShowSingleBarPanel[PM.Bar.IndexOf(bar)][1] = !ShowSingleBarPanel[PM.Bar.IndexOf(bar)][1])" EndIcon="@(ShowSingleBarPanel[PM.Bar.IndexOf(bar)][1] ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
+                                Strobe
+                            </MudButton>
+                            @if (!ShowSingleBarPanel[PM.Bar.IndexOf(bar)][1])
+                            {
+                                <MudSlider Value="bar.Strobe[0].Value" ValueChanged="@((double x) => bar.SetStrobe(x))" Min="0" Max="1" Step="0.01"/>
+                            }
+                            else
+                            {
+                                <MudContainer Style="background: #222f">
+                                    @foreach (var strobe in bar.Strobe)
+                                    {
+                                        <MudSlider @bind-Value="bar.Strobe[bar.Strobe.IndexOf(strobe)].Value" Min="0" Max="1" Step="0.01">Strobe @(bar.Strobe.IndexOf(strobe) + 1)</MudSlider>
+                                    }
+                                </MudContainer>
+                            }
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudButton Style="text-transform:none" OnClick="@(() => ShowSingleBarPanel[PM.Bar.IndexOf(bar)][5] = !ShowSingleBarPanel[PM.Bar.IndexOf(bar)][5])" EndIcon="@(ShowSingleBarPanel[PM.Bar.IndexOf(bar)][5] ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)">
+                                Macro
+                            </MudButton>
+                            @if (!ShowSingleBarPanel[PM.Bar.IndexOf(bar)][5])
+                            {
+                                <MudSlider Value="bar.Macro[0].Value" ValueChanged="@((double x) => bar.SetMacro(x))" Min="0" Max="1" Step="0.01"/>
+                            }
+                            else
+                            {
+                                <MudContainer Style="background: #222f">
+                                    @foreach (var macro in bar.Macro)
+                                    {
+                                        <MudSlider @bind-Value="bar.Macro[bar.Macro.IndexOf(macro)].Value" Min="0" Max="1" Step="0.01">Macro @(bar.Macro.IndexOf(macro) + 1)</MudSlider>
+                                    }
+                                </MudContainer>
+                            }
+                        </MudItem>
                     </MudGrid>
                 </MudContainer>
             }
@@ -208,7 +208,7 @@
         base.OnInitialized();
         MainLayout.Timer.Elapsed += RefreshTimer;
     }
-    
+
     public void RefreshTimer(object? sender, ElapsedEventArgs args)
     {
         InvokeAsync(StateHasChanged);

@@ -1,6 +1,6 @@
 namespace LightsControl;
 
-public class Switch(bool val, Lights index, Function function)
+public class SwitchFunction(bool val, Lights index, Function function)
 {
     public bool Value
     {
