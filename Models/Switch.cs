@@ -1,13 +1,14 @@
 namespace LightsControl;
 
-public class ToggleFunction(Lights index, bool val, Function function)
+public class Switch(bool val, Lights index, Function function)
 {
-    public Lights Index = index;
     public bool Value
     {
         get => val;
         set => Set(value);
     }
+
+    public readonly Lights Index = index;
     public readonly Function Function = function;
 
     void Set(bool value)
@@ -31,7 +32,7 @@ public class ToggleFunction(Lights index, bool val, Function function)
                     PM.Bar[1].Set(0, 0, 0, 0, 0, 0);
                     break;
             }
-            var q = Function.Toggle.Where(x => x.Value == true).ToList();
+            var q = Function.Switch.Where(x => x.Value == true).ToList();
             if (q.Count == 0) Function.Stop();
         }
     }

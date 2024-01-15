@@ -19,7 +19,7 @@
                     @foreach (var name in Enum.GetNames(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Blackout.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Blackout.Switch[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
                         </MudItem>
                     }
                 </MudGrid>
@@ -40,7 +40,7 @@
                     @foreach (var name in Enum.GetNames(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Expulsadeira.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Expulsadeira.Switch[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">
@@ -64,7 +64,7 @@
                     @foreach (var name in Enum.GetNames(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Strobe.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Strobe.Switch[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">
@@ -98,7 +98,7 @@
                     @foreach (var name in Enum.GetNames(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Oscillator.Toggle[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Oscillator.Switch[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">

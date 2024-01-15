@@ -63,22 +63,22 @@ public class FunctionOscillator : Function
         double r = (Color.R / 255f);
         double g = (Color.G / 255f);
         double b = (Color.B / 255f);
-        if (Toggle[(int)Lights.Strobe].Value)
+        if (Switch[(int)Lights.Strobe].Value)
         {
             if (Inverted[(int)Lights.Strobe]) PM.Strobe.Set(r * inv, g * inv, b * inv, 0, 1, 0, 0, 0);
             else PM.Strobe.Set(r * val, g * val, b * val, 0, 1, 0, 0, 0);
         }
-        if (Toggle[(int)Lights.Par].Value)
+        if (Switch[(int)Lights.Par].Value)
         {
             if (Inverted[(int)Lights.Par]) PM.Par.Set(((r + g + b) * inv) / 3, 0, inv, 0);
             else PM.Par.Set(((r + g + b) * val) / 3, 0, val, 0);
         }
-        if (Toggle[(int)Lights.Bar1].Value)
+        if (Switch[(int)Lights.Bar1].Value)
         {
             if (Inverted[(int)Lights.Bar1]) PM.Bar[0].Set(r * inv, g * inv, b * inv, 1, 0, 0);
             else PM.Bar[0].Set(r * val, g * val, b * val, 1, 0, 0);
         }
-        if (Toggle[(int)Lights.Bar2].Value)
+        if (Switch[(int)Lights.Bar2].Value)
         {
             if (Inverted[(int)Lights.Bar2]) PM.Bar[1].Set(r * inv, g * inv, b * inv, 1, 0, 0);
             else PM.Bar[1].Set(r * val, g * val, b * val, 1, 0, 0);
