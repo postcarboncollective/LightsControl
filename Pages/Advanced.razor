@@ -1,4 +1,6 @@
 ﻿@page "/Advanced"
+@using System.Timers
+@implements IDisposable
 
 <PageTitle>Advanced</PageTitle>
 
@@ -195,20 +197,28 @@
 </center>
 
 @code {
+    [CascadingParameter] public MainLayout MainLayout { get; set; }
     public bool ShowStrobePanel = false;
     public bool ShowParPanel = false;
     public List<bool> ShowBarPanel = new List<bool>() { false, false };
     public List<List<bool>> ShowSingleBarPanel = new List<List<bool>> { new List<bool> { false, false, false, false, false, false, false, false }, new List<bool> { false, false, false, false, false, false, false, false } };
 
+    public System.Timers.Timer Timer = new();
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        Global.Sync += Refresh;
+        MainLayout.Timer.Elapsed += RefreshTimer;
     }
-
-    public void Refresh()
+    
+    public void RefreshTimer(object? sender, ElapsedEventArgs args)
     {
+        Console.WriteLine("Advanced Refresh!");
         InvokeAsync(StateHasChanged);
     }
 
+    public void Dispose()
+    {
+        MainLayout.Timer.Elapsed -= RefreshTimer;
+    }
 }

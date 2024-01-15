@@ -27,11 +27,22 @@
         <MudSpacer/>
     </MudAppBar>
     <MudMainContent>
-        @Body
+        <CascadingValue Value="@this">
+            @Body
+        </CascadingValue>
     </MudMainContent>
 </MudLayout>
 
 @code {
+    public System.Timers.Timer Timer = new();
+    
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Timer.Interval = 125;
+        Timer.Start();
+    }
+
     MudTheme PlanetaManas = new()
     {
         LayoutProperties = new LayoutProperties()

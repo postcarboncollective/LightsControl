@@ -2,11 +2,11 @@ namespace LightsControl;
 
 public abstract class Preset
 {
-    public List<SyncBool> Toggle = new List<SyncBool>();
+    public List<bool> Toggle = new List<bool>();
 
     protected Preset()
     {
-        for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Toggle.Add(new SyncBool(true));
+        for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Toggle.Add(true);
     }
 
     public virtual void Run()
