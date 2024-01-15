@@ -1,6 +1,6 @@
 namespace LightsControl;
 
-public class SyncDmx
+public class Dmx
 {
     public int Address;
     double val;
@@ -14,7 +14,7 @@ public class SyncDmx
         }
     }
 
-    public SyncDmx(int addr, int value)
+    public Dmx(int addr, int value)
     {
         Address = addr;
         Value = value;

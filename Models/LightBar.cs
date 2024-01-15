@@ -2,12 +2,12 @@ namespace LightsControl;
 
 public class LightBar
 {
-    public List<SyncDmx> Brightness;
-    public List<SyncDmx> Strobe;
-    public List<SyncDmx> Red;
-    public List<SyncDmx> Green;
-    public List<SyncDmx> Blue;
-    public List<SyncDmx> Macro;
+    public List<Dmx> Brightness;
+    public List<Dmx> Strobe;
+    public List<Dmx> Red;
+    public List<Dmx> Green;
+    public List<Dmx> Blue;
+    public List<Dmx> Macro;
 
     public LightBar(int addr)
     {
@@ -19,12 +19,12 @@ public class LightBar
         Macro = new();
         for (int i = 0; i < 8; i++)
         {
-            Brightness.Add(new SyncDmx(addr + (i * 6), 0));
-            Strobe.Add(new SyncDmx((addr + 1) + (i * 6), 0));
-            Red.Add(new SyncDmx((addr + 2) + (i * 6), 0));
-            Green.Add(new SyncDmx((addr + 3) + (i * 6), 0));
-            Blue.Add(new SyncDmx((addr + 4) + (i * 6), 0));
-            Macro.Add(new SyncDmx((addr + 5) + (i * 6), 0));
+            Brightness.Add(new Dmx(addr + (i * 6), 0));
+            Strobe.Add(new Dmx((addr + 1) + (i * 6), 0));
+            Red.Add(new Dmx((addr + 2) + (i * 6), 0));
+            Green.Add(new Dmx((addr + 3) + (i * 6), 0));
+            Blue.Add(new Dmx((addr + 4) + (i * 6), 0));
+            Macro.Add(new Dmx((addr + 5) + (i * 6), 0));
         }
     }
 

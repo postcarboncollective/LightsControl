@@ -2,17 +2,17 @@ namespace LightsControl;
 
 public class LightPar
 {
-    public SyncDmx Brightness;
-    public SyncDmx Strobe;
-    public SyncDmx UV;
-    public SyncDmx Audio;
+    public Dmx Brightness;
+    public Dmx Strobe;
+    public Dmx UV;
+    public Dmx Audio;
 
     public LightPar(int addr)
     {
-        Brightness = new SyncDmx(addr, 0);
-        Strobe = new SyncDmx(addr + 1, 0);
-        UV = new SyncDmx(addr + 2, 0);
-        Audio = new SyncDmx(addr + 3, 0);
+        Brightness = new Dmx(addr, 0);
+        Strobe = new Dmx(addr + 1, 0);
+        UV = new Dmx(addr + 2, 0);
+        Audio = new Dmx(addr + 3, 0);
     }
 
     public void Set(double brightness, double strobe, double uv, double audio)
