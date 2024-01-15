@@ -47,7 +47,7 @@ public static class PM
                 Bar[0].Set(r, g, b, 1, 0, 0);
                 break;
             case Lights.Bar2:
-                Bar[0].Set(r, g, b, 1, 0, 0);
+                Bar[1].Set(r, g, b, 1, 0, 0);
                 break;
         }
     }
