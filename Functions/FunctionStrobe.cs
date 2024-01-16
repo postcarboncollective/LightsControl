@@ -33,6 +33,20 @@ public class FunctionStrobe : Function
         }
     }
 
+    public double AudioTrigger = 0.5;
+    bool triggered = false;
+    bool audioEnabled = false;
+    public bool AudioEnabled
+    {
+        get => audioEnabled;
+        set
+        {
+            audioEnabled = value;
+            if (value) Timer.Interval = (1 / 32f) * 1000;
+            else Speed = speed;
+        }
+    }
+
     public FunctionStrobe()
     {
         for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Inverted.Add(false);
@@ -52,6 +66,29 @@ public class FunctionStrobe : Function
     }
 
     public void Execute(object? sender, ElapsedEventArgs args)
+    {
+        if (AudioEnabled == false)
+        {
+            SwitchState();
+        }
+        else
+        {
+            if (triggered)
+            {
+                if (Audio.Read < AudioTrigger) triggered = false;
+            }
+            else
+            {
+                if (Audio.Read >= AudioTrigger)
+                {
+                    triggered = true;
+                    SwitchState();
+                }
+            }
+        }
+    }
+
+    void SwitchState()
     {
         if (State) Off();
         else On();
