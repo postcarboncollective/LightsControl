@@ -6,21 +6,14 @@ public class FunctionBlackout : Function
 {
     protected override void Start()
     {
-        ResetBarType();
         Kill();
     }
 
-    public void ResetBarType()
+    public override void ResetBarType(int index)
     {
-        for (int i = 0; i < Switch.Count; i++)
+        if (index >= (int)Lights.Bar1 && index <= (int)Lights.Bar2)
         {
-            if (Switch[i].Value)
-            {
-                if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
-                {
-                    PM.Bar[i - (int)Lights.Bar1].Type = (int)BarType.Full;
-                }
-            }
+            PM.Bar[index - (int)Lights.Bar1].Type = (int)BarType.Full;
         }
     }
 }

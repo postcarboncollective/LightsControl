@@ -11,6 +11,20 @@ public abstract class Function
 
     public void Run()
     {
+        Reset();
+        Start();
+    }
+
+    protected virtual void Start()
+    {
+    }
+
+    public virtual void Stop()
+    {
+    }
+
+    public void Reset()
+    {
         for (int i = 0; i < Switch.Count; i++)
         {
             if (Switch[i].Value)
@@ -22,16 +36,12 @@ public abstract class Function
                         if (f.Switch[i].Value) f.Switch[i].Value = false;
                     }
                 }
+                ResetBarType(i);
             }
         }
-        Start();
     }
 
-    protected virtual void Start()
-    {
-    }
-
-    public virtual void Stop()
+    public virtual void ResetBarType(int index)
     {
     }
 
