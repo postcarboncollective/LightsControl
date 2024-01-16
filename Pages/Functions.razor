@@ -99,7 +99,7 @@
                     }
                     @foreach (Lights light in Enum.GetValues(typeof(Lights)))
                     {
-                        <MudItem xs="6">
+                        <MudItem xs="3">
                             <MudText>@(light.ToString()) @(Global.Strobe.Inverted[(int)light] ? "Inverted" : "Normal")</MudText>
                             <MudToggleIconButton @bind-Toggled="@Global.Strobe.Inverted[(int)light]" Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error" ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success"/>
                         </MudItem>
@@ -161,13 +161,11 @@
                         <MudRadioGroup @bind-Value="Global.Oscillator.Type">
                             <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary">Saw</MudRadio>
                             <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary">Sine</MudRadio>
-                            @* <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary">Log</MudRadio> *@
-                            @* <MudRadio Value="4" Color="Color.Secondary" UnCheckedColor="Color.Primary">Four</MudRadio> *@
                         </MudRadioGroup>
                     </MudItem>
                     @foreach (Lights light in Enum.GetValues(typeof(Lights)))
                     {
-                        <MudItem xs="6">
+                        <MudItem xs="3">
                             <MudText>@(light.ToString()) @(Global.Oscillator.Inverted[(int)light] ? "Inverted" : "Normal")</MudText>
                             <MudToggleIconButton @bind-Toggled="@Global.Oscillator.Inverted[(int)light]" Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error" ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success"/>
                         </MudItem>
