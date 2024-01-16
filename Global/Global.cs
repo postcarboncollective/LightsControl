@@ -1,5 +1,3 @@
-using MudBlazor.Utilities;
-
 namespace LightsControl;
 
 public static class Global

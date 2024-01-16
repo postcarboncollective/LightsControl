@@ -27,6 +27,9 @@ public class FunctionOscillator : Function
         }
     }
 
+    public double AudioMax = 0.5f;
+    public bool AudioEnabled = false;
+
     public FunctionOscillator()
     {
         for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Inverted.Add(false);
@@ -48,17 +51,25 @@ public class FunctionOscillator : Function
 
     public void Execute(object? sender, ElapsedEventArgs args)
     {
-        time += (Speed / 2);
-        time %= 1f;
+        if (AudioEnabled)
+        {
+            time = Audio.Read / AudioMax;
+            if (time > 1) time = 1;
+        }
+        else
+        {
+            time += (Speed / 2);
+            time %= 1f;
+        }
         switch (Type)
         {
             case 1:
-                val = (Math.Sin(time * (Math.PI * 2)) / 2) + 0.5f;
-                inv = (Math.Sin((1 - time) * (Math.PI * 2)) / 2) + 0.5f;
-                break;
-            case 2:
                 val = time;
                 inv = 1 - time;
+                break;
+            case 2:
+                val = 1 - ((Math.Cos(time * (Math.PI * 2)) / 2) + 0.5f);
+                inv = 1 - ((Math.Cos((1 - time) * (Math.PI * 2)) / 2) + 0.5f);
                 break;
         }
         double r = (Color.R / 255f);

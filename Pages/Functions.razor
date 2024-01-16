@@ -117,13 +117,26 @@
                     <MudItem xs="12" Class="d-flex justify-center">
                         <MudColorPicker @bind-Value="Global.Oscillator.Color" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
                     </MudItem>
-                    <MudItem xs="12">
-                        <MudSlider @bind-Value="Global.Oscillator.Speed" Min="0.001" Max="0.249" Step="0.001">Speed</MudSlider>
+                    <MudItem xs="12" Class="d-flex justify-center">
+                        <MudCheckBox @bind-Value="@Global.Oscillator.AudioEnabled" Label="Audio" Color="Color.Secondary"></MudCheckBox>
                     </MudItem>
+                    @if (Global.Oscillator.AudioEnabled)
+                    {
+                        <MudItem xs="12">
+                            <MudSlider @bind-Value="@Global.Oscillator.AudioMax" Min="0.01" Max="0.99" Step="0.01">Max</MudSlider>
+                            <MudSlider Value="Audio.Read" Min="0.01" Max="0.99" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
+                        </MudItem>
+                    }
+                    else
+                    {
+                        <MudItem xs="12">
+                            <MudSlider @bind-Value="Global.Oscillator.Speed" Min="0.001" Max="0.249" Step="0.001">Speed</MudSlider>
+                        </MudItem>
+                    }
                     <MudItem xs="12">
                         <MudRadioGroup @bind-Value="Global.Oscillator.Type">
-                            <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary">Sine</MudRadio>
-                            <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary">Saw</MudRadio>
+                            <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary">Saw</MudRadio>
+                            <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary">Sine</MudRadio>
                             @* <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary">Log</MudRadio> *@
                             @* <MudRadio Value="4" Color="Color.Secondary" UnCheckedColor="Color.Primary">Four</MudRadio> *@
                         </MudRadioGroup>

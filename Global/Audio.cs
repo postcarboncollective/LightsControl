@@ -1,4 +1,3 @@
-using System.Timers;
 using JackSharp;
 using JackSharp.Processing;
 
