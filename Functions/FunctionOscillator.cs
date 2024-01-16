@@ -79,8 +79,8 @@ public class FunctionOscillator : Function
         {
             if (Switch[(int)light].Value)
             {
-                if (Inverted[(int)light]) PM.SetLight(light, r * inv, g * inv, b * inv);
-                else PM.SetLight(light, r * val, g * val, b * val);
+                if (Inverted[(int)light]) PM.SetLight(light, r, g, b, inv);
+                else PM.SetLight(light, r, g, b, val);
             }
         }
     }

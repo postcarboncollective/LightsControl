@@ -1,7 +1,16 @@
 namespace LightsControl;
 
+public enum BarType
+{
+    None = 0,
+    Full = 1,
+    Fill = 2,
+    Split = 3,
+}
+
 public class LightBar
 {
+    public int Type = 1;
     public List<Dmx> Brightness;
     public List<Dmx> Strobe;
     public List<Dmx> Red;
@@ -30,14 +39,52 @@ public class LightBar
 
     public void Set(double r, double g, double b, double brightness, double strobe, double macro)
     {
-        for (int i = 0; i < Red.Count; i++)
+        switch (Type)
         {
-            Red[i].Value = r;
-            Green[i].Value = g;
-            Blue[i].Value = b;
-            Brightness[i].Value = brightness;
-            Strobe[i].Value = strobe;
-            Macro[i].Value = macro;
+            case (int)BarType.Full:
+                for (int i = 0; i < Red.Count; i++)
+                {
+                    Red[i].Value = r;
+                    Green[i].Value = g;
+                    Blue[i].Value = b;
+                    Brightness[i].Value = brightness;
+                    Strobe[i].Value = strobe;
+                    Macro[i].Value = macro;
+                }
+                break;
+            case (int)BarType.Fill:
+                for (int i = 0; i < Red.Count; i++)
+                {
+                    Red[i].Value = r;
+                    Green[i].Value = g;
+                    Blue[i].Value = b;
+                    Strobe[i].Value = strobe;
+                    Macro[i].Value = macro;
+
+                    float div = 1f / Red.Count;
+                    float next = (i + 1) * div;
+                    float val = i * div;
+                    if (brightness > next) Brightness[i].Value = 1;
+                    else if (brightness > val) Brightness[i].Value = (brightness - val) * Brightness.Count;
+                    else Brightness[i].Value = 0;
+                }
+                break;
+            case (int)BarType.Split:
+                for (int i = 0; i < Red.Count; i++)
+                {
+                    Red[i].Value = r;
+                    Green[i].Value = g;
+                    Blue[i].Value = b;
+                    Strobe[i].Value = strobe;
+                    Macro[i].Value = macro;
+
+                    float div = 1f / Red.Count;
+                    float next = (i + 1) * div;
+                    float val = i * div;
+                    if (brightness < next && brightness >= val) Brightness[i].Value = 1;
+                    else Brightness[i].Value = 0;
+                }
+                break;
         }
     }
 

@@ -105,7 +105,7 @@ public class FunctionSwitch : Function
         if (possibleLights.Count > 0)
         {
             Index = possibleLights[rand.Next(possibleLights.Count)];
-            PM.SetLight(Index, r, g, b);
+            PM.SetLight(Index, r, g, b, 1);
         }
     }
 }

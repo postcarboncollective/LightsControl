@@ -102,7 +102,7 @@ public class FunctionStrobe : Function
             if (Switch[(int)light].Value)
             {
                 if (Inverted[(int)light]) PM.KillLight(light);
-                else PM.SetLight(light, r, g, b);
+                else PM.SetLight(light, r, g, b, 1);
             }
         }
     }
@@ -117,7 +117,7 @@ public class FunctionStrobe : Function
         {
             if (Switch[(int)light].Value)
             {
-                if (Inverted[(int)light]) PM.SetLight(light, r, g, b);
+                if (Inverted[(int)light]) PM.SetLight(light, r, g, b, 1);
                 else PM.KillLight(light);
             }
         }

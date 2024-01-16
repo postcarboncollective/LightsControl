@@ -1,6 +1,7 @@
 ﻿@page "/"
 @page "/Functions"
 @using System.Timers
+@using System.Security.Cryptography
 @implements IDisposable
 
 <PageTitle>Functions</PageTitle>
@@ -16,10 +17,10 @@
             <MudContainer Style="background: #111f">
                 <br/>
                 <MudGrid>
-                    @foreach (var name in Enum.GetNames(typeof(Lights)))
+                    @foreach (Lights light in Enum.GetValues(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Blackout.Switch[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@light.ToString()" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Blackout.Switch[(int)light].Value" Style="align-items: center"/>
                         </MudItem>
                     }
                 </MudGrid>
@@ -37,10 +38,10 @@
             <MudContainer Style="background: #111f">
                 <br/>
                 <MudGrid>
-                    @foreach (var name in Enum.GetNames(typeof(Lights)))
+                    @foreach (Lights light in Enum.GetValues(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Expulsadeira.Switch[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@light.ToString()" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Expulsadeira.Switch[(int)light].Value" Style="align-items: center"/>
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">
@@ -61,10 +62,10 @@
             <MudContainer Style="background: #111f">
                 <br/>
                 <MudGrid>
-                    @foreach (var name in Enum.GetNames(typeof(Lights)))
+                    @foreach (Lights light in Enum.GetValues(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Strobe.Switch[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@light.ToString()" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Strobe.Switch[(int)light].Value" Style="align-items: center"/>
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">
@@ -86,11 +87,11 @@
                             <MudSlider @bind-Value="Global.Strobe.Speed" Min="0.01" Max="0.99" Step="0.01">Speed</MudSlider>
                         </MudItem>
                     }
-                    @foreach (var name in Enum.GetNames(typeof(Lights)))
+                    @foreach (Lights light in Enum.GetValues(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudText>@(name) @(Global.Strobe.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)] ? "Inverted" : "Normal")</MudText>
-                            <MudToggleIconButton @bind-Toggled="@Global.Strobe.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)]" Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error" ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success"/>
+                            <MudText>@(light.ToString()) @(Global.Strobe.Inverted[(int)light] ? "Inverted" : "Normal")</MudText>
+                            <MudToggleIconButton @bind-Toggled="@Global.Strobe.Inverted[(int)light]" Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error" ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success"/>
                         </MudItem>
                     }
                 </MudGrid>
@@ -108,10 +109,26 @@
             <MudContainer Style="background: #111f">
                 <br/>
                 <MudGrid>
-                    @foreach (var name in Enum.GetNames(typeof(Lights)))
+                    @foreach (Lights light in Enum.GetValues(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Oscillator.Switch[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@light.ToString()" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Oscillator.Switch[(int)light].Value" Style="align-items: center"/>
+                            @if (light == Lights.Bar1)
+                            {
+                                <MudRadioGroup @bind-Value="@(PM.Bar[0].Type)">
+                                    <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary">Full</MudRadio>
+                                    <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary">Fill</MudRadio>
+                                    <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary">Split</MudRadio>
+                                </MudRadioGroup>
+                            }
+                            else if (light == Lights.Bar2)
+                            {
+                                <MudRadioGroup @bind-Value="@(PM.Bar[1].Type)">
+                                    <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary">Full</MudRadio>
+                                    <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary">Fill</MudRadio>
+                                    <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary">Split</MudRadio>
+                                </MudRadioGroup>
+                            }
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">
@@ -141,11 +158,11 @@
                             @* <MudRadio Value="4" Color="Color.Secondary" UnCheckedColor="Color.Primary">Four</MudRadio> *@
                         </MudRadioGroup>
                     </MudItem>
-                    @foreach (var name in Enum.GetNames(typeof(Lights)))
+                    @foreach (Lights light in Enum.GetValues(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudText>@(name) @(Global.Oscillator.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)] ? "Inverted" : "Normal")</MudText>
-                            <MudToggleIconButton @bind-Toggled="@Global.Oscillator.Inverted[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)]" Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error" ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success"/>
+                            <MudText>@(light.ToString()) @(Global.Oscillator.Inverted[(int)light] ? "Inverted" : "Normal")</MudText>
+                            <MudToggleIconButton @bind-Toggled="@Global.Oscillator.Inverted[(int)light]" Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error" ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success"/>
                         </MudItem>
                     }
                 </MudGrid>
@@ -163,10 +180,10 @@
             <MudContainer Style="background: #111f">
                 <br/>
                 <MudGrid>
-                    @foreach (var name in Enum.GetNames(typeof(Lights)))
+                    @foreach (Lights light in Enum.GetValues(typeof(Lights)))
                     {
                         <MudItem xs="6">
-                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@name" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Switch.Switch[Enum.GetNames(typeof(Lights)).ToList().IndexOf(name)].Value" Style="align-items: center"/>
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@light.ToString()" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Switch.Switch[(int)light].Value" Style="align-items: center"/>
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">

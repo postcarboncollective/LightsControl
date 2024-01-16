@@ -33,21 +33,21 @@ public static class PM
         }
     }
 
-    public static void SetLight(Lights index, double r, double g, double b)
+    public static void SetLight(Lights index, double r, double g, double b, double brightness)
     {
         switch (index)
         {
             case Lights.Strobe:
-                Strobe.Set(r, g, b, 0, 1, 0, 0, 0);
+                Strobe.Set(r, g, b, 0, brightness, 0, 0, 0);
                 break;
             case Lights.Par:
-                Par.Set((r + g + b) / 3, 0, 1, 0);
+                Par.Set(brightness, 0, brightness, 0);
                 break;
             case Lights.Bar1:
-                Bar[0].Set(r, g, b, 1, 0, 0);
+                Bar[0].Set(r, g, b, brightness, 0, 0);
                 break;
             case Lights.Bar2:
-                Bar[1].Set(r, g, b, 1, 0, 0);
+                Bar[1].Set(r, g, b, brightness, 0, 0);
                 break;
         }
     }

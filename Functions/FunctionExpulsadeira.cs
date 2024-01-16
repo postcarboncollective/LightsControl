@@ -20,7 +20,7 @@ public class FunctionExpulsadeira : Function
         double b = (Color.Value.B / 255f);
         foreach (Lights light in Enum.GetValues(typeof(Lights)))
         {
-            if (Switch[(int)light].Value) PM.SetLight(light, r, g, b);
+            if (Switch[(int)light].Value) PM.SetLight(light, r, g, b, 1);
         }
     }
 
