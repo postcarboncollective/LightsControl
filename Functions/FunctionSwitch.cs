@@ -54,6 +54,7 @@ public class FunctionSwitch : Function
 
     protected override void Start()
     {
+        ResetBarType();
         Kill();
         Executing = true;
     }
@@ -111,5 +112,22 @@ public class FunctionSwitch : Function
             else PM.SetLight(Index, r, g, b, 1);
         }
         else PM.SetLight(Index, r, g, b, 1);
+    }
+
+    public void ResetBarType()
+    {
+        for (int i = 0; i < Switch.Count; i++)
+        {
+            if (Switch[i].Value)
+            {
+                if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
+                {
+                    if (PM.Bar[i - (int)Lights.Bar1].Type > (int)BarType.Split)
+                    {
+                        PM.Bar[i - (int)Lights.Bar1].Type = (int)BarType.Split;
+                    }
+                }
+            }
+        }
     }
 }

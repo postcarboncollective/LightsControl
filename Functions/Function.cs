@@ -42,15 +42,4 @@ public abstract class Function
             if (Switch[(int)light].Value) PM.KillLight(light);
         }
     }
-
-    public void ResetBarType()
-    {
-        for (int i = 0; i < Switch.Count; i++)
-        {
-            if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
-            {
-                PM.Bar[i - (int)Lights.Bar1].Type = (int)BarType.Full;
-            }
-        }
-    }
 }
