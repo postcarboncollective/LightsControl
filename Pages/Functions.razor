@@ -172,9 +172,22 @@
                     <MudItem xs="12" Class="d-flex justify-center">
                         <MudColorPicker @bind-Value="Global.Switch.Color" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
                     </MudItem>
-                    <MudItem xs="12">
-                        <MudSlider @bind-Value="Global.Switch.Speed" Min="0.01" Max="0.99" Step="0.01">Speed</MudSlider>
+                    <MudItem xs="12" Class="d-flex justify-center">
+                        <MudCheckBox @bind-Value="@Global.Switch.AudioEnabled" Label="Audio" Color="Color.Secondary"></MudCheckBox>
                     </MudItem>
+                    @if (Global.Switch.AudioEnabled)
+                    {
+                        <MudItem xs="12">
+                            <MudSlider @bind-Value="@Global.Switch.AudioTrigger" Min="0.01" Max="0.99" Step="0.01">Trigger</MudSlider>
+                            <MudSlider Value="Audio.Read" Min="0.01" Max="0.99" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
+                        </MudItem>
+                    }
+                    else
+                    {
+                        <MudItem xs="12">
+                            <MudSlider @bind-Value="Global.Switch.Speed" Min="0.01" Max="0.99" Step="0.01">Speed</MudSlider>
+                        </MudItem>
+                    }
                 </MudGrid>
                 <br/>
             </MudContainer>

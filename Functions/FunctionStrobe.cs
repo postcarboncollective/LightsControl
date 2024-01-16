@@ -67,11 +67,7 @@ public class FunctionStrobe : Function
 
     public void Execute(object? sender, ElapsedEventArgs args)
     {
-        if (AudioEnabled == false)
-        {
-            SwitchState();
-        }
-        else
+        if (AudioEnabled)
         {
             if (triggered)
             {
@@ -86,6 +82,7 @@ public class FunctionStrobe : Function
                 }
             }
         }
+        else SwitchState();
     }
 
     void SwitchState()

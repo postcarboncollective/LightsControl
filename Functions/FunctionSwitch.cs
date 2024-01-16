@@ -33,6 +33,20 @@ public class FunctionSwitch : Function
         }
     }
 
+    public double AudioTrigger = 0.5;
+    bool triggered = false;
+    bool audioEnabled = false;
+    public bool AudioEnabled
+    {
+        get => audioEnabled;
+        set
+        {
+            audioEnabled = value;
+            if (value) Timer.Interval = (1 / 32f) * 1000;
+            else Speed = speed;
+        }
+    }
+
     public FunctionSwitch()
     {
         Speed = speed;
@@ -52,6 +66,26 @@ public class FunctionSwitch : Function
     }
 
     public void Execute(object? sender, ElapsedEventArgs args)
+    {
+        if (AudioEnabled)
+        {
+            if (triggered)
+            {
+                if (Audio.Read < AudioTrigger) triggered = false;
+            }
+            else
+            {
+                if (Audio.Read >= AudioTrigger)
+                {
+                    triggered = true;
+                    SwitchLight();
+                }
+            }
+        }
+        else SwitchLight();
+    }
+
+    public void SwitchLight()
     {
         double r = (Color.R / 255f);
         double g = (Color.G / 255f);
