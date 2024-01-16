@@ -8,7 +8,6 @@ public class FunctionSwitch : Function
     public System.Timers.Timer Timer = new();
     public MudColor Color = new MudColor(255, 255, 255, 255);
     public Lights Index = Lights.Bar1;
-    Random rand = new Random();
 
     bool executing = false;
     public bool Executing
@@ -104,8 +103,13 @@ public class FunctionSwitch : Function
         }
         if (possibleLights.Count > 0)
         {
-            Index = possibleLights[rand.Next(possibleLights.Count)];
-            PM.SetLight(Index, r, g, b, 1);
+            Index = possibleLights[Global.Rand.Next(possibleLights.Count)];
         }
+        if (Index >= Lights.Bar1 && Index <= Lights.Bar2)
+        {
+            if (PM.Bar[(int)Index - (int)Lights.Bar1].Type != (int)BarType.Full) PM.SetLight(Index, r, g, b, Global.Rand.NextSingle());
+            else PM.SetLight(Index, r, g, b, 1);
+        }
+        else PM.SetLight(Index, r, g, b, 1);
     }
 }

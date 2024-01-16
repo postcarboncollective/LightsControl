@@ -41,7 +41,7 @@ public static class PM
                 Strobe.Set(r, g, b, 0, brightness, 0, 0, 0);
                 break;
             case Lights.Par:
-                Par.Set(brightness, 0, brightness, 0);
+                Par.Set(brightness, 0, (r + g + b) / 3, 0);
                 break;
             case Lights.Bar1:
                 Bar[0].Set(r, g, b, brightness, 0, 0);

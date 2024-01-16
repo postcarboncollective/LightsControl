@@ -102,7 +102,15 @@ public class FunctionStrobe : Function
             if (Switch[(int)light].Value)
             {
                 if (Inverted[(int)light]) PM.KillLight(light);
-                else PM.SetLight(light, r, g, b, 1);
+                else
+                {
+                    if (light >= Lights.Bar1 && light <= Lights.Bar2)
+                    {
+                        if (PM.Bar[(int)light - (int)Lights.Bar1].Type != (int)BarType.Full) PM.SetLight(light, r, g, b, Global.Rand.NextSingle());
+                        else PM.SetLight(light, r, g, b, 1);
+                    }
+                    else PM.SetLight(light, r, g, b, 1);
+                }
             }
         }
     }
@@ -117,7 +125,15 @@ public class FunctionStrobe : Function
         {
             if (Switch[(int)light].Value)
             {
-                if (Inverted[(int)light]) PM.SetLight(light, r, g, b, 1);
+                if (Inverted[(int)light])
+                {
+                    if (light >= Lights.Bar1 && light <= Lights.Bar2)
+                    {
+                        if (PM.Bar[(int)light - (int)Lights.Bar1].Type != (int)BarType.Full) PM.SetLight(light, r, g, b, Global.Rand.NextSingle());
+                        else PM.SetLight(light, r, g, b, 1);
+                    }
+                    else PM.SetLight(light, r, g, b, 1);
+                }
                 else PM.KillLight(light);
             }
         }

@@ -14,6 +14,7 @@ public class FunctionExpulsadeira : Function
 
     protected override void Start()
     {
+        ResetBarType();
         Executing = true;
         double r = (Color.Value.R / 255f);
         double g = (Color.Value.G / 255f);

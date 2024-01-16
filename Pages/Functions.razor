@@ -66,6 +66,19 @@
                     {
                         <MudItem xs="6">
                             <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@light.ToString()" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Strobe.Switch[(int)light].Value" Style="align-items: center"/>
+                            @if (light >= Lights.Bar1 && light <= Lights.Bar2)
+                            {
+                                @if (Global.Strobe.Switch[(int)light].Value)
+                                {
+                                    <MudRadioGroup @bind-Value="@(PM.Bar[(int)light - (int)Lights.Bar1].Type)">
+                                        <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Full</MudRadio>
+                                        <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Split</MudRadio>
+                                        <br/>
+                                        <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Fill</MudRadio>
+                                        <MudRadio Value="4" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">iFill</MudRadio>
+                                    </MudRadioGroup>
+                                }
+                            }
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">
@@ -113,21 +126,18 @@
                     {
                         <MudItem xs="6">
                             <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@light.ToString()" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Oscillator.Switch[(int)light].Value" Style="align-items: center"/>
-                            @if (light == Lights.Bar1)
+                            @if (light >= Lights.Bar1 && light <= Lights.Bar2)
                             {
-                                <MudRadioGroup @bind-Value="@(PM.Bar[0].Type)">
-                                    <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary">Full</MudRadio>
-                                    <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary">Fill</MudRadio>
-                                    <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary">Split</MudRadio>
-                                </MudRadioGroup>
-                            }
-                            else if (light == Lights.Bar2)
-                            {
-                                <MudRadioGroup @bind-Value="@(PM.Bar[1].Type)">
-                                    <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary">Full</MudRadio>
-                                    <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary">Fill</MudRadio>
-                                    <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary">Split</MudRadio>
-                                </MudRadioGroup>
+                                @if (Global.Oscillator.Switch[(int)light].Value)
+                                {
+                                    <MudRadioGroup @bind-Value="@(PM.Bar[(int)light - (int)Lights.Bar1].Type)">
+                                        <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Full</MudRadio>
+                                        <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Split</MudRadio>
+                                        <br/>
+                                        <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Fill</MudRadio>
+                                        <MudRadio Value="4" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">iFill</MudRadio>
+                                    </MudRadioGroup>
+                                }
                             }
                         </MudItem>
                     }
@@ -184,6 +194,19 @@
                     {
                         <MudItem xs="6">
                             <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@light.ToString()" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Switch.Switch[(int)light].Value" Style="align-items: center"/>
+                            @if (light >= Lights.Bar1 && light <= Lights.Bar2)
+                            {
+                                @if (Global.Switch.Switch[(int)light].Value)
+                                {
+                                    <MudRadioGroup @bind-Value="@(PM.Bar[(int)light - (int)Lights.Bar1].Type)">
+                                        <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Full</MudRadio>
+                                        <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Split</MudRadio>
+                                        <br/>
+                                        <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Fill</MudRadio>
+                                        <MudRadio Value="4" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">iFill</MudRadio>
+                                    </MudRadioGroup>
+                                }
+                            }
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">

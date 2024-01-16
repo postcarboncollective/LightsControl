@@ -6,6 +6,7 @@ public class FunctionBlackout : Function
 {
     protected override void Start()
     {
+        ResetBarType();
         Kill();
     }
 }

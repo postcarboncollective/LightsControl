@@ -4,8 +4,9 @@ public enum BarType
 {
     None = 0,
     Full = 1,
-    Fill = 2,
-    Split = 3,
+    Split = 2,
+    Fill = 3,
+    iFill = 4,
 }
 
 public class LightBar
@@ -52,23 +53,6 @@ public class LightBar
                     Macro[i].Value = macro;
                 }
                 break;
-            case (int)BarType.Fill:
-                for (int i = 0; i < Red.Count; i++)
-                {
-                    Red[i].Value = r;
-                    Green[i].Value = g;
-                    Blue[i].Value = b;
-                    Strobe[i].Value = strobe;
-                    Macro[i].Value = macro;
-
-                    float div = 1f / Red.Count;
-                    float next = (i + 1) * div;
-                    float val = i * div;
-                    if (brightness > next) Brightness[i].Value = 1;
-                    else if (brightness > val) Brightness[i].Value = (brightness - val) * Brightness.Count;
-                    else Brightness[i].Value = 0;
-                }
-                break;
             case (int)BarType.Split:
                 for (int i = 0; i < Red.Count; i++)
                 {
@@ -83,6 +67,42 @@ public class LightBar
                     float val = i * div;
                     if (brightness < next && brightness >= val) Brightness[i].Value = 1;
                     else Brightness[i].Value = 0;
+                }
+                break;
+            case (int)BarType.Fill:
+                for (int i = 0; i < Red.Count; i++)
+                {
+                    int index = i;
+                    Red[index].Value = r;
+                    Green[index].Value = g;
+                    Blue[index].Value = b;
+                    Strobe[index].Value = strobe;
+                    Macro[index].Value = macro;
+
+                    float div = 1f / Red.Count;
+                    float next = (i + 1) * div;
+                    float val = i * div;
+                    if (brightness > next) Brightness[index].Value = 1;
+                    else if (brightness > val) Brightness[index].Value = (brightness - val) * Brightness.Count;
+                    else Brightness[index].Value = 0;
+                }
+                break;
+            case (int)BarType.iFill:
+                for (int i = 0; i < Red.Count; i++)
+                {
+                    int index = (Red.Count - 1) - i;
+                    Red[index].Value = r;
+                    Green[index].Value = g;
+                    Blue[index].Value = b;
+                    Strobe[index].Value = strobe;
+                    Macro[index].Value = macro;
+
+                    float div = 1f / Red.Count;
+                    float next = (i + 1) * div;
+                    float val = i * div;
+                    if (brightness > next) Brightness[index].Value = 1;
+                    else if (brightness > val) Brightness[index].Value = (brightness - val) * Brightness.Count;
+                    else Brightness[index].Value = 0;
                 }
                 break;
         }
