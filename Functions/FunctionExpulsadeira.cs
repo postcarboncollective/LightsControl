@@ -14,21 +14,38 @@ public class FunctionExpulsadeira : Function
 
     protected override void Start()
     {
-        Executing = true;
-        double r = (Color.Value.R / 255f);
-        double g = (Color.Value.G / 255f);
-        double b = (Color.Value.B / 255f);
+        Kill();
+        SetColor();
         foreach (Lights light in Enum.GetValues(typeof(Lights)))
         {
-            if (Switch[(int)light].Value) PM.SetLight(light, r, g, b, 1);
+            if (Switch[(int)light].Value)
+            {
+                PM.SetBrightness(light, 1);
+            }
         }
+        Executing = true;
     }
 
     public override void Stop()
     {
         Executing = false;
+        Kill();
     }
 
+    public override void SetColor()
+    {
+        double r = (Color.Value.R / 255f);
+        double g = (Color.Value.G / 255f);
+        double b = (Color.Value.B / 255f);
+        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        {
+            if (Switch[(int)light].Value)
+            {
+                PM.SetColor(light, r, g, b);
+            }
+        }
+    }
+    
     public override void ResetBarType(int index)
     {
         if (index >= (int)Lights.Bar1 && index <= (int)Lights.Bar2)

@@ -14,13 +14,18 @@ public abstract class Function
         Reset();
         Start();
     }
-
+    
     protected virtual void Start()
     {
     }
 
     public virtual void Stop()
     {
+    }
+
+    public virtual void SetColor()
+    {
+        
     }
 
     public void Reset()

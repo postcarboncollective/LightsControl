@@ -6,7 +6,7 @@ namespace LightsControl;
 public class FunctionSwitch : Function
 {
     public System.Timers.Timer Timer = new();
-    public MudColor Color = new MudColor(255, 255, 255, 255);
+    public ColorFunction Color;
     public Lights Index = Lights.Bar1;
 
     bool executing = false;
@@ -48,6 +48,7 @@ public class FunctionSwitch : Function
 
     public FunctionSwitch()
     {
+        Color = new(new MudColor(255, 255, 255, 255), this);
         Speed = speed;
         Timer.Elapsed += Execute;
     }
@@ -55,6 +56,7 @@ public class FunctionSwitch : Function
     protected override void Start()
     {
         Kill();
+        SetColor();
         Executing = true;
     }
 
@@ -84,11 +86,22 @@ public class FunctionSwitch : Function
         else SwitchLight();
     }
 
+    public override void SetColor()
+    {
+        double r = (Color.Value.R / 255f);
+        double g = (Color.Value.G / 255f);
+        double b = (Color.Value.B / 255f);
+        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        {
+            if (Switch[(int)light].Value)
+            {
+                PM.SetColor(light, r, g, b);
+            }
+        }
+    }
+
     public void SwitchLight()
     {
-        double r = (Color.R / 255f);
-        double g = (Color.G / 255f);
-        double b = (Color.B / 255f);
         PM.KillLight(Index);
         List<Lights> possibleLights = new();
         foreach (var x in Switch)
@@ -107,10 +120,13 @@ public class FunctionSwitch : Function
         }
         if (Index >= Lights.Bar1 && Index <= Lights.Bar2)
         {
-            if (PM.Bar[(int)Index - (int)Lights.Bar1].Type != (int)BarType.Full) PM.SetLight(Index, r, g, b, Global.Rand.NextSingle());
-            else PM.SetLight(Index, r, g, b, 1);
+            if (PM.Bar[(int)Index - (int)Lights.Bar1].Type != (int)BarType.Full)
+            {
+                PM.SetBrightness(Index, Global.Rand.NextSingle());
+            }
+            else PM.SetBrightness(Index, 1);
         }
-        else PM.SetLight(Index, r, g, b, 1);
+        else PM.SetBrightness(Index, 1);
     }
 
     public override void ResetBarType(int index)

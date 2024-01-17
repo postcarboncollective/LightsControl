@@ -9,7 +9,7 @@ public enum BarType
     iFill = 4,
 }
 
-public class LightBar
+public class LightBar : Light
 {
     public int Type = 1;
     public List<Dmx> Brightness;
@@ -38,7 +38,7 @@ public class LightBar
         }
     }
 
-    public void Set(double r, double g, double b, double brightness, double strobe, double macro)
+    public override void Set(double r, double g, double b, double brightness)
     {
         switch (Type)
         {
@@ -49,8 +49,6 @@ public class LightBar
                     Green[i].Value = g;
                     Blue[i].Value = b;
                     Brightness[i].Value = brightness;
-                    Strobe[i].Value = strobe;
-                    Macro[i].Value = macro;
                 }
                 break;
             case (int)BarType.Split:
@@ -59,8 +57,6 @@ public class LightBar
                     Red[i].Value = r;
                     Green[i].Value = g;
                     Blue[i].Value = b;
-                    Strobe[i].Value = strobe;
-                    Macro[i].Value = macro;
 
                     float div = 1f / Red.Count;
                     float next = (i + 1) * div;
@@ -76,8 +72,6 @@ public class LightBar
                     Red[index].Value = r;
                     Green[index].Value = g;
                     Blue[index].Value = b;
-                    Strobe[index].Value = strobe;
-                    Macro[index].Value = macro;
 
                     float div = 1f / Red.Count;
                     float next = (i + 1) * div;
@@ -94,10 +88,62 @@ public class LightBar
                     Red[index].Value = r;
                     Green[index].Value = g;
                     Blue[index].Value = b;
-                    Strobe[index].Value = strobe;
-                    Macro[index].Value = macro;
 
                     float div = 1f / Red.Count;
+                    float next = (i + 1) * div;
+                    float val = i * div;
+                    if (brightness > next) Brightness[index].Value = 1;
+                    else if (brightness > val) Brightness[index].Value = (brightness - val) * Brightness.Count;
+                    else Brightness[index].Value = 0;
+                }
+                break;
+        }
+    }
+
+    public override void SetColor(double r, double g, double b)
+    {
+        SetRed(r);
+        SetGreen(g);
+        SetBlue(b);
+    }
+
+    public override void SetBrightness(double brightness)
+    {
+        switch (Type)
+        {
+            case (int)BarType.Full:
+                for (int i = 0; i < Brightness.Count; i++)
+                {
+                    Brightness[i].Value = brightness;
+                }
+                break;
+            case (int)BarType.Split:
+                for (int i = 0; i < Brightness.Count; i++)
+                {
+                    float div = 1f / Brightness.Count;
+                    float next = (i + 1) * div;
+                    float val = i * div;
+                    if (brightness < next && brightness >= val) Brightness[i].Value = 1;
+                    else Brightness[i].Value = 0;
+                }
+                break;
+            case (int)BarType.Fill:
+                for (int i = 0; i < Brightness.Count; i++)
+                {
+                    int index = i;
+                    float div = 1f / Brightness.Count;
+                    float next = (i + 1) * div;
+                    float val = i * div;
+                    if (brightness > next) Brightness[index].Value = 1;
+                    else if (brightness > val) Brightness[index].Value = (brightness - val) * Brightness.Count;
+                    else Brightness[index].Value = 0;
+                }
+                break;
+            case (int)BarType.iFill:
+                for (int i = 0; i < Brightness.Count; i++)
+                {
+                    int index = (Brightness.Count - 1) - i;
+                    float div = 1f / Brightness.Count;
                     float next = (i + 1) * div;
                     float val = i * div;
                     if (brightness > next) Brightness[index].Value = 1;
@@ -121,11 +167,6 @@ public class LightBar
     public void SetBlue(double val)
     {
         foreach (var x in Blue) x.Value = val;
-    }
-
-    public void SetBrightness(double val)
-    {
-        foreach (var x in Brightness) x.Value = val;
     }
 
     public void SetStrobe(double val)

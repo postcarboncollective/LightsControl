@@ -7,7 +7,7 @@ namespace LightsControl;
 public class FunctionOscillator : Function
 {
     public System.Timers.Timer Timer = new();
-    public MudColor Color = new MudColor(255, 255, 255, 255);
+    public ColorFunction Color;
     public double Speed = 0.125f;
     public int Type = 1;
     public List<bool> Inverted = new List<bool>();
@@ -33,12 +33,15 @@ public class FunctionOscillator : Function
     public FunctionOscillator()
     {
         for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Inverted.Add(false);
+        Color = new(new MudColor(255, 255, 255, 255), this);
         Timer.Interval = (1 / 32f) * 1000;
         Timer.Elapsed += Execute;
     }
 
     protected override void Start()
     {
+        Kill();
+        SetColor();
         Executing = true;
     }
 
@@ -72,15 +75,26 @@ public class FunctionOscillator : Function
                 inv = 1 - ((Math.Cos((1 - time) * (Math.PI * 2)) / 2) + 0.5f);
                 break;
         }
-        double r = (Color.R / 255f);
-        double g = (Color.G / 255f);
-        double b = (Color.B / 255f);
         foreach (Lights light in Enum.GetValues(typeof(Lights)))
         {
             if (Switch[(int)light].Value)
             {
-                if (Inverted[(int)light]) PM.SetLight(light, r, g, b, inv);
-                else PM.SetLight(light, r, g, b, val);
+                if (Inverted[(int)light]) PM.SetBrightness(light, inv);
+                else PM.SetBrightness(light, val);
+            }
+        }
+    }
+
+    public override void SetColor()
+    {
+        double r = (Color.Value.R / 255f);
+        double g = (Color.Value.G / 255f);
+        double b = (Color.Value.B / 255f);
+        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        {
+            if (Switch[(int)light].Value)
+            {
+                PM.SetColor(light, r, g, b);
             }
         }
     }

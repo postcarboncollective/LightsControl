@@ -6,7 +6,7 @@ namespace LightsControl;
 public class FunctionStrobe : Function
 {
     public System.Timers.Timer Timer = new();
-    public MudColor Color = new MudColor(255, 255, 255, 255);
+    public ColorFunction Color;
     public List<bool> Inverted = new List<bool>();
     public bool State = false;
 
@@ -50,6 +50,7 @@ public class FunctionStrobe : Function
     public FunctionStrobe()
     {
         for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Inverted.Add(false);
+        Color = new(new MudColor(255, 255, 255, 255), this);
         Speed = speed;
         Timer.Elapsed += Execute;
     }
@@ -57,6 +58,7 @@ public class FunctionStrobe : Function
     protected override void Start()
     {
         Kill();
+        SetColor();
         Executing = true;
     }
 
@@ -86,6 +88,20 @@ public class FunctionStrobe : Function
         else SwitchState();
     }
 
+    public override void SetColor()
+    {
+        double r = (Color.Value.R / 255f);
+        double g = (Color.Value.G / 255f);
+        double b = (Color.Value.B / 255f);
+        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        {
+            if (Switch[(int)light].Value)
+            {
+                PM.SetColor(light, r, g, b);
+            }
+        }
+    }
+
     void SwitchState()
     {
         if (State) Off();
@@ -95,9 +111,6 @@ public class FunctionStrobe : Function
     void On()
     {
         State = true;
-        double r = (Color.R / 255f);
-        double g = (Color.G / 255f);
-        double b = (Color.B / 255f);
         foreach (Lights light in Enum.GetValues(typeof(Lights)))
         {
             if (Switch[(int)light].Value)
@@ -107,10 +120,10 @@ public class FunctionStrobe : Function
                 {
                     if (light >= Lights.Bar1 && light <= Lights.Bar2)
                     {
-                        if (PM.Bar[(int)light - (int)Lights.Bar1].Type != (int)BarType.Full) PM.SetLight(light, r, g, b, Global.Rand.NextSingle());
-                        else PM.SetLight(light, r, g, b, 1);
+                        if (PM.Bar[(int)light - (int)Lights.Bar1].Type != (int)BarType.Full) PM.SetBrightness(light, Global.Rand.NextSingle());
+                        else PM.SetBrightness(light, 1);
                     }
-                    else PM.SetLight(light, r, g, b, 1);
+                    else PM.SetBrightness(light, 1);
                 }
             }
         }
@@ -119,9 +132,6 @@ public class FunctionStrobe : Function
     void Off()
     {
         State = false;
-        double r = (Color.R / 255f);
-        double g = (Color.G / 255f);
-        double b = (Color.B / 255f);
         foreach (Lights light in Enum.GetValues(typeof(Lights)))
         {
             if (Switch[(int)light].Value)
@@ -130,10 +140,10 @@ public class FunctionStrobe : Function
                 {
                     if (light >= Lights.Bar1 && light <= Lights.Bar2)
                     {
-                        if (PM.Bar[(int)light - (int)Lights.Bar1].Type != (int)BarType.Full) PM.SetLight(light, r, g, b, Global.Rand.NextSingle());
-                        else PM.SetLight(light, r, g, b, 1);
+                        if (PM.Bar[(int)light - (int)Lights.Bar1].Type != (int)BarType.Full) PM.SetBrightness(light, Global.Rand.NextSingle());
+                        else PM.SetBrightness(light, 1);
                     }
-                    else PM.SetLight(light, r, g, b, 1);
+                    else PM.SetBrightness(light, 1);
                 }
                 else PM.KillLight(light);
             }

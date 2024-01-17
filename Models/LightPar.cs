@@ -1,6 +1,8 @@
+using MudBlazor;
+
 namespace LightsControl;
 
-public class LightPar
+public class LightPar : Light
 {
     public Dmx Brightness;
     public Dmx Strobe;
@@ -15,12 +17,20 @@ public class LightPar
         Audio = new Dmx(addr + 3, 0);
     }
 
-    public void Set(double brightness, double strobe, double uv, double audio)
+    public override void Set(double r, double g, double b, double brightness)
     {
         Brightness.Value = brightness;
-        Strobe.Value = strobe;
-        UV.Value = uv;
-        Audio.Value = audio;
+        UV.Value = (r + g + b) / 3;
+    }
+
+    public override void SetColor(double r, double g, double b)
+    {
+        UV.Value = (r + g + b) / 3;
+    }
+
+    public override void SetBrightness(double brightness)
+    {
+        Brightness.Value = brightness;
     }
 }
 

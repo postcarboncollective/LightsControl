@@ -1,6 +1,6 @@
 namespace LightsControl;
 
-public class LightStrobe
+public class LightStrobe : Light
 {
     public Dmx Red;
     public Dmx Green;
@@ -23,16 +23,24 @@ public class LightStrobe
         Speed = new(addr + 7, 0);
     }
 
-    public void Set(double r, double g, double b, double white, double brightness, double strobe, double swtch, double speed)
+    public override void Set(double r, double g, double b, double brightness)
     {
         Red.Value = r;
         Green.Value = g;
         Blue.Value = b;
-        White.Value = white;
         Brightness.Value = brightness;
-        Strobe.Value = strobe;
-        Switch.Value = swtch;
-        Speed.Value = speed;
+    }
+
+    public override void SetColor(double r, double g, double b)
+    {
+        Red.Value = r;
+        Green.Value = g;
+        Blue.Value = b;
+    }
+
+    public override void SetBrightness(double brightness)
+    {
+        Brightness.Value = brightness;
     }
 }
 
