@@ -15,6 +15,6 @@ public class ColorFunction(MudColor value, Function function)
     void Set(MudColor color)
     {
         value = color;
-        Function.Run();
+        Function.SetColor();
     }
 }
