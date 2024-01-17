@@ -7,7 +7,7 @@ public class FunctionSwitch : Function
 {
     public System.Timers.Timer Timer = new();
     public ColorFunction Color;
-    public Lights Index = Lights.Bar1;
+    public int Index = 0;
 
     bool executing = false;
     public bool Executing
@@ -102,15 +102,15 @@ public class FunctionSwitch : Function
 
     public void SwitchLight()
     {
-        PM.KillLight(Index);
-        List<Lights> possibleLights = new();
+        PM.Lights[Index].SetBrightness(0);
+        List<int> possibleLights = new();
         foreach (var x in Switch)
         {
             if (x.Value)
             {
-                if (x.Index != Index)
+                if ((int)x.Index != Index)
                 {
-                    possibleLights.Add(x.Index);
+                    possibleLights.Add((int)x.Index);
                 }
             }
         }
@@ -118,15 +118,15 @@ public class FunctionSwitch : Function
         {
             Index = possibleLights[Global.Rand.Next(possibleLights.Count)];
         }
-        if (Index >= Lights.Bar1 && Index <= Lights.Bar2)
+        if (Index >= (int)Lights.Bar1 && Index <= (int)Lights.Bar2)
         {
-            if (PM.Bar[(int)Index - (int)Lights.Bar1].Type != (int)BarType.Full)
+            if (PM.Bar[Index - (int)Lights.Bar1].Type != (int)BarType.Full)
             {
-                PM.SetBrightness(Index, Global.Rand.NextSingle());
+                PM.Lights[Index].SetBrightness(Global.Rand.NextSingle());
             }
-            else PM.SetBrightness(Index, 1);
+            else PM.Lights[Index].SetBrightness(1);
         }
-        else PM.SetBrightness(Index, 1);
+        else PM.Lights[Index].SetBrightness(1);
     }
 
     public override void ResetBarType(int index)
