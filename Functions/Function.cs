@@ -14,7 +14,7 @@ public abstract class Function
         Reset();
         Start();
     }
-    
+
     protected virtual void Start()
     {
     }
@@ -25,7 +25,6 @@ public abstract class Function
 
     public virtual void SetColor()
     {
-        
     }
 
     public void Reset()
@@ -52,9 +51,12 @@ public abstract class Function
 
     public virtual void Kill()
     {
-        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        for (int i = 0; i < PM.Lights.Count; i++)
         {
-            if (Switch[(int)light].Value) PM.KillLight(light);
+            if (Switch[i].Value)
+            {
+                PM.Lights[i].SetBrightness(0);
+            }
         }
     }
 }

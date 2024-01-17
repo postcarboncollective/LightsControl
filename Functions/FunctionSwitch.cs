@@ -91,11 +91,11 @@ public class FunctionSwitch : Function
         double r = (Color.Value.R / 255f);
         double g = (Color.Value.G / 255f);
         double b = (Color.Value.B / 255f);
-        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        for (int i = 0; i < PM.Lights.Count; i++)
         {
-            if (Switch[(int)light].Value)
+            if (Switch[i].Value)
             {
-                PM.SetColor(light, r, g, b);
+                PM.Lights[i].SetColor(r, g, b);
             }
         }
     }

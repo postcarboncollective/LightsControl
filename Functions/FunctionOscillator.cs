@@ -75,12 +75,12 @@ public class FunctionOscillator : Function
                 inv = 1 - ((Math.Cos((1 - time) * (Math.PI * 2)) / 2) + 0.5f);
                 break;
         }
-        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        for (int i = 0; i < PM.Lights.Count; i++)
         {
-            if (Switch[(int)light].Value)
+            if (Switch[i].Value)
             {
-                if (Inverted[(int)light]) PM.SetBrightness(light, inv);
-                else PM.SetBrightness(light, val);
+                if (Inverted[i]) PM.Lights[i].SetBrightness(inv);
+                else PM.Lights[i].SetBrightness(val);
             }
         }
     }
@@ -90,11 +90,11 @@ public class FunctionOscillator : Function
         double r = (Color.Value.R / 255f);
         double g = (Color.Value.G / 255f);
         double b = (Color.Value.B / 255f);
-        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        for (int i = 0; i < PM.Lights.Count; i++)
         {
-            if (Switch[(int)light].Value)
+            if (Switch[i].Value)
             {
-                PM.SetColor(light, r, g, b);
+                PM.Lights[i].SetColor(r, g, b);
             }
         }
     }

@@ -93,11 +93,11 @@ public class FunctionStrobe : Function
         double r = (Color.Value.R / 255f);
         double g = (Color.Value.G / 255f);
         double b = (Color.Value.B / 255f);
-        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        for (int i = 0; i < PM.Lights.Count; i++)
         {
-            if (Switch[(int)light].Value)
+            if (Switch[i].Value)
             {
-                PM.SetColor(light, r, g, b);
+                PM.Lights[i].SetColor(r, g, b);
             }
         }
     }
@@ -111,19 +111,19 @@ public class FunctionStrobe : Function
     void On()
     {
         State = true;
-        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        for (int i = 0; i < PM.Lights.Count; i++)
         {
-            if (Switch[(int)light].Value)
+            if (Switch[i].Value)
             {
-                if (Inverted[(int)light]) PM.KillLight(light);
+                if (Inverted[i]) PM.Lights[i].SetBrightness(0);
                 else
                 {
-                    if (light >= Lights.Bar1 && light <= Lights.Bar2)
+                    if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
                     {
-                        if (PM.Bar[(int)light - (int)Lights.Bar1].Type != (int)BarType.Full) PM.SetBrightness(light, Global.Rand.NextSingle());
-                        else PM.SetBrightness(light, 1);
+                        if (PM.Bar[i - (int)Lights.Bar1].Type != (int)BarType.Full) PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
+                        else PM.Lights[i].SetBrightness(1);
                     }
-                    else PM.SetBrightness(light, 1);
+                    else PM.Lights[i].SetBrightness(1);
                 }
             }
         }
@@ -132,20 +132,20 @@ public class FunctionStrobe : Function
     void Off()
     {
         State = false;
-        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        for (int i = 0; i < PM.Lights.Count; i++)
         {
-            if (Switch[(int)light].Value)
+            if (Switch[i].Value)
             {
-                if (Inverted[(int)light])
+                if (Inverted[i])
                 {
-                    if (light >= Lights.Bar1 && light <= Lights.Bar2)
+                    if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
                     {
-                        if (PM.Bar[(int)light - (int)Lights.Bar1].Type != (int)BarType.Full) PM.SetBrightness(light, Global.Rand.NextSingle());
-                        else PM.SetBrightness(light, 1);
+                        if (PM.Bar[i - (int)Lights.Bar1].Type != (int)BarType.Full) PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
+                        else PM.Lights[i].SetBrightness(1);
                     }
-                    else PM.SetBrightness(light, 1);
+                    else PM.Lights[i].SetBrightness(1);
                 }
-                else PM.KillLight(light);
+                else PM.Lights[i].SetBrightness(0);
             }
         }
     }
