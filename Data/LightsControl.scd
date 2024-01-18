@@ -7,7 +7,7 @@
 ~lightsControl = {
 	var sig = SoundIn.ar(0);
 	var volume = Amplitude.ar(sig);
-	SendReply.kr(Impulse.kr(64), '/lightscontrolosc', [volume]);
+	SendReply.kr(Impulse.kr(8), '/lightscontrolosc', [volume]);
 
 }.play;
 
