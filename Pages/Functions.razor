@@ -87,8 +87,8 @@
                     @if (Global.Strobe.AudioEnabled)
                     {
                         <MudItem xs="12">
-                            <MudSlider @bind-Value="@Global.Strobe.AudioTrigger" Min="0.1" Max="0.9" Step="0.01">Trigger</MudSlider>
-                            <MudSlider Value="Audio.Volume" Min="0.1" Max="0.9" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
+                            <MudSlider @bind-Value="@Global.Strobe.AudioTrigger" Min="0.01" Max="0.99" Step="0.01">Trigger</MudSlider>
+                            <MudSlider Value="Audio.Volume" Min="0.01" Max="0.99" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
                         </MudItem>
                     }
                     else
@@ -147,8 +147,8 @@
                     @if (Global.Oscillator.AudioEnabled)
                     {
                         <MudItem xs="12">
-                            <MudSlider @bind-Value="@Global.Oscillator.AudioMax" Min="0.1" Max="0.9" Step="0.01">Max</MudSlider>
-                            <MudSlider Value="Audio.Volume" Min="0.1" Max="0.9" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
+                            <MudSlider @bind-Value="@Global.Oscillator.AudioMax" Min="0.01" Max="0.99" Step="0.01">Max</MudSlider>
+                            <MudSlider Value="Audio.Volume" Min="0.01" Max="0.99" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
                         </MudItem>
                     }
                     else
@@ -210,8 +210,8 @@
                     @if (Global.Switch.AudioEnabled)
                     {
                         <MudItem xs="12">
-                            <MudSlider @bind-Value="@Global.Switch.AudioTrigger" Min="0.1" Max="0.9" Step="0.01">Trigger</MudSlider>
-                            <MudSlider Value="Audio.Volume" Min="0.1" Max="0.9" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
+                            <MudSlider @bind-Value="@Global.Switch.AudioTrigger" Min="0.01" Max="0.99" Step="0.01">Trigger</MudSlider>
+                            <MudSlider Value="Audio.Volume" Min="0.01" Max="0.99" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
                         </MudItem>
                     }
                     else
