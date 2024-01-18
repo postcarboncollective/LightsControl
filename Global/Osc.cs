@@ -20,10 +20,10 @@ public static class Osc
         Sender = new OscSender(Address, 58293, outputPort);
         Sender.Connect();
 
-        // Receiver = new OscReceiver(inputPort);
-        // Thread = new Thread(new ThreadStart(ListenLoop));
-        // Receiver.Connect();
-        // Thread.Start();
+        Receiver = new OscReceiver(inputPort);
+        Thread = new Thread(new ThreadStart(ListenLoop));
+        Receiver.Connect();
+        Thread.Start();
     }
 
     public static void Send(string addr, object[] args)
@@ -55,18 +55,9 @@ public static class Osc
                 if (Receiver.State == OscSocketState.Connected)
                 {
                     OscPacket packet = Receiver.Receive();
-                    string x = packet.ToString();
-                    if (x.StartsWith("/0/dmx/"))
-                    {
-                        x = x.Remove(0, "/0/dmx/".Length);
-                        int address = int.Parse(x.Split(",")[0]);
-                        address = address + 1;
-                        x = x.Split(",")[1];
-                        x = x.Remove(0, 1);
-                        x = x.Split("f")[0];
-                        float value = float.Parse(x);
-                        Console.WriteLine($"{address} - {value}");
-                    }
+                    string[] str = packet.ToString().Split(",");
+                    Audio.Volume = float.Parse(str[1].Replace("f", ""));
+                    Console.WriteLine(Audio.Volume);
                 }
             }
         }

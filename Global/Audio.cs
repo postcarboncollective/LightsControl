@@ -2,8 +2,8 @@ namespace LightsControl;
 
 public static class Audio
 {
-    public static double Volume = 0;
-    public static double Low = 0;
-    public static double Mid = 0;
-    public static double High = 0;
+    public static float Volume = 0;
+    public static float Low = 0;
+    public static float Mid = 0;
+    public static float High = 0;
 }
