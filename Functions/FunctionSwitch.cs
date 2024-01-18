@@ -70,11 +70,11 @@ public class FunctionSwitch : Function
         {
             if (triggered)
             {
-                if (Audio.Read < AudioTrigger) triggered = false;
+                if (Audio.Volume < AudioTrigger) triggered = false;
             }
             else
             {
-                if (Audio.Read >= AudioTrigger)
+                if (Audio.Volume >= AudioTrigger)
                 {
                     triggered = true;
                     SwitchLight();

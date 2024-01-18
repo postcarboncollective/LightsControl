@@ -54,7 +54,7 @@ public class FunctionOscillator : Function
     {
         if (AudioEnabled)
         {
-            time = Audio.Read / AudioMax;
+            time = Audio.Volume / AudioMax;
             if (time > 1) time = 1;
         }
         else
