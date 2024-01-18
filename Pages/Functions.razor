@@ -87,14 +87,14 @@
                     @if (Global.Strobe.AudioEnabled)
                     {
                         <MudItem xs="12">
-                            <MudSlider @bind-Value="@Global.Strobe.AudioTrigger" Min="0.03" Max="0.97" Step="0.01">Trigger</MudSlider>
-                            <MudSlider Value="Audio.Volume" Min="0.03" Max="0.97" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
+                            <MudSlider @bind-Value="@Global.Strobe.AudioTrigger" Min="0.05" Max="0.95" Step="0.01">Trigger</MudSlider>
+                            <MudSlider Value="Audio.Volume" Min="0.05" Max="0.95" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
                         </MudItem>
                     }
                     else
                     {
                         <MudItem xs="12">
-                            <MudSlider @bind-Value="Global.Strobe.Speed" Min="0.03" Max="0.97" Step="0.01">Speed</MudSlider>
+                            <MudSlider @bind-Value="Global.Strobe.Speed" Min="0.05" Max="0.95" Step="0.01">Speed</MudSlider>
                         </MudItem>
                     }
                     @foreach (Lights light in Enum.GetValues(typeof(Lights)))
@@ -147,8 +147,8 @@
                     @if (Global.Oscillator.AudioEnabled)
                     {
                         <MudItem xs="12">
-                            <MudSlider @bind-Value="@Global.Oscillator.AudioMax" Min="0.03" Max="0.97" Step="0.01">Max</MudSlider>
-                            <MudSlider Value="Audio.Volume" Min="0.03" Max="0.97" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
+                            <MudSlider @bind-Value="@Global.Oscillator.AudioMax" Min="0.05" Max="0.95" Step="0.01">Max</MudSlider>
+                            <MudSlider Value="Audio.Volume" Min="0.05" Max="0.95" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
                         </MudItem>
                     }
                     else
@@ -210,14 +210,14 @@
                     @if (Global.Switch.AudioEnabled)
                     {
                         <MudItem xs="12">
-                            <MudSlider @bind-Value="@Global.Switch.AudioTrigger" Min="0.03" Max="0.97" Step="0.01">Trigger</MudSlider>
-                            <MudSlider Value="Audio.Volume" Min="0.03" Max="0.97" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
+                            <MudSlider @bind-Value="@Global.Switch.AudioTrigger" Min="0.05" Max="0.95" Step="0.01">Trigger</MudSlider>
+                            <MudSlider Value="Audio.Volume" Min="0.05" Max="0.95" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
                         </MudItem>
                     }
                     else
                     {
                         <MudItem xs="12">
-                            <MudSlider @bind-Value="Global.Switch.Speed" Min="0.03" Max="0.97" Step="0.01">Speed</MudSlider>
+                            <MudSlider @bind-Value="Global.Switch.Speed" Min="0.05" Max="0.95" Step="0.01">Speed</MudSlider>
                         </MudItem>
                     }
                 </MudGrid>
