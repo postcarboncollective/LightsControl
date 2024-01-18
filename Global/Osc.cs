@@ -57,7 +57,7 @@ public static class Osc
                     OscPacket packet = Receiver.Receive();
                     string[] str = packet.ToString().Split(",");
                     Audio.Volume = float.Parse(str[1].Replace("f", ""));
-                    Console.WriteLine(Audio.Volume);
+                    // Console.WriteLine(Audio.Volume);
                 }
             }
         }
