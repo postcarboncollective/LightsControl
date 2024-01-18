@@ -40,8 +40,6 @@ public class FunctionOscillator : Function
 
     protected override void Start()
     {
-        Kill();
-        SetColor();
         Executing = true;
     }
 

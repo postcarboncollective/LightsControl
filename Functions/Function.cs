@@ -12,6 +12,8 @@ public abstract class Function
     public void Run()
     {
         Reset();
+        Kill();
+        SetColor();
         Start();
     }
 
@@ -55,7 +57,7 @@ public abstract class Function
         {
             if (Switch[i].Value)
             {
-                PM.Lights[i].SetBrightness(0);
+                PM.Lights[i].Set(0, 0, 0, 0);
             }
         }
     }

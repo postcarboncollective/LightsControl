@@ -20,7 +20,7 @@ public class SwitchFunction(bool val, Lights index, Function function)
         }
         else
         {
-            PM.Lights[(int)Index].SetBrightness(0);
+            PM.Lights[(int)Index].Set(0, 0, 0, 0);
             var q = Function.Switch.Where(x => x.Value == true).ToList();
             if (q.Count == 0) Function.Stop();
         }

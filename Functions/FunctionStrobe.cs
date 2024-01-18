@@ -57,8 +57,6 @@ public class FunctionStrobe : Function
 
     protected override void Start()
     {
-        Kill();
-        SetColor();
         Executing = true;
     }
 

@@ -14,8 +14,6 @@ public class FunctionExpulsadeira : Function
 
     protected override void Start()
     {
-        Kill();
-        SetColor();
         for (int i = 0; i < PM.Lights.Count; i++)
         {
             if (Switch[i].Value)

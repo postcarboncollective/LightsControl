@@ -55,8 +55,6 @@ public class FunctionSwitch : Function
 
     protected override void Start()
     {
-        Kill();
-        SetColor();
         Executing = true;
     }
 
