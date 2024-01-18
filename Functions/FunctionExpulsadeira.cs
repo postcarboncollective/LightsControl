@@ -16,11 +16,11 @@ public class FunctionExpulsadeira : Function
     {
         Kill();
         SetColor();
-        foreach (Lights light in Enum.GetValues(typeof(Lights)))
+        for (int i = 0; i < PM.Lights.Count; i++)
         {
-            if (Switch[(int)light].Value)
+            if (Switch[i].Value)
             {
-                PM.SetBrightness(light, 1);
+                PM.Lights[i].SetBrightness(1);
             }
         }
         Executing = true;
