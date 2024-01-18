@@ -20,17 +20,18 @@ public class LightPar : Light
     public override void Set(double r, double g, double b, double brightness)
     {
         Brightness.Value = brightness;
-        UV.Value = (r + g + b) / 3;
+        UV.Value = brightness;
     }
 
     public override void SetColor(double r, double g, double b)
     {
-        UV.Value = (r + g + b) / 3;
+        // UV.Value = (r + g + b) / 3;
     }
 
     public override void SetBrightness(double brightness)
     {
         Brightness.Value = brightness;
+        UV.Value = brightness;
     }
 }
 
