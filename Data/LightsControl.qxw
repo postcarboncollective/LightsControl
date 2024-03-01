@@ -3,14 +3,14 @@
 <Workspace xmlns="http://www.qlcplus.org/Workspace" CurrentWindow="SimpleDesk">
  <Creator>
   <Name>Q Light Controller Plus</Name>
-  <Version>4.12.4</Version>
+  <Version>4.12.7</Version>
   <Author>esquilo</Author>
  </Creator>
  <Engine Autostart="0">
   <InputOutputMap>
    <Universe Name="Universe 1" ID="0">
-    <Input Plugin="OSC" Line="0"/>
-    <Output Plugin="DMX USB" Line="0"/>
+    <Input Plugin="OSC" UID="127.0.0.1" Line="0"/>
+    <Output Plugin="DMX USB" UID="None" Line="0"/>
    </Universe>
    <Universe Name="Universe 2" ID="1"/>
    <Universe Name="Universe 3" ID="2"/>
