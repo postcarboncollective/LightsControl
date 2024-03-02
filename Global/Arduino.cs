@@ -34,7 +34,7 @@ public static class Arduino
     
     public static void Write(string value)
     {
-        Console.WriteLine(value);
+        // Console.WriteLine(value);
         SerialPort.WriteLine(value);
     }
     
