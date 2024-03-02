@@ -1,3 +1,6 @@
+using System.Timers;
+using MudBlazor;
+
 namespace LightsControl;
 
 using System;
@@ -7,7 +10,10 @@ using System.Threading;
 public static class Arduino
 {
     public static SerialPort SerialPort;
-    static int val = 0;
+
+    public static System.Timers.Timer ReadTimer = new();
+    public static System.Timers.Timer Timer = new();
+    public static bool BlinkState = false;
 
     public static void Init()
     {
@@ -17,30 +23,24 @@ public static class Arduino
         SerialPort = new SerialPort(ports[0], 9600);
         SerialPort.Open();
         
-        // StartReading();
+        // ReadTimer.Elapsed += Read;
+        // ReadTimer.Interval = 200;
+        // ReadTimer.Start();
         
-        Task.Run(() =>
-        {
-            while (true)
-            {
-                SerialPort.WriteLine("Arduino|Fill|0|255|0");
-                Thread.Sleep(200);
-                SerialPort.WriteLine("Arduino|Fill|0|0|0");
-                Thread.Sleep(200);
-            }
-        });
+        // Timer.Elapsed += Blink;
+        // Timer.Interval = 50;
+        // Timer.Start();
     }
-
-    public static void StartReading()
+    
+    public static void Write(string value)
     {
-        Task.Run(() =>
-        {
-            while (true)
-            {
-                string message = SerialPort.ReadExisting();
-                if(!string.IsNullOrWhiteSpace(message)) Console.WriteLine(message);                
-                Thread.Sleep(200);
-            }
-        });
+        Console.WriteLine(value);
+        SerialPort.WriteLine(value);
+    }
+    
+    public static void Read(object? sender, ElapsedEventArgs e)
+    {
+        string message = SerialPort.ReadExisting();
+        if(!string.IsNullOrWhiteSpace(message)) Console.WriteLine(message);                
     }
 }
