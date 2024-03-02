@@ -2,11 +2,13 @@ namespace LightsControl;
 
 public class LightLed : Light
 {
+    public int Type = 1;
     public int Address;
     public double Red;
     public double Green;
     public double Blue;
     public double Brightness;
+
 
     public LightLed(int addr)
     {

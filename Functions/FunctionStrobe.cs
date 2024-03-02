@@ -118,7 +118,18 @@ public class FunctionStrobe : Function
                 {
                     if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
                     {
-                        if (PM.Bar[i - (int)Lights.Bar1].Type != (int)BarType.Full) PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
+                        if (PM.Bar[i - (int)Lights.Bar1].Type != (int)BarType.Full)
+                        {
+                            PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
+                        }
+                        else PM.Lights[i].SetBrightness(1);
+                    }
+                    else if (i >= (int)Lights.Led1)
+                    {
+                        if (PM.Led[i - (int)Lights.Led1].Type != (int)BarType.Full)
+                        {
+                            PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
+                        }
                         else PM.Lights[i].SetBrightness(1);
                     }
                     else PM.Lights[i].SetBrightness(1);
@@ -138,7 +149,10 @@ public class FunctionStrobe : Function
                 {
                     if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
                     {
-                        if (PM.Bar[i - (int)Lights.Bar1].Type != (int)BarType.Full) PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
+                        if (PM.Bar[i - (int)Lights.Bar1].Type != (int)BarType.Full)
+                        {
+                            PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
+                        }
                         else PM.Lights[i].SetBrightness(1);
                     }
                     else PM.Lights[i].SetBrightness(1);
