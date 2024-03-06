@@ -10,9 +10,8 @@ using System.Threading;
 public static class Arduino
 {
     public static SerialPort SerialPort;
-
     public static System.Timers.Timer ReadTimer = new();
-    public static System.Timers.Timer Timer = new();
+    public static System.Timers.Timer WriteTimer = new();
     public static int current = 0;
 
     public static void Init()
@@ -27,9 +26,9 @@ public static class Arduino
         // ReadTimer.Interval = 200;
         // ReadTimer.Start();
         
-        Timer.Elapsed += Iter;
-        Timer.Interval = 100;
-        Timer.Start();
+        // WriteTimer.Elapsed += Iter;
+        // WriteTimer.Interval = 100;
+        // WriteTimer.Start();
 
         Task.Run(async () =>
         {
@@ -47,13 +46,18 @@ public static class Arduino
 
     public static void Write(string value)
     {
-        // Console.WriteLine(value);
-        SerialPort.WriteLine(value);
+        if (SerialPort != null)
+        {
+            SerialPort.WriteLine(value);            
+        }
     }
     
     public static void Read(object? sender, ElapsedEventArgs e)
     {
-        string message = SerialPort.ReadExisting();
-        if(!string.IsNullOrWhiteSpace(message)) Console.WriteLine(message);                
+        if (SerialPort != null)
+        {
+            string message = SerialPort.ReadExisting();
+            if(!string.IsNullOrWhiteSpace(message)) Console.WriteLine(message);               
+        }
     }
 }

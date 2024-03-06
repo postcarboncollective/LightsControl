@@ -42,12 +42,12 @@ public abstract class Function
                         if (f.Switch[i].Value) f.Switch[i].Value = false;
                     }
                 }
-                ResetBarType(i);
+                ResetType(i);
             }
         }
     }
 
-    public virtual void ResetBarType(int index)
+    public virtual void ResetType(int index)
     {
     }
 

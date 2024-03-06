@@ -127,7 +127,7 @@ public class FunctionSwitch : Function
         else PM.Lights[Index].SetBrightness(1);
     }
 
-    public override void ResetBarType(int index)
+    public override void ResetType(int index)
     {
         if (index >= (int)Lights.Bar1 && index <= (int)Lights.Bar2)
         {

@@ -115,7 +115,7 @@ void Set(CRGB color, int led, int length)
 
 void Fill(CRGB color)
 {
-  for(int i=0; i<NUM_LEDS; i++)
+  for(int i=0; i<numLeds; i++)
   {
     leds[i] = color;
   }

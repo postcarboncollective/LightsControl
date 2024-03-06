@@ -11,6 +11,7 @@ public class FunctionStrobe : Function
     public bool State = false;
 
     bool executing = false;
+
     public bool Executing
     {
         get => executing;
@@ -23,6 +24,7 @@ public class FunctionStrobe : Function
     }
 
     double speed = 0.5f;
+
     public double Speed
     {
         get => speed;
@@ -36,6 +38,7 @@ public class FunctionStrobe : Function
     public double AudioTrigger = 0.5;
     bool triggered = false;
     bool audioEnabled = false;
+
     public bool AudioEnabled
     {
         get => audioEnabled;
@@ -113,27 +116,25 @@ public class FunctionStrobe : Function
         {
             if (Switch[i].Value)
             {
-                if (Inverted[i]) PM.Lights[i].SetBrightness(0);
-                else
+                if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
                 {
-                    if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
+                    if (PM.Bar[i - (int)Lights.Bar1].Type != (int)BarType.Full)
                     {
-                        if (PM.Bar[i - (int)Lights.Bar1].Type != (int)BarType.Full)
-                        {
-                            PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
-                        }
-                        else PM.Lights[i].SetBrightness(1);
+                        PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
+                        return;
                     }
-                    else if (i >= (int)Lights.Led1)
-                    {
-                        if (PM.Led[i - (int)Lights.Led1].Type != (int)BarType.Full)
-                        {
-                            PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
-                        }
-                        else PM.Lights[i].SetBrightness(1);
-                    }
-                    else PM.Lights[i].SetBrightness(1);
                 }
+                else if (i >= (int)Lights.Led1)
+                {
+                    if (PM.Led[i - (int)Lights.Led1].Type != (int)LedType.Full)
+                    {
+                        PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
+                        return;
+                    }
+                }
+
+                if (Inverted[i]) PM.Lights[i].SetBrightness(0);
+                else PM.Lights[i].SetBrightness(1);
             }
         }
     }
@@ -145,18 +146,24 @@ public class FunctionStrobe : Function
         {
             if (Switch[i].Value)
             {
-                if (Inverted[i])
+                if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
                 {
-                    if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
+                    if (PM.Bar[i - (int)Lights.Bar1].Type != (int)BarType.Full)
                     {
-                        if (PM.Bar[i - (int)Lights.Bar1].Type != (int)BarType.Full)
-                        {
-                            PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
-                        }
-                        else PM.Lights[i].SetBrightness(1);
+                        PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
+                        return;
                     }
-                    else PM.Lights[i].SetBrightness(1);
                 }
+                else if (i >= (int)Lights.Led1)
+                {
+                    if (PM.Led[i - (int)Lights.Led1].Type != (int)LedType.Full)
+                    {
+                        PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
+                        return;
+                    }
+                }
+
+                if (Inverted[i]) PM.Lights[i].SetBrightness(1);
                 else PM.Lights[i].SetBrightness(0);
             }
         }
@@ -168,7 +175,7 @@ public class FunctionStrobe : Function
         State = false;
     }
 
-    public override void ResetBarType(int index)
+    public override void ResetType(int index)
     {
         if (index >= (int)Lights.Bar1 && index <= (int)Lights.Bar2)
         {

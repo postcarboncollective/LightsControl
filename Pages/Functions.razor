@@ -76,6 +76,16 @@
                                     </MudRadioGroup>
                                 }
                             }
+                            else if (light >= Lights.Led1)
+                            {
+                                @if (Global.Strobe.Switch[(int)light].Value)
+                                {
+                                    <MudRadioGroup @bind-Value="@(PM.Led[(int)light - (int)Lights.Led1].Type)">
+                                        <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Full</MudRadio>
+                                        <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Split</MudRadio>
+                                    </MudRadioGroup>
+                                }
+                            }
                         </MudItem>
                     }
                     <MudItem xs="12" Class="d-flex justify-center">
