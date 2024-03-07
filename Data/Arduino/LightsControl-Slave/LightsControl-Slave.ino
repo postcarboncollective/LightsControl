@@ -1,12 +1,10 @@
 #include <FastLED.h>
-#define NUM_LEDS 250
+#define NUM_LEDS 200
 #define DATA_PIN 3
-#define LEDPIN 13
+#define ENABLE_PIN 8
 #define ID 0;
 CRGB leds[NUM_LEDS];
 
-bool ledState = false;
-int enablePin = 8;
 int numLeds = 30;
 
 int readMessageState = 0;
@@ -22,10 +20,9 @@ void setup()
 {
   Serial.begin(9600);
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
-  pinMode(LEDPIN, OUTPUT);
-  pinMode(enablePin, OUTPUT);
+  pinMode(ENABLE_PIN, OUTPUT);
   delay(10);
-  digitalWrite(enablePin, LOW);
+  digitalWrite(ENABLE_PIN, LOW);
 }
 
 void loop() 
@@ -37,20 +34,7 @@ void ReadMessage()
 {
   if(Serial.available() > 0)
   {
-    char val = Serial.read();
-    Serial.println(val);
-
-    if(ledState == false)
-    {
-      ledState = true;
-      digitalWrite(LEDPIN, HIGH);
-    }
-    else
-    {
-      ledState = false;
-      digitalWrite(LEDPIN, LOW);
-    }
-    
+    char val = Serial.read();    
     if(val == '|')
     {
       readMessageState += 1;
@@ -62,16 +46,24 @@ void ReadMessage()
         readMessageState = 0;
         if(function == "Off")
         {
-          Fill(CRGB(0,0,0));
+          Full(CRGB(0,0,0));
         }
-        else if(function == "Fill")
+        else if(function == "Full")
         {
-          Fill(CRGB(p1.toInt(),p2.toInt(),p3.toInt()));
+          Full(CRGB(p1.toInt(), p2.toInt(), p3.toInt()));
         }
         else if(function == "Set")
         {
-          Fill(CRGB(0,0,0));
-          Set(CRGB(p1.toInt(),p2.toInt(),p3.toInt()),p4.toInt(),p5.toInt());
+          Full(CRGB(0,0,0));
+          Set(CRGB(p1.toInt(), p2.toInt(), p3.toInt()), p4.toInt(), p5.toInt());
+        }
+        else if(function == "Fill")
+        {
+          Fill(CRGB(p1.toInt(), p2.toInt(), p3.toInt()), p4.toInt());
+        }
+        else if(function == "iFill")
+        {
+          iFill(CRGB(p1.toInt(), p2.toInt(), p3.toInt()), p4.toInt());
         }
         else if(function == "Init")
         {
@@ -116,6 +108,15 @@ void ReadMessage()
   }
 }
 
+void Full(CRGB color)
+{
+  for(int i=0; i<numLeds; i++)
+  {
+    leds[i] = color;
+  }
+  FastLED.show();
+}
+
 void Set(CRGB color, int led, int length)
 {
   if(length == 0) length = 1;
@@ -126,11 +127,23 @@ void Set(CRGB color, int led, int length)
   FastLED.show();
 }
 
-void Fill(CRGB color)
+void Fill(CRGB color, int led)
 {
   for(int i=0; i<numLeds; i++)
   {
-    leds[i] = color;
+    if(i < led) leds[i] = color;
+    else leds[i] = CRGB(0,0,0);
+  }
+  FastLED.show();
+}
+
+void iFill(CRGB color, int led)
+{
+  for(int i=0; i<numLeds; i++)
+  {
+    int index = ((numLeds-1) - i);
+    if(index > led) leds[index] = color;
+    else leds[index] = CRGB(0,0,0);
   }
   FastLED.show();
 }

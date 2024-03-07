@@ -38,35 +38,19 @@ public class LightLed : Light
         switch (Type)
         {
             case (int)LedType.Full:
-                Arduino.Write($"{Address}|Fill|{(int)Math.Floor((Red*Brightness)*255)}|{(int)Math.Floor((Green*Brightness)*255)}|{(int)Math.Floor((Blue*Brightness)*255)}");
+                Arduino.Write($"{Address}|Full|{(int)Math.Floor((Red*Brightness)*255)}|{(int)Math.Floor((Green*Brightness)*255)}|{(int)Math.Floor((Blue*Brightness)*255)}");
                 break;
             case (int)LedType.Split:
-                float val = (float)(Brightness * Size);
-                Arduino.Write($"{Address}|Set|{(int)Math.Floor((Red)*255)}|{(int)Math.Floor((Green)*255)}|{(int)Math.Floor((Blue)*255)}|{val}|1");
+                int valSplit = (int)(Brightness * Size);
+                Arduino.Write($"{Address}|Set|{(int)Math.Floor((Red)*255)}|{(int)Math.Floor((Green)*255)}|{(int)Math.Floor((Blue)*255)}|{valSplit}|1");
                 break;
             case (int)LedType.Fill:
-                // for (int i = 0; i < Brightness.Count; i++)
-                // {
-                //     int index = i;
-                //     float div = 1f / Brightness.Count;
-                //     float next = (i + 1) * div;
-                //     float val = i * div;
-                //     if (brightness > next) Brightness[index].Value = 1;
-                //     else if (brightness > val) Brightness[index].Value = (brightness - val) * Brightness.Count;
-                //     else Brightness[index].Value = 0;
-                // }
+                int valFill = (int)(Brightness * Size);
+                Arduino.Write($"{Address}|Fill|{(int)Math.Floor((Red)*255)}|{(int)Math.Floor((Green)*255)}|{(int)Math.Floor((Blue)*255)}|{valFill}");
                 break;
             case (int)LedType.iFill:
-                // for (int i = 0; i < Brightness.Count; i++)
-                // {
-                //     int index = (Brightness.Count - 1) - i;
-                //     float div = 1f / Brightness.Count;
-                //     float next = (i + 1) * div;
-                //     float val = i * div;
-                //     if (brightness > next) Brightness[index].Value = 1;
-                //     else if (brightness > val) Brightness[index].Value = (brightness - val) * Brightness.Count;
-                //     else Brightness[index].Value = 0;
-                // }
+                int valiFill = (int)(Brightness * Size);
+                Arduino.Write($"{Address}|iFill|{(int)Math.Floor((Red)*255)}|{(int)Math.Floor((Green)*255)}|{(int)Math.Floor((Blue)*255)}|{valiFill}");
                 break;
         }
     }
@@ -85,35 +69,19 @@ public class LightLed : Light
         switch (Type)
         {
             case (int)LedType.Full:
-                Arduino.Write($"{Address}|Fill|{(int)Math.Floor((Red*Brightness)*255)}|{(int)Math.Floor((Green*Brightness)*255)}|{(int)Math.Floor((Blue*Brightness)*255)}");
+                Arduino.Write($"{Address}|Full|{(int)Math.Floor((Red*Brightness)*255)}|{(int)Math.Floor((Green*Brightness)*255)}|{(int)Math.Floor((Blue*Brightness)*255)}");
                 break;
             case (int)LedType.Split:
-                float val = (float)(Brightness * Size);
-                Arduino.Write($"{Address}|Set|{(int)Math.Floor((Red)*255)}|{(int)Math.Floor((Green)*255)}|{(int)Math.Floor((Blue)*255)}|{val}|1");
+                int valSplit = (int)(Brightness * Size);
+                Arduino.Write($"{Address}|Set|{(int)Math.Floor((Red)*255)}|{(int)Math.Floor((Green)*255)}|{(int)Math.Floor((Blue)*255)}|{valSplit}|1");
                 break;
             case (int)LedType.Fill:
-                // for (int i = 0; i < Brightness.Count; i++)
-                // {
-                //     int index = i;
-                //     float div = 1f / Brightness.Count;
-                //     float next = (i + 1) * div;
-                //     float val = i * div;
-                //     if (brightness > next) Brightness[index].Value = 1;
-                //     else if (brightness > val) Brightness[index].Value = (brightness - val) * Brightness.Count;
-                //     else Brightness[index].Value = 0;
-                // }
+                int valFill = (int)(Brightness * Size);
+                Arduino.Write($"{Address}|Fill|{(int)Math.Floor((Red)*255)}|{(int)Math.Floor((Green)*255)}|{(int)Math.Floor((Blue)*255)}|{valFill}");
                 break;
             case (int)LedType.iFill:
-                // for (int i = 0; i < Brightness.Count; i++)
-                // {
-                //     int index = (Brightness.Count - 1) - i;
-                //     float div = 1f / Brightness.Count;
-                //     float next = (i + 1) * div;
-                //     float val = i * div;
-                //     if (brightness > next) Brightness[index].Value = 1;
-                //     else if (brightness > val) Brightness[index].Value = (brightness - val) * Brightness.Count;
-                //     else Brightness[index].Value = 0;
-                // }
+                int valiFill = (int)(Brightness * Size);
+                Arduino.Write($"{Address}|iFill|{(int)Math.Floor((Red)*255)}|{(int)Math.Floor((Green)*255)}|{(int)Math.Floor((Blue)*255)}|{valiFill}");
                 break;
         }
     }

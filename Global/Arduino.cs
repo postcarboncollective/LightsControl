@@ -33,7 +33,7 @@ public static class Arduino
 
         Task.Run(async () =>
         {
-            await Task.Delay(2000);
+            await Task.Delay(5000);
             foreach (var x in PM.Led)
             {
                 Write($"{x.Address}|Init|{x.Size}");

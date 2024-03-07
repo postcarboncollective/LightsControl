@@ -1,18 +1,17 @@
-int enablePin = 8;
+#define ENABLE_PIN 8
 
 void setup() 
 {
   Serial.begin(9600);
-  pinMode(enablePin, OUTPUT);
+  pinMode(ENABLE_PIN, OUTPUT);
   delay(10);
-  digitalWrite(enablePin, HIGH);
+  digitalWrite(ENABLE_PIN, HIGH);
 }
 
 void loop() 
 {
   if(Serial.available() > 0)
   {
-    char val = Serial.read();
-    Serial.print(val);
+    Serial.print(Serial.read());
   }
 }
