@@ -19,6 +19,7 @@ public static class Arduino
         string[] ports = SerialPort.GetPortNames();
         if (ports.Length == 0) return;
         
+        // SerialPort = new SerialPort("/dev/ttyACM0", 9600);
         SerialPort = new SerialPort(ports[0], 9600);
         SerialPort.Open();
         
@@ -33,6 +34,10 @@ public static class Arduino
         Task.Run(async () =>
         {
             await Task.Delay(2000);
+            foreach (var x in PM.Led)
+            {
+                Write($"{x.Address}|Init|{x.Size}");
+            }
             Write("0|Off");
         });
     }

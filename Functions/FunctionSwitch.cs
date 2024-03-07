@@ -126,15 +126,4 @@ public class FunctionSwitch : Function
         }
         else PM.Lights[Index].SetBrightness(1);
     }
-
-    public override void ResetType(int index)
-    {
-        if (index >= (int)Lights.Bar1 && index <= (int)Lights.Bar2)
-        {
-            if (PM.Bar[index - (int)Lights.Bar1].Type > (int)BarType.Split)
-            {
-                PM.Bar[index - (int)Lights.Bar1].Type = (int)BarType.Split;
-            }
-        }
-    }
 }

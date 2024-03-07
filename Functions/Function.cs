@@ -47,8 +47,16 @@ public abstract class Function
         }
     }
 
-    public virtual void ResetType(int index)
+    public void ResetType(int index)
     {
+        if (index >= (int)Lights.Bar1 && index <= (int)Lights.Bar2)
+        {
+            PM.Bar[index - (int)Lights.Bar1].Type = (int)BarType.Full;
+        }
+        else if (index >= (int)Lights.Led1)
+        {
+            PM.Led[index - (int)Lights.Led1].Type = (int)LedType.Full;
+        }
     }
 
     public virtual void Kill()

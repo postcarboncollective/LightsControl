@@ -1,10 +1,12 @@
 #include <FastLED.h>
-#define NUM_LEDS 100
+#define NUM_LEDS 250
 #define DATA_PIN 3
 #define LEDPIN 13
 #define ID 0;
 CRGB leds[NUM_LEDS];
 
+bool ledState = false;
+int enablePin = 8;
 int numLeds = 30;
 
 int readMessageState = 0;
@@ -20,6 +22,10 @@ void setup()
 {
   Serial.begin(9600);
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+  pinMode(LEDPIN, OUTPUT);
+  pinMode(enablePin, OUTPUT);
+  delay(10);
+  digitalWrite(enablePin, LOW);
 }
 
 void loop() 
@@ -32,6 +38,19 @@ void ReadMessage()
   if(Serial.available() > 0)
   {
     char val = Serial.read();
+    Serial.println(val);
+
+    if(ledState == false)
+    {
+      ledState = true;
+      digitalWrite(LEDPIN, HIGH);
+    }
+    else
+    {
+      ledState = false;
+      digitalWrite(LEDPIN, LOW);
+    }
+    
     if(val == '|')
     {
       readMessageState += 1;
@@ -54,16 +73,10 @@ void ReadMessage()
           Fill(CRGB(0,0,0));
           Set(CRGB(p1.toInt(),p2.toInt(),p3.toInt()),p4.toInt(),p5.toInt());
         }
-        // Serial.print(arduino);
-        // Serial.print("|");
-        // Serial.print(function);
-        // Serial.print("|");
-        // Serial.print(p1);
-        // Serial.print("|");
-        // Serial.print(p2);
-        // Serial.print("|");
-        // Serial.print(p3);
-        // Serial.print('\n');
+        else if(function == "Init")
+        {
+          numLeds = p1.toInt();
+        }
         arduino = "";
         function = "";
         p1 = "";
