@@ -5,6 +5,7 @@
 #define ID 0;
 CRGB leds[NUM_LEDS];
 
+bool ledState = false;
 int numLeds = 30;
 
 int readMessageState = 0;
@@ -20,6 +21,7 @@ void setup()
 {
   Serial.begin(9600);
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+  pinMode(13, OUTPUT);
   pinMode(ENABLE_PIN, OUTPUT);
   delay(10);
   digitalWrite(ENABLE_PIN, LOW);
@@ -35,6 +37,18 @@ void ReadMessage()
   if(Serial.available() > 0)
   {
     char val = Serial.read();    
+
+    if(ledState == false)
+    {
+      ledState = true;
+      digitalWrite(13, HIGH);
+    }
+    else
+    {
+      ledState = false;
+      digitalWrite(13, LOW);
+    }
+
     if(val == '|')
     {
       readMessageState += 1;

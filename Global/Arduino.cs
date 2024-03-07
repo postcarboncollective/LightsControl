@@ -17,6 +17,12 @@ public static class Arduino
     public static void Init()
     {
         string[] ports = SerialPort.GetPortNames();
+
+        foreach (var x in ports)
+        {
+            Console.WriteLine(x);
+        }
+        
         if (ports.Length == 0) return;
         
         // SerialPort = new SerialPort("/dev/ttyACM0", 9600);
