@@ -34,7 +34,7 @@ public class FunctionOscillator : Function
     {
         for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Inverted.Add(false);
         Color = new(new MudColor(255, 255, 255, 255), this);
-        Timer.Interval = (1 / 32f) * 1000;
+        Timer.Interval = (1 / 16f) * 1000;
         Timer.Elapsed += Execute;
     }
 

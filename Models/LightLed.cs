@@ -9,6 +9,15 @@ public enum LedType
     iFill = 4,
 }
 
+public enum LedFunction
+{
+    Off = 0,
+    Full = 1,
+    Set = 2,
+    Fill = 3,
+    iFill = 4
+}
+
 public class LightLed : Light
 {
     public int Type = 1;
