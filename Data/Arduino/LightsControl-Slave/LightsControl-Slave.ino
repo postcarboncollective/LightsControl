@@ -66,7 +66,7 @@ void ReadMessage()
       case 4: // iFill
         iFill(CRGB(msg[3],msg[4],msg[5]),msg[6]);
         break;
-      case 255: // Init
+      case 200: // Init
         numLeds = msg[3];
         break;
     }

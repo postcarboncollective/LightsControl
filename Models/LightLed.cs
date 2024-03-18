@@ -16,7 +16,7 @@ public enum LedFunction : byte
     Set = 2,
     Fill = 3,
     iFill = 4,
-    Init = 255,
+    Init = 200,
 }
 
 public class LightLed : Light
