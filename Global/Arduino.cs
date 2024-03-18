@@ -26,16 +26,17 @@ public static class Arduino
         if (ports.Length == 0) return;
 
         SerialPort = new SerialPort(ports[0], 9600);
-        SerialPort.DataReceived += OnSerialDataReceived;
+        // SerialPort.DataReceived += OnSerialDataReceived;
         SerialPort.Open();
 
-        WriteTimer.Elapsed += Iter;
-        WriteTimer.Interval = 100;
-        WriteTimer.Start();
+        // WriteTimer.Elapsed += Iter;
+        // WriteTimer.Interval = 100;
+        // WriteTimer.Start();
 
         Task.Run(async () =>
         {
             await Task.Delay(5000);
+            
             foreach (var x in PM.Led)
             {
                 bool[] a1 = new bool[] { false, false, false, false, false, false, false, false };
@@ -51,15 +52,6 @@ public static class Arduino
         });
     }
 
-    private static void OnSerialDataReceived(object sender, SerialDataReceivedEventArgs e)
-    {
-        if (SerialPort != null)
-        {
-            string message = SerialPort.ReadLine();
-            if (!string.IsNullOrWhiteSpace(message)) Console.WriteLine(message);
-        }
-    }
-
     public static void Write(byte addr1, byte addr2, byte function, byte r, byte g, byte b, byte p1, byte p2)
     {
         if (SerialPort != null)
@@ -67,11 +59,20 @@ public static class Arduino
             SerialPort.Write(new byte[] { addr1, addr2, function, r, g, b, p1, p2 }, 0, 8);
         }
     }
-
+    
     public static byte CreateByte(bool[] bits)
     {
         if (bits.Length > 8) throw new ArgumentOutOfRangeException();
         return (byte)bits.Reverse().Select((val, i) => Convert.ToByte(val) << i).Sum();
+    }
+    
+    private static void OnSerialDataReceived(object sender, SerialDataReceivedEventArgs e)
+    {
+        if (SerialPort != null)
+        {
+            string message = SerialPort.ReadLine();
+            if (!string.IsNullOrWhiteSpace(message)) Console.WriteLine(message);
+        }
     }
 
     private static void Iter(object? sender, ElapsedEventArgs e)
