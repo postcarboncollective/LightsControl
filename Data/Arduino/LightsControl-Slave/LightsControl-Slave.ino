@@ -2,20 +2,13 @@
 #define NUM_LEDS 200
 #define DATA_PIN 5
 #define ENABLE_PIN 8
-#define ID 0;
 CRGB leds[NUM_LEDS];
 
+byte id = 0;
 bool ledState = false;
 int numLeds = 30;
 
-int readMessageState = 0;
-String arduino = "";
-String function = "";
-String p1 = "";
-String p2 = "";
-String p3 = "";
-String p4 = "";
-String p5 = "";
+byte msg[8];
 
 void setup() 
 {
@@ -34,90 +27,44 @@ void loop()
 
 void ReadMessage()
 {
-  if(Serial.available() > 0)
+  if(Serial.available() > 7)
   {
-    char val = Serial.read();    
+    for(int i=0; i<8; i++)
+    {
+      msg[i] = Serial.read(); 
+    }
+    Blink();
 
-    if(ledState == false)
+    if(id < 8)
     {
-      ledState = true;
-      digitalWrite(13, HIGH);
+      if(bitRead(msg[0],id) == false) return;  
     }
-    else
+    else if(id < 16)
     {
-      ledState = false;
-      digitalWrite(13, LOW);
+      if(bitRead(msg[1],id-8) == false) return;
     }
 
-    if(val == '|')
+    switch(msg[2])
     {
-      readMessageState += 1;
-    }
-    else if(val == '\n')
-    {
-      if(arduino != "")
-      {
-        readMessageState = 0;
-        if(function == "Off")
-        {
-          Full(CRGB(0,0,0));
-        }
-        else if(function == "Full")
-        {
-          Full(CRGB(p1.toInt(), p2.toInt(), p3.toInt()));
-        }
-        else if(function == "Set")
-        {
-          Full(CRGB(0,0,0));
-          Set(CRGB(p1.toInt(), p2.toInt(), p3.toInt()), p4.toInt(), p5.toInt());
-        }
-        else if(function == "Fill")
-        {
-          Fill(CRGB(p1.toInt(), p2.toInt(), p3.toInt()), p4.toInt());
-        }
-        else if(function == "iFill")
-        {
-          iFill(CRGB(p1.toInt(), p2.toInt(), p3.toInt()), p4.toInt());
-        }
-        else if(function == "Init")
-        {
-          numLeds = p1.toInt();
-        }
-        arduino = "";
-        function = "";
-        p1 = "";
-        p2 = "";
-        p3 = "";
-        p4 = "";
-        p5 = "";
-      }
-    }
-    else
-    { 
-      switch(readMessageState)
-      {
-        case 0:
-          arduino += val;
-          break;
-        case 1:
-          function += val;
-          break;
-        case 2:
-          p1 += val;
-          break;
-        case 3:
-          p2 += val;
-          break;
-        case 4:
-          p3 += val;
-          break;
-        case 5:
-          p4 += val;
-          break;
-        case 6:
-          p5 += val;
-          break;
-      }
+      case 0: // Off
+        Full(CRGB(0,0,0));
+        break;
+      case 1: // Full
+        Full(CRGB(msg[3],msg[4],msg[5]));
+        break;
+      case 2: // Set
+        Full(CRGB(0,0,0));
+        Set(CRGB(msg[3],msg[4],msg[5]),msg[6],msg[7]);
+        break;
+      case 3: // Fill
+        Fill(CRGB(msg[3],msg[4],msg[5]),msg[6]);
+        break;
+      case 4: // iFill
+        iFill(CRGB(msg[3],msg[4],msg[5]),msg[6]);
+        break;
+      case 255: // Init
+        numLeds = msg[3];
+        break;
     }
   }
 }
@@ -160,4 +107,18 @@ void iFill(CRGB color, int led)
     else leds[index] = CRGB(0,0,0);
   }
   FastLED.show();
+}
+
+void Blink()
+{
+  if(ledState == false)
+  {
+    ledState = true;
+    digitalWrite(13, HIGH);
+  }
+  else
+  {
+    ledState = false;
+    digitalWrite(13, LOW);
+  }
 }

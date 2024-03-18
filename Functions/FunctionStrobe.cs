@@ -132,7 +132,6 @@ public class FunctionStrobe : Function
                         return;
                     }
                 }
-
                 if (Inverted[i]) PM.Lights[i].SetBrightness(0);
                 else PM.Lights[i].SetBrightness(1);
             }

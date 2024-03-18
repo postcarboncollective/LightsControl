@@ -13,21 +13,27 @@ void setup()
 
 void loop() 
 {
-  if(Serial.available() > 0)
+  if(Serial.available() > 7)
   {
-    char val = Serial.read();
-    Serial.print(val);
+    for(int i=0; i<8; i++)
+    {
+      msg[i] = Serial.read(); 
+      Serial.print(msg[i]);
+    }
+    Blink();
+  }
+}
 
-    if(ledState == false)
-    {
-      ledState = true;
-      digitalWrite(13, HIGH);
-    }
-    else
-    {
-      ledState = false;
-      digitalWrite(13, LOW);
-    }
-    
+void Blink()
+{
+  if(ledState == false)
+  {
+    ledState = true;
+    digitalWrite(13, HIGH);
+  }
+  else
+  {
+    ledState = false;
+    digitalWrite(13, LOW);
   }
 }
