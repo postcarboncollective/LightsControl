@@ -28,42 +28,42 @@ public static class Arduino
         SerialPort = new SerialPort(ports[0], 9600);
         // SerialPort.DataReceived += OnSerialDataReceived;
         SerialPort.Open();
-
+        
         // WriteTimer.Elapsed += Iter;
         // WriteTimer.Interval = 100;
         // WriteTimer.Start();
 
-        Task.Run(async () =>
-        {
-            await Task.Delay(5000);
-            
-            foreach (var x in PM.Led)
-            {
-                bool[] a1 = new bool[] { false, false, false, false, false, false, false, false };
-                bool[] a2 = new bool[] { false, false, false, false, false, false, false, false };
-                if (x.Address < 8) a1[x.Address] = true;
-                else if (x.Address < 16) a2[x.Address] = true;
-                Write(CreateByte(a1), CreateByte(a2), (byte)LedFunction.Init, x.Size, 0, 0, 0, 0);
-            }
+        Task.Run(async () => { await Setup(); });
+    }
 
-            byte addr1 = CreateByte(new bool[] { true, true, true, true, true, true, true, true });
-            byte addr2 = CreateByte(new bool[] { true, true, true, true, true, true, true, true });
-            Write(addr1, addr2, (byte)LedFunction.Off, 0, 0, 0, 0, 0);
-        });
+    public async static Task Setup()
+    {
+        await Task.Delay(5000);
+        foreach (var x in PM.Led)
+        {
+            bool[] a1 = new bool[] { false, false, false, false, false, false, false, false };
+            bool[] a2 = new bool[] { false, false, false, false, false, false, false, false };
+            if (x.Address < 8) a1[x.Address] = true;
+            else if (x.Address < 16) a2[x.Address] = true;
+            Write(CreateByte(a1), CreateByte(a2), (byte)LedFunction.Init, x.Size, 0, 0, 0, 0);
+        }
+        byte addr1 = CreateByte(new bool[] { true, true, true, true, true, true, true, true });
+        byte addr2 = CreateByte(new bool[] { true, true, true, true, true, true, true, true });
+        Write(addr1, addr2, (byte)LedFunction.Off, 0, 0, 0, 0, 0);
     }
 
     public static void Write(byte addr1, byte addr2, byte function, byte r, byte g, byte b, byte p1, byte p2)
     {
         if (SerialPort != null)
         {
-            SerialPort.Write(new byte[] { addr1, addr2, function, r, g, b, p1, p2 }, 0, 8);
+            SerialPort.Write(new byte[] { 255, addr1, addr2, function, r, g, b, p1, p2 }, 0, 9);
         }
     }
     
     public static byte CreateByte(bool[] bits)
     {
         if (bits.Length > 8) throw new ArgumentOutOfRangeException();
-        return (byte)bits.Reverse().Select((val, i) => Convert.ToByte(val) << i).Sum();
+        return (byte)bits.Select((val, i) => Convert.ToByte(val) << i).Sum();
     }
     
     private static void OnSerialDataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -77,9 +77,9 @@ public static class Arduino
 
     private static void Iter(object? sender, ElapsedEventArgs e)
     {
-        byte addr1 = CreateByte(new bool[] { true, true, true, true, true, true, true, true });
-        byte addr2 = CreateByte(new bool[] { true, true, true, true, true, true, true, true });
-        Write(addr1, addr2, (byte)LedFunction.Set, 0, 255, 0, current, 4);
+        byte addr1 = CreateByte(new bool[] { true, false, false, false, false, false, false, false });
+        byte addr2 = CreateByte(new bool[] { false, false, false, false, false, false, false, false });
+        Write(addr1, addr2, (byte)LedFunction.Set, 0, 200, 0, current, 4);
         current++;
         current %= PM.Led[0].Size;
     }

@@ -17,4 +17,9 @@ public static class Global
             f.Stop();
         }
     }
+
+    public static void SetLeds(bool[] a1, bool[] a2, LedFunction function, byte r, byte g, byte b, byte p1, byte p2)
+    {
+        
+    }
 }

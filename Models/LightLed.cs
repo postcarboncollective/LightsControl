@@ -56,19 +56,19 @@ public class LightLed : Light
         switch (Type)
         {
             case (int)LedType.Full:
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Full, (byte)Math.Floor((Red*Brightness)*255), (byte)Math.Floor((Green*Brightness)*255), (byte)Math.Floor((Blue*Brightness)*255), 0, 0);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Full, (byte)Math.Floor((Red*Brightness)*200), (byte)Math.Floor((Green*Brightness)*200), (byte)Math.Floor((Blue*Brightness)*200), 0, 0);
                 break;
             case (int)LedType.Split:
                 byte valSplit = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Set, (byte)Math.Floor((Red*Brightness)*255), (byte)Math.Floor((Green*Brightness)*255), (byte)Math.Floor((Blue*Brightness)*255), valSplit, 1);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Set, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valSplit, 1);
                 break;
             case (int)LedType.Fill:
                 byte valFill = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Fill, (byte)Math.Floor((Red*Brightness)*255), (byte)Math.Floor((Green*Brightness)*255), (byte)Math.Floor((Blue*Brightness)*255), valFill, 0);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Fill, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valFill, 0);
                 break;
             case (int)LedType.iFill:
                 byte valiFill = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.iFill, (byte)Math.Floor((Red*Brightness)*255), (byte)Math.Floor((Green*Brightness)*255), (byte)Math.Floor((Blue*Brightness)*255), valiFill, 0);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.iFill, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valiFill, 0);
                 break;
         }
     }
@@ -87,19 +87,19 @@ public class LightLed : Light
         switch (Type)
         {
             case (int)LedType.Full:
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Full, (byte)Math.Floor((Red*Brightness)*255), (byte)Math.Floor((Green*Brightness)*255), (byte)Math.Floor((Blue*Brightness)*255), 0, 0);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Full, (byte)Math.Floor((Red*Brightness)*200), (byte)Math.Floor((Green*Brightness)*200), (byte)Math.Floor((Blue*Brightness)*200), 0, 0);
                 break;
             case (int)LedType.Split:
                 byte valSplit = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Set, (byte)Math.Floor((Red*Brightness)*255), (byte)Math.Floor((Green*Brightness)*255), (byte)Math.Floor((Blue*Brightness)*255), valSplit, 1);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Set, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valSplit, 1);
                 break;
             case (int)LedType.Fill:
                 byte valFill = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Fill, (byte)Math.Floor((Red*Brightness)*255), (byte)Math.Floor((Green*Brightness)*255), (byte)Math.Floor((Blue*Brightness)*255), valFill, 0);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Fill, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valFill, 0);
                 break;
             case (int)LedType.iFill:
                 byte valiFill = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.iFill, (byte)Math.Floor((Red*Brightness)*255), (byte)Math.Floor((Green*Brightness)*255), (byte)Math.Floor((Blue*Brightness)*255), valiFill, 0);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.iFill, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valiFill, 0);
                 break;
         }
     }

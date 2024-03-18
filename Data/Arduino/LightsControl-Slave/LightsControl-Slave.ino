@@ -27,12 +27,16 @@ void loop()
 
 void ReadMessage()
 {
-  if(Serial.available() > 7)
+  if(Serial.available() > 8)
   {
+    if(Serial.read() != 255) return;
     for(int i=0; i<8; i++)
     {
       msg[i] = Serial.read(); 
+      Serial.print(msg[i]);
+      Serial.print(" ");
     }
+    Serial.println();
     Blink();
 
     if(id < 8)
