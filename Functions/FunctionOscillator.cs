@@ -27,7 +27,6 @@ public class FunctionOscillator : Function
     double time = 0;
     double val = 0;
     double inv = 1;
-    
     double walk = 0.5f;
     int walkDirection = 1;
 

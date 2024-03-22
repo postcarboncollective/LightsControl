@@ -26,7 +26,7 @@ public static class Arduino
         if (ports.Length == 0) return;
 
         SerialPort = new SerialPort(ports[0], 9600);
-        SerialPort.DataReceived += OnSerialDataReceived;
+        // SerialPort.DataReceived += OnSerialDataReceived;
         SerialPort.Open();
         
         // WriteTimer.Elapsed += Iter;
@@ -45,10 +45,12 @@ public static class Arduino
             bool[] a2 = new bool[] { false, false, false, false, false, false, false, false };
             if (x.Address < 8) a1[x.Address] = true;
             else if (x.Address < 16) a2[x.Address] = true;
+            await Task.Delay(250);
             Write(CreateByte(a1), CreateByte(a2), (byte)LedFunction.Init, x.Size, 0, 0, 0, 0);
         }
         byte addr1 = CreateByte(new bool[] { true, true, true, true, true, true, true, true });
         byte addr2 = CreateByte(new bool[] { true, true, true, true, true, true, true, true });
+        await Task.Delay(250);
         Write(addr1, addr2, (byte)LedFunction.Off, 0, 0, 0, 0, 0);
     }
 
