@@ -16,7 +16,7 @@ public class FunctionOscillator : Function
     public int LedType = 1;
     public int LedSplitSize = 1;
     List<ComponentInvert> invertedLeds;
-    readonly bool[] ledA1 = { false, false, false, false, false, false, false, false };
+    bool[] ledA1 = { false, false, false, false, false, false, false, false };
     bool[] ledA2 = { false, false, false, false, false, false, false, false };
     bool[] ledA1Normal = { false, false, false, false, false, false, false, false };
     bool[] ledA2Normal = { false, false, false, false, false, false, false, false };
