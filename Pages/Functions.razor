@@ -249,6 +249,12 @@
         <MudContainer Style="background: #111f">
             <br/>
             <MudGrid>
+                <MudItem xs="12">
+                    <MudRadioGroup @bind-Value="@(Global.SwitchStrobe.Type)">
+                        <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Random</MudRadio>
+                        <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Sequential</MudRadio>
+                    </MudRadioGroup>
+                </MudItem>
                 <MudItem xs="12">Light</MudItem>
                 @foreach (Lights light in Enum.GetValues(typeof(Lights)))
                 {

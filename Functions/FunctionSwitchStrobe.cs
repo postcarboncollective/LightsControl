@@ -8,12 +8,14 @@ public class FunctionSwitchStrobe : Function
 {
     public System.Timers.Timer Timer = new();
     public ColorFunction Color;
+    public int Type = 1;
     public int Index = 0;
 
     public int LedType = 1;
     public int LedSplitSize = 1;
-    
+
     bool executing = false;
+
     public bool Executing
     {
         get => executing;
@@ -26,6 +28,7 @@ public class FunctionSwitchStrobe : Function
     }
 
     double speed = 0.5f;
+
     public double Speed
     {
         get => speed;
@@ -39,6 +42,7 @@ public class FunctionSwitchStrobe : Function
     public double AudioTrigger = 0.5;
     bool triggered = false;
     bool audioEnabled = false;
+
     public bool AudioEnabled
     {
         get => audioEnabled;
@@ -116,10 +120,33 @@ public class FunctionSwitchStrobe : Function
                 }
             }
         }
+
         if (possibleLights.Count > 0)
         {
-            Index = possibleLights[Global.Rand.Next(possibleLights.Count)];
+            if (Type == (int)SwitchType.Random)
+            {
+                Index = possibleLights[Global.Rand.Next(possibleLights.Count)];
+            }
+            else if (Type == (int)SwitchType.Sequential)
+            {
+                bool set = false;
+                foreach (var x in possibleLights)
+                {
+                    if (x > Index)
+                    {
+                        Index = x;
+                        set = true;
+                        break;
+                    }
+                }
+
+                if (set == false)
+                {
+                    Index = possibleLights[0];
+                }
+            }
         }
+
         if (Index >= (int)Lights.Bar1 && Index <= (int)Lights.Bar2)
         {
             if (PM.Bar[Index - (int)Lights.Bar1].Type != (int)LightType.Full)

@@ -9,6 +9,13 @@ public enum LightType
     iFill = 4,
 }
 
+public enum SwitchType
+{
+    None = 0,
+    Random = 1,
+    Sequential = 2,
+}
+
 public static class Global
 {
     public static FunctionBlackout Blackout = new();
