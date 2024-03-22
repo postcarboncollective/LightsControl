@@ -23,10 +23,13 @@ public class FunctionOscillator : Function
     bool[] ledA1Inverted = { false, false, false, false, false, false, false, false };
     bool[] ledA2Inverted = { false, false, false, false, false, false, false, false };
     bool hasLeds = false;
-
+    
     double time = 0;
     double val = 0;
     double inv = 1;
+    
+    double walk = 0.5f;
+    int walkDirection = 1;
 
     bool executing = false;
 
@@ -146,6 +149,18 @@ public class FunctionOscillator : Function
             case 2:
                 val = 1 - ((Math.Cos(time * (Math.PI * 2)) / 2) + 0.5f);
                 inv = 1 - ((Math.Cos((1 - time) * (Math.PI * 2)) / 2) + 0.5f);
+                break;
+            case 3:
+                if (time % 0.1f <= 0.01) 
+                {
+                    int[] numbers = { -1, 1 };
+                    walkDirection = numbers[Global.Rand.Next(0, 2)];
+                }
+                walk += (Speed / 2) * walkDirection;
+                if (walk > 1) walk = 0;
+                else if (walk < 0) walk = 1;
+                val = walk;
+                inv = 1 - walk;
                 break;
         }
 
