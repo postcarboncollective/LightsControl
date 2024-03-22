@@ -91,7 +91,7 @@ public class FunctionSwitch : Function
         double b = (Color.Value.B / 255f);
         for (int i = 0; i < PM.Lights.Count; i++)
         {
-            if (Switch[i].Value)
+            if (base.Switch[i].Value)
             {
                 PM.Lights[i].SetColor(r, g, b);
             }
@@ -102,7 +102,7 @@ public class FunctionSwitch : Function
     {
         PM.Lights[Index].SetBrightness(0);
         List<int> possibleLights = new();
-        foreach (var x in Switch)
+        foreach (var x in base.Switch)
         {
             if (x.Value)
             {
@@ -118,7 +118,7 @@ public class FunctionSwitch : Function
         }
         if (Index >= (int)Lights.Bar1 && Index <= (int)Lights.Bar2)
         {
-            if (PM.Bar[Index - (int)Lights.Bar1].Type != (int)BarType.Full)
+            if (PM.Bar[Index - (int)Lights.Bar1].Type != (int)LightFunction.Full)
             {
                 PM.Lights[Index].SetBrightness(Global.Rand.NextSingle());
             }

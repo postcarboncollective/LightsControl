@@ -19,7 +19,7 @@ public static class Arduino
         string[] ports = SerialPort.GetPortNames();
 
         foreach (var x in ports)
-        {
+        {   
             Console.WriteLine(x);
         }
 
@@ -30,7 +30,7 @@ public static class Arduino
         SerialPort.Open();
         
         // WriteTimer.Elapsed += Iter;
-        // WriteTimer.Interval = 100;
+        // WriteTimer.Interval = 50;
         // WriteTimer.Start();
 
         Task.Run(async () => { await Setup(); });

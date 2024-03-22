@@ -1,6 +1,6 @@
 namespace LightsControl;
 
-public class SwitchFunction(bool val, Lights index, Function function)
+public class ComponentSwitch(bool val, int index, Function function)
 {
     public bool Value
     {
@@ -8,7 +8,7 @@ public class SwitchFunction(bool val, Lights index, Function function)
         set => Set(value);
     }
 
-    public readonly Lights Index = index;
+    public readonly int Index = index;
     public readonly Function Function = function;
 
     void Set(bool value)
@@ -20,7 +20,7 @@ public class SwitchFunction(bool val, Lights index, Function function)
         }
         else
         {
-            PM.Lights[(int)Index].Set(0, 0, 0, 0);
+            PM.Lights[Index].Set(0, 0, 0, 0);
             var q = Function.Switch.Where(x => x.Value == true).ToList();
             if (q.Count == 0) Function.Stop();
         }

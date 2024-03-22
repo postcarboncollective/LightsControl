@@ -1,14 +1,5 @@
 namespace LightsControl;
 
-public enum LedType
-{
-    None = 0,
-    Full = 1,
-    Split = 2,
-    Fill = 3,
-    iFill = 4,
-}
-
 public enum LedFunction : byte
 {
     Off = 0,
@@ -30,6 +21,7 @@ public class LightLed : Light
     public double Brightness;
     byte bits1; 
     byte bits2;
+    public byte SplitSize = 1;
 
     public LightLed(int addr, byte size)
     {
@@ -55,18 +47,18 @@ public class LightLed : Light
         Brightness = brightness;
         switch (Type)
         {
-            case (int)LedType.Full:
+            case (int)LightFunction.Full:
                 Arduino.Write(bits1, bits2, (byte)LedFunction.Full, (byte)Math.Floor((Red*Brightness)*200), (byte)Math.Floor((Green*Brightness)*200), (byte)Math.Floor((Blue*Brightness)*200), 0, 0);
                 break;
-            case (int)LedType.Split:
+            case (int)LightFunction.Split:
                 byte valSplit = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Set, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valSplit, 1);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Set, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valSplit, SplitSize);
                 break;
-            case (int)LedType.Fill:
+            case (int)LightFunction.Fill:
                 byte valFill = (byte)(Brightness * Size);
                 Arduino.Write(bits1, bits2, (byte)LedFunction.Fill, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valFill, 0);
                 break;
-            case (int)LedType.iFill:
+            case (int)LightFunction.iFill:
                 byte valiFill = (byte)(Brightness * Size);
                 Arduino.Write(bits1, bits2, (byte)LedFunction.iFill, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valiFill, 0);
                 break;
@@ -80,24 +72,24 @@ public class LightLed : Light
         Blue = b;
         Set(Red, Green,Blue, Brightness);
     }
-
+    
     public override void SetBrightness(double brightness)
     {
         Brightness = brightness;
         switch (Type)
         {
-            case (int)LedType.Full:
+            case (int)LightFunction.Full:
                 Arduino.Write(bits1, bits2, (byte)LedFunction.Full, (byte)Math.Floor((Red*Brightness)*200), (byte)Math.Floor((Green*Brightness)*200), (byte)Math.Floor((Blue*Brightness)*200), 0, 0);
                 break;
-            case (int)LedType.Split:
+            case (int)LightFunction.Split:
                 byte valSplit = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Set, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valSplit, 1);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Set, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valSplit, SplitSize);
                 break;
-            case (int)LedType.Fill:
+            case (int)LightFunction.Fill:
                 byte valFill = (byte)(Brightness * Size);
                 Arduino.Write(bits1, bits2, (byte)LedFunction.Fill, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valFill, 0);
                 break;
-            case (int)LedType.iFill:
+            case (int)LightFunction.iFill:
                 byte valiFill = (byte)(Brightness * Size);
                 Arduino.Write(bits1, bits2, (byte)LedFunction.iFill, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valiFill, 0);
                 break;

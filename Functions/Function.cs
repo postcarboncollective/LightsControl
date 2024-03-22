@@ -2,16 +2,22 @@ namespace LightsControl;
 
 public abstract class Function
 {
-    public readonly List<SwitchFunction> Switch = new List<SwitchFunction>();
+    public readonly List<ComponentSwitch> Switch = new List<ComponentSwitch>();
+    public readonly List<ComponentSwitch> SwitchLed = new List<ComponentSwitch>();
+    public double R = 1.0;
+    public double G = 1.0;
+    public double B = 1.0;
 
     protected Function()
     {
-        for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Switch.Add(new SwitchFunction(false, (Lights)i, this));
+        for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Switch.Add(new ComponentSwitch(false, i, this));
+        SwitchLed = Switch.GetRange((int)Lights.Led1, Enum.GetNames(typeof(Lights)).Length-(int)Lights.Led1);
     }
 
     public void Run()
     {
         Reset();
+        ResetLeds();
         Kill();
         SetColor();
         Start();
@@ -47,15 +53,15 @@ public abstract class Function
         }
     }
 
+    public virtual void ResetLeds()
+    {
+    }
+
     public void ResetType(int index)
     {
         if (index >= (int)Lights.Bar1 && index <= (int)Lights.Bar2)
         {
-            PM.Bar[index - (int)Lights.Bar1].Type = (int)BarType.Full;
-        }
-        else if (index >= (int)Lights.Led1)
-        {
-            PM.Led[index - (int)Lights.Led1].Type = (int)LedType.Full;
+            PM.Bar[index - (int)Lights.Bar1].Type = (int)LightFunction.Full;
         }
     }
 

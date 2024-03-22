@@ -1,23 +1,14 @@
 namespace LightsControl;
 
-public enum BarType
-{
-    None = 0,
-    Full = 1,
-    Split = 2,
-    Fill = 3,
-    iFill = 4,
-}
-
 public class LightBar : Light
 {
     public int Type = 1;
-    public List<Dmx> Brightness;
-    public List<Dmx> Strobe;
-    public List<Dmx> Red;
-    public List<Dmx> Green;
-    public List<Dmx> Blue;
-    public List<Dmx> Macro;
+    public List<DmxChannel> Brightness;
+    public List<DmxChannel> Strobe;
+    public List<DmxChannel> Red;
+    public List<DmxChannel> Green;
+    public List<DmxChannel> Blue;
+    public List<DmxChannel> Macro;
 
     public LightBar(int addr)
     {
@@ -29,12 +20,12 @@ public class LightBar : Light
         Macro = new();
         for (int i = 0; i < 8; i++)
         {
-            Brightness.Add(new Dmx(addr + (i * 6), 0));
-            Strobe.Add(new Dmx((addr + 1) + (i * 6), 0));
-            Red.Add(new Dmx((addr + 2) + (i * 6), 0));
-            Green.Add(new Dmx((addr + 3) + (i * 6), 0));
-            Blue.Add(new Dmx((addr + 4) + (i * 6), 0));
-            Macro.Add(new Dmx((addr + 5) + (i * 6), 0));
+            Brightness.Add(new DmxChannel(addr + (i * 6), 0));
+            Strobe.Add(new DmxChannel((addr + 1) + (i * 6), 0));
+            Red.Add(new DmxChannel((addr + 2) + (i * 6), 0));
+            Green.Add(new DmxChannel((addr + 3) + (i * 6), 0));
+            Blue.Add(new DmxChannel((addr + 4) + (i * 6), 0));
+            Macro.Add(new DmxChannel((addr + 5) + (i * 6), 0));
         }
     }
 
@@ -42,7 +33,7 @@ public class LightBar : Light
     {
         switch (Type)
         {
-            case (int)BarType.Full:
+            case (int)LightFunction.Full:
                 for (int i = 0; i < Red.Count; i++)
                 {
                     Red[i].Value = r;
@@ -51,7 +42,7 @@ public class LightBar : Light
                     Brightness[i].Value = brightness;
                 }
                 break;
-            case (int)BarType.Split:
+            case (int)LightFunction.Split:
                 for (int i = 0; i < Red.Count; i++)
                 {
                     Red[i].Value = r;
@@ -65,7 +56,7 @@ public class LightBar : Light
                     else Brightness[i].Value = 0;
                 }
                 break;
-            case (int)BarType.Fill:
+            case (int)LightFunction.Fill:
                 for (int i = 0; i < Red.Count; i++)
                 {
                     int index = i;
@@ -81,7 +72,7 @@ public class LightBar : Light
                     else Brightness[index].Value = 0;
                 }
                 break;
-            case (int)BarType.iFill:
+            case (int)LightFunction.iFill:
                 for (int i = 0; i < Red.Count; i++)
                 {
                     int index = (Red.Count - 1) - i;
@@ -111,13 +102,13 @@ public class LightBar : Light
     {
         switch (Type)
         {
-            case (int)BarType.Full:
+            case (int)LightFunction.Full:
                 for (int i = 0; i < Brightness.Count; i++)
                 {
                     Brightness[i].Value = brightness;
                 }
                 break;
-            case (int)BarType.Split:
+            case (int)LightFunction.Split:
                 for (int i = 0; i < Brightness.Count; i++)
                 {
                     float div = 1f / Brightness.Count;
@@ -127,7 +118,7 @@ public class LightBar : Light
                     else Brightness[i].Value = 0;
                 }
                 break;
-            case (int)BarType.Fill:
+            case (int)LightFunction.Fill:
                 for (int i = 0; i < Brightness.Count; i++)
                 {
                     int index = i;
@@ -139,7 +130,7 @@ public class LightBar : Light
                     else Brightness[index].Value = 0;
                 }
                 break;
-            case (int)BarType.iFill:
+            case (int)LightFunction.iFill:
                 for (int i = 0; i < Brightness.Count; i++)
                 {
                     int index = (Brightness.Count - 1) - i;

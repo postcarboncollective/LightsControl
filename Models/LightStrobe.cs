@@ -2,14 +2,14 @@ namespace LightsControl;
 
 public class LightStrobe : Light
 {
-    public Dmx Red;
-    public Dmx Green;
-    public Dmx Blue;
-    public Dmx White;
-    public Dmx Brightness;
-    public Dmx Strobe;
-    public Dmx Switch;
-    public Dmx Speed;
+    public DmxChannel Red;
+    public DmxChannel Green;
+    public DmxChannel Blue;
+    public DmxChannel White;
+    public DmxChannel Brightness;
+    public DmxChannel Strobe;
+    public DmxChannel Switch;
+    public DmxChannel Speed;
 
     public LightStrobe(int addr)
     {

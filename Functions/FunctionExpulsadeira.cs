@@ -32,14 +32,14 @@ public class FunctionExpulsadeira : Function
 
     public override void SetColor()
     {
-        double r = (Color.Value.R / 255f);
-        double g = (Color.Value.G / 255f);
-        double b = (Color.Value.B / 255f);
+        R = (Color.Value.R / 255f);
+        G = (Color.Value.G / 255f);
+        B = (Color.Value.B / 255f);
         for (int i = 0; i < PM.Lights.Count; i++)
         {
             if (Switch[i].Value)
             {
-                PM.Lights[i].SetColor(r, g, b);
+                PM.Lights[i].SetColor(R, G, B);
             }
         }
     }

@@ -4,17 +4,17 @@ namespace LightsControl;
 
 public class LightPar : Light
 {
-    public Dmx Brightness;
-    public Dmx Strobe;
-    public Dmx UV;
-    public Dmx Audio;
+    public DmxChannel Brightness;
+    public DmxChannel Strobe;
+    public DmxChannel UV;
+    public DmxChannel Audio;
 
     public LightPar(int addr)
     {
-        Brightness = new Dmx(addr, 0);
-        Strobe = new Dmx(addr + 1, 0);
-        UV = new Dmx(addr + 2, 0);
-        Audio = new Dmx(addr + 3, 0);
+        Brightness = new DmxChannel(addr, 0);
+        Strobe = new DmxChannel(addr + 1, 0);
+        UV = new DmxChannel(addr + 2, 0);
+        Audio = new DmxChannel(addr + 3, 0);
     }
 
     public override void Set(double r, double g, double b, double brightness)

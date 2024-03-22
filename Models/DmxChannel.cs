@@ -1,6 +1,6 @@
 namespace LightsControl;
 
-public class Dmx
+public class DmxChannel
 {
     public int Address;
     double val;
@@ -14,7 +14,7 @@ public class Dmx
         }
     }
 
-    public Dmx(int addr, int value)
+    public DmxChannel(int addr, int value)
     {
         Address = addr;
         Value = value;
