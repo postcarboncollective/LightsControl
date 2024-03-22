@@ -40,7 +40,7 @@ public class FunctionSwitchStrobe : Function
     }
 
     public double AudioTrigger = 0.5;
-    bool triggered = false;
+    bool audioTriggered = false;
     bool audioEnabled = false;
 
     public bool AudioEnabled
@@ -63,6 +63,7 @@ public class FunctionSwitchStrobe : Function
 
     protected override void Start()
     {
+        GetNewIndex();
         Executing = true;
     }
 
@@ -76,15 +77,15 @@ public class FunctionSwitchStrobe : Function
     {
         if (AudioEnabled)
         {
-            if (triggered)
+            if (audioTriggered)
             {
-                if (Audio.Volume < AudioTrigger) triggered = false;
+                if (Audio.Volume < AudioTrigger) audioTriggered = false;
             }
             else
             {
                 if (Audio.Volume >= AudioTrigger)
                 {
-                    triggered = true;
+                    audioTriggered = true;
                     SwitchLight();
                 }
             }
@@ -109,6 +110,27 @@ public class FunctionSwitchStrobe : Function
     public void SwitchLight()
     {
         PM.Lights[Index].Kill();
+        GetNewIndex();
+        if (Index >= (int)Lights.Bar1 && Index <= (int)Lights.Bar2)
+        {
+            if (PM.Bar[Index - (int)Lights.Bar1].Type != (int)LightType.Full)
+            {
+                PM.Lights[Index].SetBrightness(Global.Rand.NextSingle());
+            }
+            else PM.Lights[Index].SetBrightness(1);
+        }
+        else if (Index >= (int)Lights.Led1)
+        {
+            PM.Led[Index - (int)Lights.Led1].Type = LedType;
+            PM.Led[Index - (int)Lights.Led1].SplitSize = (byte)LedSplitSize;
+            if (LedType != (int)LightType.Full) PM.Lights[Index].SetBrightness(Global.Rand.NextSingle());
+            else PM.Lights[Index].SetBrightness(1);
+        }
+        else PM.Lights[Index].SetBrightness(1);
+    }
+
+    void GetNewIndex()
+    {
         List<int> possibleLights = new();
         foreach (var x in Switch)
         {
@@ -146,22 +168,5 @@ public class FunctionSwitchStrobe : Function
                 }
             }
         }
-
-        if (Index >= (int)Lights.Bar1 && Index <= (int)Lights.Bar2)
-        {
-            if (PM.Bar[Index - (int)Lights.Bar1].Type != (int)LightType.Full)
-            {
-                PM.Lights[Index].SetBrightness(Global.Rand.NextSingle());
-            }
-            else PM.Lights[Index].SetBrightness(1);
-        }
-        else if (Index >= (int)Lights.Led1)
-        {
-            PM.Led[Index - (int)Lights.Led1].Type = LedType;
-            PM.Led[Index - (int)Lights.Led1].SplitSize = (byte)LedSplitSize;
-            if (LedType != (int)LightType.Full) PM.Lights[Index].SetBrightness(Global.Rand.NextSingle());
-            else PM.Lights[Index].SetBrightness(1);
-        }
-        else PM.Lights[Index].SetBrightness(1);
     }
 }

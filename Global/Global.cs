@@ -23,7 +23,8 @@ public static class Global
     public static FunctionStrobe Strobe = new();
     public static FunctionOscillator Oscillator = new();
     public static FunctionSwitchStrobe SwitchStrobe = new();
-    public static List<Function> Functions = [Blackout, Expulsadeira, Strobe, Oscillator, SwitchStrobe];
+    public static FunctionSwitchOscillator SwitchOscillator = new();
+    public static List<Function> Functions = [Blackout, Expulsadeira, Strobe, Oscillator, SwitchStrobe, SwitchOscillator];
     public static Random Rand = new Random();
 
     public static void StopAllFunctions()

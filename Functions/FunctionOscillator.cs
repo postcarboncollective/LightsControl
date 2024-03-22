@@ -10,7 +10,7 @@ public class FunctionOscillator : Function
     public System.Timers.Timer Timer = new();
     public ColorFunction Color;
     public double Speed = 0.125f;
-    public int Type = 1;
+    public int OscillatorType = 1;
     public List<ComponentInvert> Inverted = new List<ComponentInvert>();
 
     public int LedType = 1;
@@ -45,7 +45,7 @@ public class FunctionOscillator : Function
 
     public double AudioMax = 0.5f;
     public bool AudioEnabled = false;
-    bool triggered = false;
+    bool audioTriggered = false;
 
     public FunctionOscillator()
     {
@@ -126,10 +126,24 @@ public class FunctionOscillator : Function
             }
         }
     }
+    
+    public override void SetColor()
+    {
+        R = (Color.Value.R / 255f);
+        G = (Color.Value.G / 255f);
+        B = (Color.Value.B / 255f);
+        for (int i = 0; i < PM.Lights.Count; i++)
+        {
+            if (Switch[i].Value)
+            {
+                PM.Lights[i].SetColor(R, G, B);
+            }
+        }
+    }
 
     public void Execute(object? sender, ElapsedEventArgs args)
     {
-        if (AudioEnabled && Type != 3)
+        if (AudioEnabled && OscillatorType != 3)
         {
             time = Audio.Volume / AudioMax;
             if (time > 1) time = 1;
@@ -140,7 +154,7 @@ public class FunctionOscillator : Function
             time %= 1f;
         }
 
-        switch (Type)
+        switch (OscillatorType)
         {
             case 1:
                 val = time;
@@ -153,15 +167,15 @@ public class FunctionOscillator : Function
             case 3:
                 if (AudioEnabled)
                 {
-                    if (triggered)
+                    if (audioTriggered)
                     {
-                        if (Audio.Volume < AudioMax) triggered = false;
+                        if (Audio.Volume < AudioMax) audioTriggered = false;
                     }
                     else
                     {
                         if (Audio.Volume >= AudioMax)
                         {
-                            triggered = true;
+                            audioTriggered = true;
                             if (walkDirection == 1) walkDirection = -1;
                             else walkDirection = 1;
                         }
@@ -212,20 +226,6 @@ public class FunctionOscillator : Function
                     Global.SetLeds(ledA1Normal, ledA2Normal, LedFunction.iFill, R, G, B, (byte)(val * 200), 0);
                     Global.SetLeds(ledA1Inverted, ledA2Inverted, LedFunction.iFill, R, G, B, (byte)(inv * 200), 0);
                     break;
-            }
-        }
-    }
-
-    public override void SetColor()
-    {
-        R = (Color.Value.R / 255f);
-        G = (Color.Value.G / 255f);
-        B = (Color.Value.B / 255f);
-        for (int i = 0; i < PM.Lights.Count; i++)
-        {
-            if (Switch[i].Value)
-            {
-                PM.Lights[i].SetColor(R, G, B);
             }
         }
     }

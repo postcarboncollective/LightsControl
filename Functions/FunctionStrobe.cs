@@ -47,7 +47,7 @@ public class FunctionStrobe : Function
     }
 
     public double AudioTrigger = 0.5;
-    bool triggered = false;
+    bool audioTriggered = false;
     bool audioEnabled = false;
 
     public bool AudioEnabled
@@ -144,15 +144,15 @@ public class FunctionStrobe : Function
     {
         if (AudioEnabled)
         {
-            if (triggered)
+            if (audioTriggered)
             {
-                if (Audio.Volume < AudioTrigger) triggered = false;
+                if (Audio.Volume < AudioTrigger) audioTriggered = false;
             }
             else
             {
                 if (Audio.Volume >= AudioTrigger)
                 {
-                    triggered = true;
+                    audioTriggered = true;
                     SwitchState();
                 }
             }

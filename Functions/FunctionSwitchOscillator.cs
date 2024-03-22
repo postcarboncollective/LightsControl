@@ -10,8 +10,10 @@ public class FunctionSwitchOscillator : Function
     public System.Timers.Timer Timer = new();
     public ColorFunction Color;
     public double Speed = 0.125f;
-    public int Type = 1;
+    public int OscillatorType = 1;
     public List<ComponentInvert> Inverted = new List<ComponentInvert>();
+    public int Type = 1;
+    public int Index = 0;
 
     public int LedType = 1;
     public int LedSplitSize = 1;
@@ -29,6 +31,7 @@ public class FunctionSwitchOscillator : Function
     double inv = 1;
     double walk = 0.5f;
     int walkDirection = 1;
+    bool timeTriggered = false;
 
     bool executing = false;
 
@@ -45,7 +48,7 @@ public class FunctionSwitchOscillator : Function
 
     public double AudioMax = 0.5f;
     public bool AudioEnabled = false;
-    bool triggered = false;
+    bool audioTriggered = false;
 
     public FunctionSwitchOscillator()
     {
@@ -58,6 +61,7 @@ public class FunctionSwitchOscillator : Function
 
     protected override void Start()
     {
+        GetNewIndex();
         Executing = true;
     }
 
@@ -126,21 +130,43 @@ public class FunctionSwitchOscillator : Function
             }
         }
     }
+    
+    public override void SetColor()
+    {
+        R = (Color.Value.R / 255f);
+        G = (Color.Value.G / 255f);
+        B = (Color.Value.B / 255f);
+        for (int i = 0; i < PM.Lights.Count; i++)
+        {
+            if (Switch[i].Value)
+            {
+                PM.Lights[i].SetColor(R, G, B);
+            }
+        }
+    }
 
     public void Execute(object? sender, ElapsedEventArgs args)
     {
-        if (AudioEnabled && Type != 3)
+        if (AudioEnabled && OscillatorType != 3)
         {
             time = Audio.Volume / AudioMax;
-            if (time > 1) time = 1;
+            if (time > 1)
+            {
+                time = 1;
+                timeTriggered = true;
+            }
         }
         else
         {
             time += (Speed / 2);
-            time %= 1f;
+            if (time > 1)
+            {
+                time = 0;
+                timeTriggered = true;
+            }
         }
 
-        switch (Type)
+        switch (OscillatorType)
         {
             case 1:
                 val = time;
@@ -153,15 +179,15 @@ public class FunctionSwitchOscillator : Function
             case 3:
                 if (AudioEnabled)
                 {
-                    if (triggered)
+                    if (audioTriggered)
                     {
-                        if (Audio.Volume < AudioMax) triggered = false;
+                        if (Audio.Volume < AudioMax) audioTriggered = false;
                     }
                     else
                     {
                         if (Audio.Volume >= AudioMax)
                         {
-                            triggered = true;
+                            audioTriggered = true;
                             if (walkDirection == 1) walkDirection = -1;
                             else walkDirection = 1;
                         }
@@ -169,7 +195,7 @@ public class FunctionSwitchOscillator : Function
                 }
                 else
                 {
-                    if (time % 0.1f <= 0.01) 
+                    if (time % 0.1f <= 0.01f)
                     {
                         int[] numbers = { -1, 1 };
                         walkDirection = numbers[Global.Rand.Next(0, 2)];
@@ -183,26 +209,59 @@ public class FunctionSwitchOscillator : Function
                 break;
         }
 
-        // for (int i = 0; i < (int)Lights.Led1; i++)
-        // {
-            // if (Switch[i].Value)
-            // {
-                // if (Inverted[i].Value) PM.Lights[i].SetBrightness(inv);
-                // else PM.Lights[i].SetBrightness(val);
-            // }
-        // }
-    }
-
-    public override void SetColor()
-    {
-        R = (Color.Value.R / 255f);
-        G = (Color.Value.G / 255f);
-        B = (Color.Value.B / 255f);
-        for (int i = 0; i < PM.Lights.Count; i++)
+        if (timeTriggered)
         {
-            if (Switch[i].Value)
+            timeTriggered = false;
+            PM.Lights[Index].Kill();
+            GetNewIndex();
+            if (Index >= (int)Lights.Led1)
             {
-                PM.Lights[i].SetColor(R, G, B);
+                PM.Led[Index - (int)Lights.Led1].Type = LedType;
+                PM.Led[Index - (int)Lights.Led1].SplitSize = (byte)LedSplitSize;
+            }
+        }
+        
+        if (Inverted[Index].Value) PM.Lights[Index].SetBrightness(inv);
+        else PM.Lights[Index].SetBrightness(val);
+    }
+    
+    void GetNewIndex()
+    {
+        List<int> possibleLights = new();
+        foreach (var x in Switch)
+        {
+            if (x.Value)
+            {
+                if (x.Index != Index)
+                {
+                    possibleLights.Add(x.Index);
+                }
+            }
+        }
+
+        if (possibleLights.Count > 0)
+        {
+            if (OscillatorType == (int)SwitchType.Random)
+            {
+                Index = possibleLights[Global.Rand.Next(possibleLights.Count)];
+            }
+            else if (OscillatorType == (int)SwitchType.Sequential)
+            {
+                bool set = false;
+                foreach (var x in possibleLights)
+                {
+                    if (x > Index)
+                    {
+                        Index = x;
+                        set = true;
+                        break;
+                    }
+                }
+
+                if (set == false)
+                {
+                    Index = possibleLights[0];
+                }
             }
         }
     }
