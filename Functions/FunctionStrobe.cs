@@ -9,17 +9,17 @@ public class FunctionStrobe : Function
     public ColorFunction Color;
     public List<ComponentInvert> Inverted = new List<ComponentInvert>();
     public bool State = false;
-    
+
     public int LedType = 1;
     public int LedSplitSize = 1;
-    public List<ComponentInvert> InvertedLeds;
-    public bool[] LedA1 = { false, false, false, false, false, false, false, false };
-    public bool[] LedA2 = { false, false, false, false, false, false, false, false };
-    public bool[] LedA1Normal = { false, false, false, false, false, false, false, false };
-    public bool[] LedA2Normal = { false, false, false, false, false, false, false, false };
-    public bool[] LedA1Inverted = { false, false, false, false, false, false, false, false };
-    public bool[] LedA2Inverted = { false, false, false, false, false, false, false, false };
-    public bool HasLeds = false;
+    List<ComponentInvert> invertedLeds;
+    readonly bool[] ledA1 = { false, false, false, false, false, false, false, false };
+    bool[] ledA2 = { false, false, false, false, false, false, false, false };
+    bool[] ledA1Normal = { false, false, false, false, false, false, false, false };
+    bool[] ledA2Normal = { false, false, false, false, false, false, false, false };
+    bool[] ledA1Inverted = { false, false, false, false, false, false, false, false };
+    bool[] ledA2Inverted = { false, false, false, false, false, false, false, false };
+    bool hasLeds = false;
 
     bool executing = false;
 
@@ -64,8 +64,8 @@ public class FunctionStrobe : Function
     public FunctionStrobe()
     {
         for (int i = 0; i < Enum.GetNames(typeof(Lights)).Length; i++) Inverted.Add(new ComponentInvert(false, this));
-        InvertedLeds = Inverted.GetRange((int)Lights.Led1, Enum.GetNames(typeof(Lights)).Length-(int)Lights.Led1);
-        Color = new(new MudColor(255, 255, 255, 255), this);
+        invertedLeds = Inverted.GetRange((int)Lights.Led1, Enum.GetNames(typeof(Lights)).Length - (int)Lights.Led1);
+        Color = new(new MudColor(0, 255, 0, 255), this);
         Speed = speed;
         Timer.Elapsed += Execute;
     }
@@ -80,47 +80,61 @@ public class FunctionStrobe : Function
         Executing = false;
         Kill();
     }
-    
+
     public override void ResetLeds()
     {
-        HasLeds = false;
-        InvertedLeds = Inverted.GetRange((int)Lights.Led1, Enum.GetNames(typeof(Lights)).Length-(int)Lights.Led1);
+        hasLeds = false;
+        invertedLeds = Inverted.GetRange((int)Lights.Led1, Enum.GetNames(typeof(Lights)).Length - (int)Lights.Led1);
+        
+        for (int i = 0; i < SwitchLed.Count; i++)
+        {
+            if (i < 8) ledA1[i] = SwitchLed[i].Value;
+            else if (i < 16) ledA2[i - 8] = SwitchLed[i].Value;
+            if (hasLeds == false && SwitchLed[i].Value) hasLeds = true;
+        }
+
         for (int i = 0; i < SwitchLed.Count; i++)
         {
             if (i < 8)
             {
-                LedA1[i] = SwitchLed[i].Value;
-                LedA1Normal[i] = SwitchLed[i].Value;
+                if (invertedLeds[i].Value)
+                {
+                    if (ledA1[i])
+                    {
+                        ledA1Normal[i] = false;
+                        ledA1Inverted[i] = true;
+                    }
+                }
+                else if (ledA1[i])
+                {
+                    ledA1Normal[i] = true;
+                    ledA1Inverted[i] = false;
+                }
+                else
+                {
+                    ledA1Normal[i] = false;
+                    ledA1Inverted[i] = false;
+                }
             }
             else if (i < 16)
             {
-                LedA2[i - 8] = SwitchLed[i].Value;
-                LedA2Normal[i - 8] = SwitchLed[i].Value;
-            }
-            if (HasLeds == false && SwitchLed[i].Value) HasLeds = true;
-        }
-        for(int i=0; i<SwitchLed.Count; i++)
-        {
-            if (i < 8)
-            {
-                if (InvertedLeds[i].Value)
+                if (invertedLeds[i].Value)
                 {
-                    if (LedA1Normal[i])
+                    if (ledA2[i])
                     {
-                        LedA1Inverted[i] = true;
-                        LedA1Normal[i] = false;
+                        ledA2Normal[i] = false;
+                        ledA2Inverted[i] = true;
                     }
-                }                            
-            }
-            else if (i < 16)
-            {
-                if (InvertedLeds[i].Value)
+                }
+                else if (ledA2[i])
                 {
-                    if (LedA2Normal[i])
-                    {
-                        LedA2Inverted[i] = true;
-                        LedA2Normal[i] = false;
-                    }
+                    ledA2Normal[i] = true;
+                    ledA2Inverted[i] = false;
+                }
+                else
+                {
+                    ledA2Normal[i] = false;
+                    ledA2Inverted[i] = false;
                 }
             }
         }
@@ -165,11 +179,11 @@ public class FunctionStrobe : Function
         if (State) Off();
         else On();
     }
-    
+
     void On()
     {
         State = true;
-        
+
         // Lights
         for (int i = 0; i < (int)Lights.Led1; i++)
         {
@@ -177,14 +191,14 @@ public class FunctionStrobe : Function
             {
                 if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
                 {
-                    if (PM.Bar[i - (int)Lights.Bar1].Type != (int)LightFunction.Full)
+                    if (PM.Bar[i - (int)Lights.Bar1].Type != (int)LightType.Full)
                     {
                         PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
                     }
                     else
                     {
                         if (Inverted[i].Value) PM.Lights[i].SetBrightness(0);
-                        else PM.Lights[i].SetBrightness(1);                        
+                        else PM.Lights[i].SetBrightness(1);
                     }
                 }
                 else
@@ -194,18 +208,18 @@ public class FunctionStrobe : Function
                 }
             }
         }
-        
+
         // Leds
-        if (HasLeds)
+        if (hasLeds)
         {
             switch (LedType)
             {
                 case (int)LedFunction.Full:
-                    Global.SetLeds(LedA1Normal, LedA2Normal, LedFunction.Full, R, G, B, 0, 0);
-                    Global.SetLeds(LedA1Inverted, LedA2Inverted, LedFunction.Full, 0, 0, 0, 0, 0);
+                    Global.SetLeds(ledA1Normal, ledA2Normal, LedFunction.Full, R, G, B, 0, 0);
+                    Global.SetLeds(ledA1Inverted, ledA2Inverted, LedFunction.Off, 0, 0, 0, 0, 0);
                     break;
                 case (int)LedFunction.Set:
-                    Global.SetLeds(LedA1, LedA2, LedFunction.Set, R, G, B, (byte)(Global.Rand.NextSingle()*PM.Led[0].Size), (byte)LedSplitSize);
+                    Global.SetLeds(ledA1, ledA2, LedFunction.Set, R, G, B, (byte)(Global.Rand.NextSingle() * 200), (byte)LedSplitSize);
                     break;
             }
         }
@@ -214,7 +228,7 @@ public class FunctionStrobe : Function
     void Off()
     {
         State = false;
-        
+
         // Lights
         for (int i = 0; i < (int)Lights.Led1; i++)
         {
@@ -222,14 +236,14 @@ public class FunctionStrobe : Function
             {
                 if (i >= (int)Lights.Bar1 && i <= (int)Lights.Bar2)
                 {
-                    if (PM.Bar[i - (int)Lights.Bar1].Type != (int)LightFunction.Full)
+                    if (PM.Bar[i - (int)Lights.Bar1].Type != (int)LightType.Full)
                     {
                         PM.Lights[i].SetBrightness(Global.Rand.NextSingle());
                     }
                     else
                     {
                         if (Inverted[i].Value) PM.Lights[i].SetBrightness(1);
-                        else PM.Lights[i].SetBrightness(0);                        
+                        else PM.Lights[i].SetBrightness(0);
                     }
                 }
                 else
@@ -239,18 +253,18 @@ public class FunctionStrobe : Function
                 }
             }
         }
-        
+
         // Leds
-        if (HasLeds)
+        if (hasLeds)
         {
             switch (LedType)
             {
-                case (int)LedFunction.Full:
-                    Global.SetLeds(LedA1Inverted, LedA2Inverted, LedFunction.Full, R, G, B, 0, 0);
-                    Global.SetLeds(LedA1Normal, LedA2Normal, LedFunction.Full, 0, 0, 0, 0, 0);
+                case (int)LightType.Full:
+                    Global.SetLeds(ledA1Inverted, ledA2Inverted, LedFunction.Full, R, G, B, 0, 0);
+                    Global.SetLeds(ledA1Normal, ledA2Normal, LedFunction.Off, 0, 0, 0, 0, 0);
                     break;
-                case (int)LedFunction.Set:
-                    Global.SetLeds(LedA1, LedA2, LedFunction.Set, R, G, B, (byte)(Global.Rand.NextSingle()*PM.Led[0].Size), (byte)LedSplitSize);
+                case (int)LightType.Split:
+                    Global.SetLeds(ledA1, ledA2, LedFunction.Set, R, G, B, (byte)(Global.Rand.NextSingle() * 200), (byte)LedSplitSize);
                     break;
             }
         }

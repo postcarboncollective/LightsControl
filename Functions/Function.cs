@@ -61,7 +61,7 @@ public abstract class Function
     {
         if (index >= (int)Lights.Bar1 && index <= (int)Lights.Bar2)
         {
-            PM.Bar[index - (int)Lights.Bar1].Type = (int)LightFunction.Full;
+            PM.Bar[index - (int)Lights.Bar1].Type = (int)LightType.Full;
         }
     }
 

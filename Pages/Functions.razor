@@ -91,7 +91,7 @@
                         <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Split</MudRadio>
                     </MudRadioGroup>
                 </MudItem>
-                @if (Global.Strobe.LedType == (int)LightFunction.Split)
+                @if (Global.Strobe.LedType == (int)LightType.Split)
                 {
                     <MudItem xs="12">
                         <MudSlider @bind-Value="Global.Strobe.LedSplitSize" Min="1" Max="9" Step="1">Split Size</MudSlider>
@@ -134,85 +134,95 @@
 </MudContainer>
 
 
-@* <br/> *@
-@* <MudContainer> *@
-@*     <MudButton OnClick="@(() => ShowOscillatorPanel = !ShowOscillatorPanel)" EndIcon="@(ShowOscillatorPanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)" Color="@(Global.Oscillator.Executing ? Color.Secondary : Color.Primary)"> *@
-@*         Oscillator *@
-@*     </MudButton> *@
-@*     @if (ShowOscillatorPanel) *@
-@*     { *@
-@*         <MudContainer Style="background: #111f"> *@
-@*             <br/> *@
-@*             <MudGrid> *@
-@*                 @foreach (Lights light in Enum.GetValues(typeof(Lights))) *@
-@*                 { *@
-@*                     <MudItem xs="6"> *@
-@*                         <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@light.ToString()" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Oscillator.Switch[(int)light].Value" Style="align-items: center"/> *@
-@*                         @if (light >= Lights.Bar1 && light <= Lights.Bar2) *@
-@*                         { *@
-@*                             @if (Global.Oscillator.Switch[(int)light].Value) *@
-@*                             { *@
-@*                                 <MudRadioGroup @bind-Value="@(PM.Bar[(int)light - (int)Lights.Bar1].Type)"> *@
-@*                                     <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Full</MudRadio> *@
-@*                                     <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Split</MudRadio> *@
-@*                                     <br/> *@
-@*                                     <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Fill</MudRadio> *@
-@*                                     <MudRadio Value="4" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">iFill</MudRadio> *@
-@*                                 </MudRadioGroup> *@
-@*                             } *@
-@*                         } *@
-@*                         else if (light >= Lights.Led1) *@
-@*                         { *@
-@*                             @if (Global.Oscillator.Switch[(int)light].Value) *@
-@*                             { *@
-@*                                 <MudRadioGroup @bind-Value="@(PM.Led[(int)light - (int)Lights.Led1].Type)"> *@
-@*                                     <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Full</MudRadio> *@
-@*                                     <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Split</MudRadio> *@
-@*                                     <br/> *@
-@*                                     <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Fill</MudRadio> *@
-@*                                     <MudRadio Value="4" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">iFill</MudRadio> *@
-@*                                 </MudRadioGroup> *@
-@*                             } *@
-@*                         } *@
-@*                     </MudItem> *@
-@*                 } *@
-@*                 <MudItem xs="12" Class="d-flex justify-center"> *@
-@*                     <MudColorPicker @bind-Value="Global.Oscillator.Color.Value" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/> *@
-@*                 </MudItem> *@
-@*                 <MudItem xs="12" Class="d-flex justify-center"> *@
-@*                     <MudCheckBox @bind-Value="@Global.Oscillator.AudioEnabled" Label="Audio" Color="Color.Secondary"></MudCheckBox> *@
-@*                 </MudItem> *@
-@*                 @if (Global.Oscillator.AudioEnabled) *@
-@*                 { *@
-@*                     <MudItem xs="12"> *@
-@*                         <MudSlider @bind-Value="@Global.Oscillator.AudioMax" Min="0.01" Max="0.99" Step="0.01">Max</MudSlider> *@
-@*                         <MudSlider Value="Audio.Volume" Min="0.01" Max="0.99" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider> *@
-@*                     </MudItem> *@
-@*                 } *@
-@*                 else *@
-@*                 { *@
-@*                     <MudItem xs="12"> *@
-@*                         <MudSlider @bind-Value="Global.Oscillator.Speed" Min="0.001" Max="0.249" Step="0.001">Speed</MudSlider> *@
-@*                     </MudItem> *@
-@*                 } *@
-@*                 <MudItem xs="12"> *@
-@*                     <MudRadioGroup @bind-Value="Global.Oscillator.Type"> *@
-@*                         <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary">Saw</MudRadio> *@
-@*                         <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary">Sine</MudRadio> *@
-@*                     </MudRadioGroup> *@
-@*                 </MudItem> *@
-@*                 @foreach (Lights light in Enum.GetValues(typeof(Lights))) *@
-@*                 { *@
-@*                     <MudItem xs="3"> *@
-@*                         <MudText>@(light.ToString()) @(Global.Oscillator.Inverted[(int)light] ? "Inverted" : "Normal")</MudText> *@
-@*                         <MudToggleIconButton @bind-Toggled="@Global.Oscillator.Inverted[(int)light]" Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error" ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success"/> *@
-@*                     </MudItem> *@
-@*                 } *@
-@*             </MudGrid> *@
-@*             <br/> *@
-@*         </MudContainer> *@
-@*     } *@
-@* </MudContainer> *@
+<br/>
+<MudContainer>
+    <MudButton OnClick="@(() => ShowOscillatorPanel = !ShowOscillatorPanel)" EndIcon="@(ShowOscillatorPanel ? Icons.Material.Filled.ArrowUpward : Icons.Material.Filled.ArrowDownward)" Color="@(Global.Oscillator.Executing ? Color.Secondary : Color.Primary)">
+        Oscillator
+    </MudButton>
+    @if (ShowOscillatorPanel)
+    {
+        <MudContainer Style="background: #111f">
+            <br/>
+            <MudGrid>
+                <MudItem xs="12">Light</MudItem>
+                @foreach (Lights light in Enum.GetValues(typeof(Lights)))
+                {
+                    if (light >= Lights.Led1) break;
+                    <MudItem xs="6">
+                        <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@light.ToString()" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Oscillator.Switch[(int)light].Value" Style="align-items: center">
+                            <MudToggleIconButton @bind-Toggled="@Global.Oscillator.Inverted[(int)light].Value" Icon="@Icons.Material.Filled.Watch" Color="@Color.Success" ToggledIcon="@Icons.Material.Filled.WatchOff" ToggledColor="@Color.Error"/>
+                        </MudSwitch>
+                        @if (light >= Lights.Bar1 && light <= Lights.Bar2)
+                        {
+                            @if (Global.Oscillator.Switch[(int)light].Value)
+                            {
+                                <MudRadioGroup @bind-Value="@(PM.Bar[(int)light - (int)Lights.Bar1].Type)">
+                                    <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Full</MudRadio>
+                                    <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Split</MudRadio>
+                                    <br/>
+                                    <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Fill</MudRadio>
+                                    <MudRadio Value="4" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">iFill</MudRadio>
+                                </MudRadioGroup>
+                            }
+                        }
+                    </MudItem>
+                }
+                <MudItem xs="12">Led</MudItem>
+                <MudItem xs="12">
+                    <MudRadioGroup @bind-Value="@(Global.Oscillator.LedType)">
+                        <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Full</MudRadio>
+                        <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Split</MudRadio>
+                        <MudRadio Value="3" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">Fill</MudRadio>
+                        <MudRadio Value="4" Color="Color.Secondary" UnCheckedColor="Color.Primary" Dense="true">iFill</MudRadio>
+                    </MudRadioGroup>
+                </MudItem>
+                @if (Global.Oscillator.LedType == (int)LightType.Split)
+                {
+                    <MudItem xs="12">
+                        <MudSlider @bind-Value="Global.Oscillator.LedSplitSize" Min="1" Max="9" Step="1">Split Size</MudSlider>
+                    </MudItem>
+                }
+                @foreach (Lights light in Enum.GetValues(typeof(Lights)))
+                {
+                    if (light >= Lights.Led1)
+                    {
+                        <MudItem xs="6">
+                            <MudSwitch UnCheckedColor="Color.Primary" Color="Color.Secondary" Label="@light.ToString()" LabelPosition="LabelPosition.Start" @bind-Value="@Global.Oscillator.Switch[(int)light].Value" Style="align-items: center">
+                                <MudToggleIconButton @bind-Toggled="@Global.Oscillator.Inverted[(int)light].Value" Icon="@Icons.Material.Filled.Watch" Color="@Color.Success" ToggledIcon="@Icons.Material.Filled.WatchOff" ToggledColor="@Color.Error"/>
+                            </MudSwitch>
+                        </MudItem>
+                    }
+                }
+                <MudItem xs="12" Class="d-flex justify-center">
+                    <MudColorPicker @bind-Value="Global.Oscillator.Color.Value" DisableToolbar="@true" DisableAlpha="@true" DisableColorField="@false" DisablePreview="@false" DisableSliders="@false" DisableInputs="@true" DisableModeSwitch="@true" ColorPickerMode="ColorPickerMode.RGB" PickerVariant="PickerVariant.Static"/>
+                </MudItem>
+                <MudItem xs="12" Class="d-flex justify-center">
+                    <MudCheckBox @bind-Value="@Global.Oscillator.AudioEnabled" Label="Audio" Color="Color.Secondary"></MudCheckBox>
+                </MudItem>
+                @if (Global.Oscillator.AudioEnabled)
+                {
+                    <MudItem xs="12">
+                        <MudSlider @bind-Value="@Global.Oscillator.AudioMax" Min="0.01" Max="0.99" Step="0.01">Max</MudSlider>
+                        <MudSlider Value="Audio.Volume" Min="0.01" Max="0.99" Step="0.01" Variant="Variant.Filled" Disabled="true"></MudSlider>
+                    </MudItem>
+                }
+                else
+                {
+                    <MudItem xs="12">
+                        <MudSlider @bind-Value="Global.Oscillator.Speed" Min="0.001" Max="0.249" Step="0.001">Speed</MudSlider>
+                    </MudItem>
+                }
+                <MudItem xs="12">
+                    <MudRadioGroup @bind-Value="Global.Oscillator.Type">
+                        <MudRadio Value="1" Color="Color.Secondary" UnCheckedColor="Color.Primary">Saw</MudRadio>
+                        <MudRadio Value="2" Color="Color.Secondary" UnCheckedColor="Color.Primary">Sine</MudRadio>
+                    </MudRadioGroup>
+                </MudItem>
+            </MudGrid>
+            <br/>
+        </MudContainer>
+    }
+</MudContainer>
 
 
 @* <br/> *@

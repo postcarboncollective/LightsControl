@@ -48,7 +48,7 @@ public class FunctionSwitch : Function
 
     public FunctionSwitch()
     {
-        Color = new(new MudColor(255, 255, 255, 255), this);
+        Color = new(new MudColor(0, 255, 0, 255), this);
         Speed = speed;
         Timer.Elapsed += Execute;
     }
@@ -118,7 +118,7 @@ public class FunctionSwitch : Function
         }
         if (Index >= (int)Lights.Bar1 && Index <= (int)Lights.Bar2)
         {
-            if (PM.Bar[Index - (int)Lights.Bar1].Type != (int)LightFunction.Full)
+            if (PM.Bar[Index - (int)Lights.Bar1].Type != (int)LightType.Full)
             {
                 PM.Lights[Index].SetBrightness(Global.Rand.NextSingle());
             }

@@ -33,11 +33,11 @@ void ReadMessage()
     for(int i=0; i<8; i++)
     {
       msg[i] = Serial.read(); 
-      Serial.print(msg[i]);
-      Serial.print(" ");
+      // Serial.print(msg[i]);
+      // Serial.print(" ");
     }
-    Serial.println();
-    Blink();
+    // Serial.println();
+    // Blink();
 
     if(id < 8)
     {
@@ -85,18 +85,20 @@ void Full(CRGB color)
 void Set(CRGB color, int led, int length)
 {
   if(length == 0) length = 1;
+  int which = (led/200.0)*numLeds;
   for(int i=0; i<length; i++)
   {
-    leds[(led+i)%numLeds] = color;
+    leds[(which+i)%numLeds] = color;
   }
   FastLED.show();
 }
 
 void Fill(CRGB color, int led)
 {
+  int which = (led/200.0)*numLeds;
   for(int i=0; i<numLeds; i++)
   {
-    if(i < led) leds[i] = color;
+    if(i < which) leds[i] = color;
     else leds[i] = CRGB(0,0,0);
   }
   FastLED.show();
@@ -104,10 +106,11 @@ void Fill(CRGB color, int led)
 
 void iFill(CRGB color, int led)
 {
+  int which = (led/200.0)*numLeds;
   for(int i=0; i<numLeds; i++)
   {
     int index = ((numLeds-1) - i);
-    if(index > led) leds[index] = color;
+    if(index > which) leds[index] = color;
     else leds[index] = CRGB(0,0,0);
   }
   FastLED.show();

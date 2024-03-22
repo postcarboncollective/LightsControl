@@ -33,7 +33,7 @@ public class LightBar : Light
     {
         switch (Type)
         {
-            case (int)LightFunction.Full:
+            case (int)LightType.Full:
                 for (int i = 0; i < Red.Count; i++)
                 {
                     Red[i].Value = r;
@@ -42,7 +42,7 @@ public class LightBar : Light
                     Brightness[i].Value = brightness;
                 }
                 break;
-            case (int)LightFunction.Split:
+            case (int)LightType.Split:
                 for (int i = 0; i < Red.Count; i++)
                 {
                     Red[i].Value = r;
@@ -56,7 +56,7 @@ public class LightBar : Light
                     else Brightness[i].Value = 0;
                 }
                 break;
-            case (int)LightFunction.Fill:
+            case (int)LightType.Fill:
                 for (int i = 0; i < Red.Count; i++)
                 {
                     int index = i;
@@ -72,7 +72,7 @@ public class LightBar : Light
                     else Brightness[index].Value = 0;
                 }
                 break;
-            case (int)LightFunction.iFill:
+            case (int)LightType.iFill:
                 for (int i = 0; i < Red.Count; i++)
                 {
                     int index = (Red.Count - 1) - i;
@@ -102,13 +102,13 @@ public class LightBar : Light
     {
         switch (Type)
         {
-            case (int)LightFunction.Full:
+            case (int)LightType.Full:
                 for (int i = 0; i < Brightness.Count; i++)
                 {
                     Brightness[i].Value = brightness;
                 }
                 break;
-            case (int)LightFunction.Split:
+            case (int)LightType.Split:
                 for (int i = 0; i < Brightness.Count; i++)
                 {
                     float div = 1f / Brightness.Count;
@@ -118,7 +118,7 @@ public class LightBar : Light
                     else Brightness[i].Value = 0;
                 }
                 break;
-            case (int)LightFunction.Fill:
+            case (int)LightType.Fill:
                 for (int i = 0; i < Brightness.Count; i++)
                 {
                     int index = i;
@@ -130,7 +130,7 @@ public class LightBar : Light
                     else Brightness[index].Value = 0;
                 }
                 break;
-            case (int)LightFunction.iFill:
+            case (int)LightType.iFill:
                 for (int i = 0; i < Brightness.Count; i++)
                 {
                     int index = (Brightness.Count - 1) - i;
