@@ -28,10 +28,6 @@ public static class Arduino
         SerialPort = new SerialPort(ports[0], 9600);
         // SerialPort.DataReceived += OnSerialDataReceived;
         SerialPort.Open();
-        
-        // WriteTimer.Elapsed += Iter;
-        // WriteTimer.Interval = 50;
-        // WriteTimer.Start();
 
         Task.Run(async () => { await Setup(); });
     }
@@ -75,14 +71,5 @@ public static class Arduino
             string message = SerialPort.ReadLine();
             if (!string.IsNullOrWhiteSpace(message)) Console.WriteLine(message);
         }
-    }
-
-    private static void Iter(object? sender, ElapsedEventArgs e)
-    {
-        byte addr1 = CreateByte(new bool[] { true, false, false, false, false, false, false, false });
-        byte addr2 = CreateByte(new bool[] { false, false, false, false, false, false, false, false });
-        Write(addr1, addr2, (byte)LedFunction.Set, 0, 200, 0, current, 4);
-        current++;
-        current %= PM.Led[0].Size;
     }
 }
