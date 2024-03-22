@@ -42,6 +42,11 @@ public class LightStrobe : Light
     {
         Brightness.Value = brightness;
     }
+    
+    public override void Kill()
+    {
+        Brightness.Value = 0;
+    }
 }
 
 // Strobe 1-8

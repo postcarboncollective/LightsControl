@@ -48,19 +48,19 @@ public class LightLed : Light
         switch (Type)
         {
             case (int)LightType.Full:
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Full, (byte)Math.Floor((Red*Brightness)*200), (byte)Math.Floor((Green*Brightness)*200), (byte)Math.Floor((Blue*Brightness)*200), 0, 0);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Full, (byte)(Red*Brightness*254), (byte)(Green*Brightness*254), (byte)(Blue*Brightness*254), 0, 0);
                 break;
             case (int)LightType.Split:
-                byte valSplit = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Set, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valSplit, SplitSize);
+                byte valSplit = (byte)(Brightness * 200);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Set, (byte)(Red*254), (byte)(Green*254), (byte)(Blue*254), valSplit, SplitSize);
                 break;
             case (int)LightType.Fill:
-                byte valFill = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Fill, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valFill, 0);
+                byte valFill = (byte)(Brightness * 200);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Fill, (byte)(Red*254), (byte)(Green*254), (byte)(Blue*254), valFill, 0);
                 break;
             case (int)LightType.iFill:
-                byte valiFill = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.iFill, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valiFill, 0);
+                byte valiFill = (byte)(Brightness * 200);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.iFill, (byte)(Red*254), (byte)(Green*254), (byte)(Blue*254), valiFill, 0);
                 break;
         }
     }
@@ -79,20 +79,25 @@ public class LightLed : Light
         switch (Type)
         {
             case (int)LightType.Full:
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Full, (byte)Math.Floor((Red*Brightness)*200), (byte)Math.Floor((Green*Brightness)*200), (byte)Math.Floor((Blue*Brightness)*200), 0, 0);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Full, (byte)(Red*Brightness*254), (byte)(Green*Brightness*254), (byte)(Blue*Brightness*254), 0, 0);
                 break;
             case (int)LightType.Split:
-                byte valSplit = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Set, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valSplit, SplitSize);
+                byte valSplit = (byte)(Brightness * 200);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Set, (byte)(Red*254), (byte)(Green*254), (byte)(Blue*254), valSplit, SplitSize);
                 break;
             case (int)LightType.Fill:
-                byte valFill = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.Fill, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valFill, 0);
+                byte valFill = (byte)(Brightness * 200);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.Fill, (byte)(Red*254), (byte)(Green*254), (byte)(Blue*254), valFill, 0);
                 break;
             case (int)LightType.iFill:
-                byte valiFill = (byte)(Brightness * Size);
-                Arduino.Write(bits1, bits2, (byte)LedFunction.iFill, (byte)Math.Floor((Red)*200), (byte)Math.Floor((Green)*200), (byte)Math.Floor((Blue)*200), valiFill, 0);
+                byte valiFill = (byte)(Brightness * 200);
+                Arduino.Write(bits1, bits2, (byte)LedFunction.iFill, (byte)(Red*254), (byte)(Green*254), (byte)(Blue*254), valiFill, 0);
                 break;
         }
+    }
+    
+    public override void Kill()
+    {
+        Arduino.Write(bits1, bits2, (byte)LedFunction.Off, 0, 0, 0, 0, 0);
     }
 }

@@ -197,13 +197,13 @@ public class FunctionStrobe : Function
                     }
                     else
                     {
-                        if (Inverted[i].Value) PM.Lights[i].SetBrightness(0);
+                        if (Inverted[i].Value) PM.Lights[i].Kill();
                         else PM.Lights[i].SetBrightness(1);
                     }
                 }
                 else
                 {
-                    if (Inverted[i].Value) PM.Lights[i].SetBrightness(0);
+                    if (Inverted[i].Value) PM.Lights[i].Kill();
                     else PM.Lights[i].SetBrightness(1);
                 }
             }
@@ -243,13 +243,13 @@ public class FunctionStrobe : Function
                     else
                     {
                         if (Inverted[i].Value) PM.Lights[i].SetBrightness(1);
-                        else PM.Lights[i].SetBrightness(0);
+                        else PM.Lights[i].Kill();
                     }
                 }
                 else
                 {
                     if (Inverted[i].Value) PM.Lights[i].SetBrightness(1);
-                    else PM.Lights[i].SetBrightness(0);
+                    else PM.Lights[i].Kill();
                 }
             }
         }

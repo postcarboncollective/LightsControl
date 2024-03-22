@@ -45,6 +45,7 @@ public class FunctionOscillator : Function
 
     public double AudioMax = 0.5f;
     public bool AudioEnabled = false;
+    bool triggered = false;
 
     public FunctionOscillator()
     {
@@ -128,7 +129,7 @@ public class FunctionOscillator : Function
 
     public void Execute(object? sender, ElapsedEventArgs args)
     {
-        if (AudioEnabled)
+        if (AudioEnabled && Type != 3)
         {
             time = Audio.Volume / AudioMax;
             if (time > 1) time = 1;
@@ -150,10 +151,29 @@ public class FunctionOscillator : Function
                 inv = 1 - ((Math.Cos((1 - time) * (Math.PI * 2)) / 2) + 0.5f);
                 break;
             case 3:
-                if (time % 0.1f <= 0.01) 
+                if (AudioEnabled)
                 {
-                    int[] numbers = { -1, 1 };
-                    walkDirection = numbers[Global.Rand.Next(0, 2)];
+                    if (triggered)
+                    {
+                        if (Audio.Volume < AudioMax) triggered = false;
+                    }
+                    else
+                    {
+                        if (Audio.Volume >= AudioMax)
+                        {
+                            triggered = true;
+                            if (walkDirection == 1) walkDirection = -1;
+                            else walkDirection = 1;
+                        }
+                    }
+                }
+                else
+                {
+                    if (time % 0.1f <= 0.01) 
+                    {
+                        int[] numbers = { -1, 1 };
+                        walkDirection = numbers[Global.Rand.Next(0, 2)];
+                    }                    
                 }
                 walk += (Speed / 2) * walkDirection;
                 if (walk > 1) walk = 0;

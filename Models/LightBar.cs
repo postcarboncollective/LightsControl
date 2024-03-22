@@ -145,6 +145,14 @@ public class LightBar : Light
         }
     }
 
+    public override void Kill()
+    {
+        foreach (var x in Brightness)
+        {
+            x.Value = 0;
+        }
+    }
+
     public void SetRed(double val)
     {
         foreach (var x in Red) x.Value = val;

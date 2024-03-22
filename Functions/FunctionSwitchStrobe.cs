@@ -1,14 +1,18 @@
+using System.Diagnostics;
 using System.Timers;
 using MudBlazor.Utilities;
 
 namespace LightsControl;
 
-public class FunctionSwitch : Function
+public class FunctionSwitchStrobe : Function
 {
     public System.Timers.Timer Timer = new();
     public ColorFunction Color;
     public int Index = 0;
 
+    public int LedType = 1;
+    public int LedSplitSize = 1;
+    
     bool executing = false;
     public bool Executing
     {
@@ -46,7 +50,7 @@ public class FunctionSwitch : Function
         }
     }
 
-    public FunctionSwitch()
+    public FunctionSwitchStrobe()
     {
         Color = new(new MudColor(0, 255, 0, 255), this);
         Speed = speed;
@@ -86,29 +90,29 @@ public class FunctionSwitch : Function
 
     public override void SetColor()
     {
-        double r = (Color.Value.R / 255f);
-        double g = (Color.Value.G / 255f);
-        double b = (Color.Value.B / 255f);
+        R = (Color.Value.R / 255f);
+        G = (Color.Value.G / 255f);
+        B = (Color.Value.B / 255f);
         for (int i = 0; i < PM.Lights.Count; i++)
         {
-            if (base.Switch[i].Value)
+            if (Switch[i].Value)
             {
-                PM.Lights[i].SetColor(r, g, b);
+                PM.Lights[i].SetColor(R, G, B);
             }
         }
     }
 
     public void SwitchLight()
     {
-        PM.Lights[Index].SetBrightness(0);
+        PM.Lights[Index].Kill();
         List<int> possibleLights = new();
-        foreach (var x in base.Switch)
+        foreach (var x in Switch)
         {
             if (x.Value)
             {
-                if ((int)x.Index != Index)
+                if (x.Index != Index)
                 {
-                    possibleLights.Add((int)x.Index);
+                    possibleLights.Add(x.Index);
                 }
             }
         }
@@ -122,6 +126,13 @@ public class FunctionSwitch : Function
             {
                 PM.Lights[Index].SetBrightness(Global.Rand.NextSingle());
             }
+            else PM.Lights[Index].SetBrightness(1);
+        }
+        else if (Index >= (int)Lights.Led1)
+        {
+            PM.Led[Index - (int)Lights.Led1].Type = LedType;
+            PM.Led[Index - (int)Lights.Led1].SplitSize = (byte)LedSplitSize;
+            if (LedType != (int)LightType.Full) PM.Lights[Index].SetBrightness(Global.Rand.NextSingle());
             else PM.Lights[Index].SetBrightness(1);
         }
         else PM.Lights[Index].SetBrightness(1);

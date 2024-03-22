@@ -33,6 +33,11 @@ public class LightPar : Light
         Brightness.Value = brightness;
         UV.Value = brightness;
     }
+    
+    public override void Kill()
+    {
+        Brightness.Value = 0;
+    }
 }
 
 // Par 9-12
