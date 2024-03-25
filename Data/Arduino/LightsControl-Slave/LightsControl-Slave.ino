@@ -6,7 +6,7 @@ CRGB leds[NUM_LEDS];
 
 byte id = 0;
 bool ledState = false;
-int numLeds = 30;
+int numLeds = 90;
 
 byte msg[8];
 

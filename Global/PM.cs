@@ -27,14 +27,14 @@ public static class PM
     };
     public static List<LightLed> Led = new()
     {
-        new LightLed(0, 100), 
-        new LightLed(1, 100), 
-        new LightLed(2, 100), 
-        new LightLed(3, 100),
-        new LightLed(4, 100), 
-        new LightLed(5, 100), 
-        new LightLed(6, 100), 
-        new LightLed(7, 100),
+        new LightLed(0, 90), 
+        new LightLed(1, 90), 
+        new LightLed(2, 90), 
+        new LightLed(3, 90),
+        new LightLed(4, 90),
+        new LightLed(5, 90),
+        new LightLed(6, 90),
+        new LightLed(7, 90),
     };
     public static List<Light> Lights = [Strobe, Par, Bar[0], Bar[1], Led[0], Led[1], Led[2], Led[3], Led[4], Led[5], Led[6], Led[7]];
 }
