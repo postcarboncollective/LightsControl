@@ -37,7 +37,7 @@ void ReadMessage()
       // Serial.print(" ");
     }
     // Serial.println();
-    // Blink();
+    Blink();
 
     if(id < 8)
     {

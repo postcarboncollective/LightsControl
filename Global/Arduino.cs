@@ -26,7 +26,7 @@ public static class Arduino
         if (ports.Length == 0) return;
 
         SerialPort = new SerialPort(ports[0], 9600);
-        // SerialPort.DataReceived += OnSerialDataReceived;
+        // SerialPort.DataReceived += OnSerialDataReceived;    
         SerialPort.Open();
 
         Task.Run(async () => { await Setup(); });
