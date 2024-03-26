@@ -14,6 +14,7 @@ public static class Arduino
     public static List<string> Ports = new();
     public static System.Timers.Timer WriteTimer = new();
     public static byte current = 0;
+    public static bool SerialPortError = false;
 
     public static void Init()
     {
@@ -65,6 +66,7 @@ public static class Arduino
         SerialPort.WriteTimeout = 1000;
         // SerialPort.DataReceived += OnSerialDataReceived; 
         SerialPort.Open();
+        SerialPortError = false;
         Console.WriteLine($"Opened Serial Port -> {Ports[0]}");
     }
 
@@ -87,8 +89,12 @@ public static class Arduino
             }
             catch
             {
-                Console.WriteLine("SerialPort.Write -> Error!");
-                ResetSerialPort();
+                if (SerialPortError == false)
+                {
+                    SerialPortError = true;
+                    Console.WriteLine("SerialPort.Write -> Error!");
+                    ResetSerialPort();                    
+                }
             }
         }
     }
@@ -104,8 +110,12 @@ public static class Arduino
             }
             catch
             {
-                Console.WriteLine("SerialPort.Read -> Error!");
-                ResetSerialPort();
+                if (SerialPortError == false)
+                {
+                    SerialPortError = true;
+                    Console.WriteLine("SerialPort.Read -> Error!");
+                    ResetSerialPort();                    
+                }
             }
         }
     }
