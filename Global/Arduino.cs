@@ -21,7 +21,7 @@ public static class Arduino
         foreach (var port in ports)
         {   
             Console.WriteLine(port);
-            if (port.StartsWith("/dev/ttyAMA10"))
+            if (port.StartsWith("/dev/ttyAMA"))
             {
                 portsToRemove.Add(port);
             }
