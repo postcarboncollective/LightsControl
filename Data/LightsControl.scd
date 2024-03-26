@@ -20,5 +20,3 @@ s.reboot {
 	};
 };
 )
-
-s.reboot;
