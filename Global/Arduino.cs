@@ -75,7 +75,7 @@ public static class Arduino
         SerialPort.DiscardInBuffer();
         SerialPort.DiscardOutBuffer();
         SerialPort.Close();
-        // SerialPort.Dispose();
+        SerialPort.Dispose();
         OpenSerialPort();
     }
 
