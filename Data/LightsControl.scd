@@ -6,8 +6,8 @@ s.reboot {
 
 		~lightsControl.free;
 		~lightsControl = {
-			var sig = SoundIn.ar(0);
-			// var sig = SinOsc.ar(440);
+			// var sig = SoundIn.ar(0);
+			var sig = SinOsc.ar(440);
 			var volume = Amplitude.ar(sig);
 			SendReply.kr(Impulse.kr(32), '/lightscontrolosc', [volume]);
 		}.play;
