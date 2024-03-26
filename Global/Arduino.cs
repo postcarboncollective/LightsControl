@@ -17,20 +17,19 @@ public static class Arduino
     public static void Init()
     {
         List<string> ports = SerialPort.GetPortNames().ToList();
-
-        List<string> remove = new();
-        foreach (var x in ports)
+        List<string> portsToRemove = new();
+        foreach (var port in ports)
         {   
-            Console.WriteLine(x);
-            if (x.StartsWith("/dev/ttyAMA"))
+            Console.WriteLine(port);
+            if (port.StartsWith("/dev/ttyAMA"))
             {
-                remove.Add(x);
+                portsToRemove.Add(port);
             }
         }
 
-        foreach (var x in remove)
+        foreach (var port in portsToRemove)
         {
-            ports.Remove(x);
+            ports.Remove(port);
         }
         
         if (ports.Count < 1) return;
