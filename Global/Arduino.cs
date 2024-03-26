@@ -66,7 +66,7 @@ public static class Arduino
         SerialPort = new SerialPort(Ports[0], 9600);
         SerialPort.ReadTimeout = 1000;
         SerialPort.WriteTimeout = 1000;
-        // SerialPort.DataReceived += OnSerialDataReceived; 
+        SerialPort.DataReceived += OnSerialDataReceived; 
         SerialPort.RtsEnable = true;
         SerialPort.DtrEnable = true;
         SerialPort.Open();
