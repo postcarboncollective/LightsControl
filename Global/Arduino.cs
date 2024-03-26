@@ -49,12 +49,14 @@ public static class Arduino
         foreach (var port in Ports)
         {
             Console.WriteLine(port);
-            if (port.StartsWith("/dev/ttyAMA") || port.StartsWith("/dev/tty/USB"))
+            // if (port.StartsWith("/dev/ttyAMA") || port.StartsWith("/dev/tty/USB"))
+            if(port.StartsWith("/dev/tty/USB"))
             {
                 toRemove.Add(port);
             }
         }
-
+        
+        
         foreach (var port in toRemove)
         {
             Ports.Remove(port);
