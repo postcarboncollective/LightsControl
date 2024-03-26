@@ -49,7 +49,7 @@ public static class Arduino
         foreach (var port in Ports)
         {
             Console.WriteLine(port);
-            // if (port.StartsWith("/dev/ttyAMA") || port.StartsWith("/dev/tty/USB"))
+            // if (port.StartsWith("/dev/ttyAMA") || port.StartsWith("/dev/ttyUSB"))
             // if(port.StartsWith("/dev/ttyUSB"))
             // {
                 // toRemove.Add(port);
@@ -63,8 +63,7 @@ public static class Arduino
         }
 
         if (Ports.Count < 1) return;
-        // SerialPort = new SerialPort(Ports[0], 9600);
-        SerialPort = new("/dev/ttyS0", 9600);
+        SerialPort = new SerialPort(Ports[0], 9600);
         SerialPort.ReadTimeout = 1000;
         SerialPort.WriteTimeout = 1000;
         SerialPort.DataReceived += OnSerialDataReceived; 
@@ -91,6 +90,7 @@ public static class Arduino
             try
             {
                 SerialPort.Write(new byte[] { 255, addr1, addr2, function, r, g, b, p1, p2 }, 0, 9);
+                SerialPort.WriteLine("");
             }
             catch
             {

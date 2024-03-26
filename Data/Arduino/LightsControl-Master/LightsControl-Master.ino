@@ -17,9 +17,10 @@ void loop()
   {
     for(int i=0; i<9; i++)
     {
-      Serial.write(Serial.read());
+      // Serial.write(Serial.read());
+      Serial.print(Serial.read());
     }
-    // Serial.println();
+    Serial.println();
     Blink();
   }
 }
