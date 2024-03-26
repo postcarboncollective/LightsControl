@@ -10,34 +10,14 @@ using System.Threading;
 
 public static class Arduino
 {
-    public static SerialPort SerialPort;
+    public static SerialPort SerialPort = new();
+    public static List<string> Ports = new();
     public static System.Timers.Timer WriteTimer = new();
     public static byte current = 0;
 
     public static void Init()
     {
-        List<string> ports = SerialPort.GetPortNames().ToList();
-        List<string> portsToRemove = new();
-        foreach (var port in ports)
-        {   
-            Console.WriteLine(port);
-            if (port.StartsWith("/dev/ttyAMA"))
-            {
-                portsToRemove.Add(port);
-            }
-        }
-
-        foreach (var port in portsToRemove)
-        {
-            ports.Remove(port);
-        }
-        
-        if (ports.Count < 1) return;
-
-        SerialPort = new SerialPort(ports[0], 9600);
-        // SerialPort.DataReceived += OnSerialDataReceived;    
-        SerialPort.Open();
-
+        OpenSerialPort();
         Task.Run(async () => { await Setup(); });
     }
 
@@ -53,17 +33,80 @@ public static class Arduino
             await Task.Delay(250);
             Write(CreateByte(a1), CreateByte(a2), (byte)LedFunction.Init, x.Size, 0, 0, 0, 0);
         }
+
         byte addr1 = CreateByte(new bool[] { true, true, true, true, true, true, true, true });
         byte addr2 = CreateByte(new bool[] { true, true, true, true, true, true, true, true });
         await Task.Delay(250);
         Write(addr1, addr2, (byte)LedFunction.Off, 0, 0, 0, 0, 0);
     }
+    
+    public static void OpenSerialPort()
+    {
+        SerialPort = new();
+        Ports = SerialPort.GetPortNames().ToList();
+        List<string> toRemove = new();
+        foreach (var port in Ports)
+        {
+            Console.WriteLine(port);
+            if (port.StartsWith("/dev/ttyAMA") || port.StartsWith("/dev/tty/USB"))
+            {
+                toRemove.Add(port);
+            }
+        }
+
+        foreach (var port in toRemove)
+        {
+            Ports.Remove(port);
+        }
+
+        if (Ports.Count < 1) return;
+        SerialPort = new SerialPort(Ports[0], 9600);
+        SerialPort.ReadTimeout = 1000;
+        SerialPort.WriteTimeout = 1000;
+        // SerialPort.DataReceived += OnSerialDataReceived; 
+        SerialPort.Open();
+        Console.WriteLine($"Opened Serial Port -> {Ports[0]}");
+    }
+
+    public static void ResetSerialPort()
+    {
+        SerialPort.DiscardInBuffer();
+        SerialPort.DiscardOutBuffer();
+        SerialPort.Close();
+        SerialPort.Dispose();
+        OpenSerialPort();
+    }
 
     public static void Write(byte addr1, byte addr2, byte function, byte r, byte g, byte b, byte p1, byte p2)
     {
-        if (SerialPort != null)
+        if (SerialPort.IsOpen)
         {
-            SerialPort.Write(new byte[] { 255, addr1, addr2, function, r, g, b, p1, p2 }, 0, 9);
+            try
+            {
+                SerialPort.Write(new byte[] { 255, addr1, addr2, function, r, g, b, p1, p2 }, 0, 9);
+            }
+            catch
+            {
+                Console.WriteLine("SerialPort.Write -> Error!");
+                ResetSerialPort();
+            }
+        }
+    }
+
+    private static void OnSerialDataReceived(object sender, SerialDataReceivedEventArgs e)
+    {
+        if (SerialPort.IsOpen)
+        {
+            try
+            {
+                string message = SerialPort.ReadLine();
+                if (!string.IsNullOrWhiteSpace(message)) Console.WriteLine(message);
+            }
+            catch
+            {
+                Console.WriteLine("SerialPort.Read -> Error!");
+                ResetSerialPort();
+            }
         }
     }
     
@@ -71,14 +114,5 @@ public static class Arduino
     {
         if (bits.Length > 8) throw new ArgumentOutOfRangeException();
         return (byte)bits.Select((val, i) => Convert.ToByte(val) << i).Sum();
-    }
-    
-    private static void OnSerialDataReceived(object sender, SerialDataReceivedEventArgs e)
-    {
-        if (SerialPort != null)
-        {
-            string message = SerialPort.ReadLine();
-            if (!string.IsNullOrWhiteSpace(message)) Console.WriteLine(message);
-        }
     }
 }
