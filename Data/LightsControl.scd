@@ -9,7 +9,7 @@ s.reboot {
 			var sig = SoundIn.ar(0);
 			// var sig = SinOsc.ar(440);
 			var volume = Amplitude.ar(sig);
-			SendReply.kr(Impulse.kr(8), '/lightscontrolosc', [volume]);
+			SendReply.kr(Impulse.kr(32), '/lightscontrolosc', [volume]);
 		}.play;
 
 		~lightsControlOsc.free;
