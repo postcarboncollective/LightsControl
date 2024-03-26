@@ -16,14 +16,24 @@ public static class Arduino
 
     public static void Init()
     {
-        string[] ports = SerialPort.GetPortNames();
+        List<string> ports = SerialPort.GetPortNames().ToList();
 
+        List<string> remove = new();
         foreach (var x in ports)
         {   
             Console.WriteLine(x);
+            if (x.StartsWith("/dev/ttyAMA"))
+            {
+                remove.Add(x);
+            }
         }
 
-        if (ports.Length == 0) return;
+        foreach (var x in remove)
+        {
+            ports.Remove(x);
+        }
+        
+        if (ports.Count < 1) return;
 
         SerialPort = new SerialPort(ports[0], 9600);
         // SerialPort.DataReceived += OnSerialDataReceived;    
