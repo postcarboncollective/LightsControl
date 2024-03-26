@@ -63,7 +63,8 @@ public static class Arduino
         }
 
         if (Ports.Count < 1) return;
-        SerialPort = new SerialPort(Ports[0], 9600);
+        // SerialPort = new SerialPort(Ports[0], 9600);
+        SerialPort = new("/dev/ttyS0", 9600);
         SerialPort.ReadTimeout = 1000;
         SerialPort.WriteTimeout = 1000;
         SerialPort.DataReceived += OnSerialDataReceived; 
