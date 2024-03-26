@@ -40,7 +40,7 @@ public static class Arduino
         await Task.Delay(250);
         Write(addr1, addr2, (byte)LedFunction.Off, 0, 0, 0, 0, 0);
     }
-    
+
     public static void OpenSerialPort()
     {
         SerialPort = new();
@@ -52,11 +52,11 @@ public static class Arduino
             // if (port.StartsWith("/dev/ttyAMA") || port.StartsWith("/dev/ttyUSB"))
             // if(port.StartsWith("/dev/ttyUSB"))
             // {
-                // toRemove.Add(port);
+            // toRemove.Add(port);
             // }
         }
-        
-        
+
+
         foreach (var port in toRemove)
         {
             Ports.Remove(port);
@@ -66,7 +66,7 @@ public static class Arduino
         SerialPort = new SerialPort(Ports[0], 9600);
         SerialPort.ReadTimeout = 1000;
         SerialPort.WriteTimeout = 1000;
-        SerialPort.DataReceived += OnSerialDataReceived; 
+        SerialPort.DataReceived += OnSerialDataReceived;
         SerialPort.RtsEnable = true;
         SerialPort.DtrEnable = true;
         SerialPort.Open();
@@ -90,15 +90,14 @@ public static class Arduino
             try
             {
                 SerialPort.Write(new byte[] { 255, addr1, addr2, function, r, g, b, p1, p2 }, 0, 9);
-                SerialPort.WriteLine("");
             }
-            catch
+            catch (Exception ex)
             {
                 if (SerialPortError == false)
                 {
                     SerialPortError = true;
-                    Console.WriteLine("SerialPort.Write -> Error!");
-                    ResetSerialPort();                    
+                    Console.WriteLine($"SerialPort.Write -> Error \n {ex.Message} \n {ex.StackTrace} \n {ex.InnerException} \n {ex.Source}");
+                    ResetSerialPort();
                 }
             }
         }
@@ -113,18 +112,18 @@ public static class Arduino
                 string message = SerialPort.ReadLine();
                 if (!string.IsNullOrWhiteSpace(message)) Console.WriteLine(message);
             }
-            catch
+            catch (Exception ex)
             {
                 if (SerialPortError == false)
                 {
                     SerialPortError = true;
-                    Console.WriteLine("SerialPort.Read -> Error!");
-                    ResetSerialPort();                    
+                    Console.WriteLine($"SerialPort.Read -> Error \n {ex.Message} \n {ex.StackTrace} \n {ex.InnerException} \n {ex.Source}");
+                    ResetSerialPort();
                 }
             }
         }
     }
-    
+
     public static byte CreateByte(bool[] bits)
     {
         if (bits.Length > 8) throw new ArgumentOutOfRangeException();
