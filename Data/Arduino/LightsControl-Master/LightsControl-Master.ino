@@ -7,8 +7,10 @@ void setup()
   Serial.begin(9600);
   pinMode(13, OUTPUT);
   pinMode(ENABLE_PIN, OUTPUT);
+  pinMode(7, OUTPUT);
   delay(10);
   digitalWrite(ENABLE_PIN, HIGH);
+  digitalWrite(7, HIGH);
 }
 
 void loop() 

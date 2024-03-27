@@ -50,10 +50,10 @@ public static class Arduino
         {
             Console.WriteLine(port);
             // if (port.StartsWith("/dev/ttyAMA") || port.StartsWith("/dev/ttyUSB"))
-            // if(port.StartsWith("/dev/ttyUSB"))
-            // {
-            // toRemove.Add(port);
-            // }
+            if(port.StartsWith("/dev/ttyAMA"))
+            {
+               toRemove.Add(port);  
+            }
         }
 
 
