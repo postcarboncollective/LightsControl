@@ -4,7 +4,7 @@
 #define ENABLE_PIN 8
 CRGB leds[NUM_LEDS];
 
-byte id = 2;
+byte id = 7;
 bool ledState = false;
 int numLeds = 90;
 
