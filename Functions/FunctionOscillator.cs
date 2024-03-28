@@ -84,18 +84,18 @@ public class FunctionOscillator : Function
         {
             if (i < 8)
             {
-                if (invertedLeds[i].Value)
+                if (ledA1[i])
                 {
-                    if (ledA1[i])
+                    if (invertedLeds[i].Value)
                     {
                         ledA1Normal[i] = false;
                         ledA1Inverted[i] = true;
                     }
-                }
-                else if (ledA1[i])
-                {
-                    ledA1Normal[i] = true;
-                    ledA1Inverted[i] = false;
+                    else
+                    {
+                        ledA1Normal[i] = true;
+                        ledA1Inverted[i] = false;
+                    }
                 }
                 else
                 {
@@ -105,18 +105,18 @@ public class FunctionOscillator : Function
             }
             else if (i < 16)
             {
-                if (invertedLeds[i].Value)
+                if (ledA2[i])
                 {
-                    if (ledA2[i])
+                    if (invertedLeds[i].Value)
                     {
                         ledA2Normal[i] = false;
                         ledA2Inverted[i] = true;
                     }
-                }
-                else if (ledA2[i])
-                {
-                    ledA2Normal[i] = true;
-                    ledA2Inverted[i] = false;
+                    else
+                    {
+                        ledA2Normal[i] = true;
+                        ledA2Inverted[i] = false;   
+                    }
                 }
                 else
                 {

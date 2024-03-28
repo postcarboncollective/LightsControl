@@ -71,65 +71,6 @@ public class FunctionSwitchOscillator : Function
         Executing = false;
         Kill();
     }
-
-    public override void ResetLeds()
-    {
-        hasLeds = false;
-        invertedLeds = Inverted.GetRange((int)Lights.Led1, Enum.GetNames(typeof(Lights)).Length - (int)Lights.Led1);
-        
-        for (int i = 0; i < SwitchLed.Count; i++)
-        {
-            if (i < 8) ledA1[i] = SwitchLed[i].Value;
-            else if (i < 16) ledA2[i - 8] = SwitchLed[i].Value;
-            if (hasLeds == false && SwitchLed[i].Value) hasLeds = true;
-        }
-
-        for (int i = 0; i < SwitchLed.Count; i++)
-        {
-            if (i < 8)
-            {
-                if (invertedLeds[i].Value)
-                {
-                    if (ledA1[i])
-                    {
-                        ledA1Normal[i] = false;
-                        ledA1Inverted[i] = true;
-                    }
-                }
-                else if (ledA1[i])
-                {
-                    ledA1Normal[i] = true;
-                    ledA1Inverted[i] = false;
-                }
-                else
-                {
-                    ledA1Normal[i] = false;
-                    ledA1Inverted[i] = false;
-                }
-            }
-            else if (i < 16)
-            {
-                if (invertedLeds[i].Value)
-                {
-                    if (ledA2[i])
-                    {
-                        ledA2Normal[i] = false;
-                        ledA2Inverted[i] = true;
-                    }
-                }
-                else if (ledA2[i])
-                {
-                    ledA2Normal[i] = true;
-                    ledA2Inverted[i] = false;
-                }
-                else
-                {
-                    ledA2Normal[i] = false;
-                    ledA2Inverted[i] = false;
-                }
-            }
-        }
-    }
     
     public override void SetColor()
     {
