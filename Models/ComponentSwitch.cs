@@ -20,9 +20,9 @@ public class ComponentSwitch(bool val, int index, Function function)
         }
         else
         {
-            PM.Lights[Index].Kill();
             var q = Function.Switch.Where(x => x.Value == true).ToList();
             if (q.Count == 0) Function.Stop();
+            PM.Lights[Index].Kill();
         }
     }
 }
