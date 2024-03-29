@@ -70,7 +70,7 @@ public class LightLed : Light
         Red = r;
         Green = g;
         Blue = b;
-        Set(Red, Green,Blue, Brightness);
+        // Set(Red, Green,Blue, Brightness);
     }
     
     public override void SetBrightness(double brightness)
