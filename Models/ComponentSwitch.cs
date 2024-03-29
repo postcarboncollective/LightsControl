@@ -21,9 +21,9 @@ public class ComponentSwitch(bool val, int index, Function function)
         else
         {
             // Function.ResetLeds();
-            Function.Run();
             var q = Function.Switch.Where(x => x.Value == true).ToList();
             if (q.Count == 0) Function.Stop();
+            else Function.Run();
             PM.Lights[Index].Kill();
         }
     }
