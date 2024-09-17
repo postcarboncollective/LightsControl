@@ -41,7 +41,7 @@ public static class Arduino
         Write(addr1, addr2, (byte)LedFunction.Off, 0, 0, 0, 0, 0);
     }
 
-    public static async void OpenSerialPort()
+    public static void OpenSerialPort()
     {
         try
         {
@@ -71,22 +71,15 @@ public static class Arduino
                 SerialPortError = false;
                 Console.WriteLine($"Opened Serial Port -> {Ports[0]}");
             }
-            else RetryOpenSerialPort();
+            else ResetSerialPort();
         }
         catch
         {
-            RetryOpenSerialPort();
+            ResetSerialPort();
         }
     }
 
-    static async void RetryOpenSerialPort()
-    {
-        Console.WriteLine("Failed to open Serial Port. Trying again in 2 seconds.");
-        await Task.Delay(2000);
-        ResetSerialPort();
-    }
-
-    public static void ResetSerialPort()
+    static async void ResetSerialPort()
     {
         try
         {
@@ -94,12 +87,14 @@ public static class Arduino
             SerialPort.DiscardOutBuffer();
             SerialPort.Close();
             SerialPort.Dispose();
-            OpenSerialPort();
         }
         catch
         {
-            OpenSerialPort();
+            Console.WriteLine("Serial Port is already closed.");
         }
+        Console.WriteLine("Reset Serial Port. Trying to open in 2 seconds.");
+        await Task.Delay(2000);
+        OpenSerialPort();
     }
 
     public static void Write(byte addr1, byte addr2, byte function, byte r, byte g, byte b, byte p1, byte p2)
