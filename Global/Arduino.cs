@@ -41,46 +41,65 @@ public static class Arduino
         Write(addr1, addr2, (byte)LedFunction.Off, 0, 0, 0, 0, 0);
     }
 
-    public static void OpenSerialPort()
+    public static async void OpenSerialPort()
     {
-        SerialPort = new();
-        Ports = SerialPort.GetPortNames().ToList();
-        List<string> toRemove = new();
-        foreach (var port in Ports)
+        try
         {
-            Console.WriteLine(port);
-            // if (port.StartsWith("/dev/ttyAMA") || port.StartsWith("/dev/ttyUSB"))
-            if(port.StartsWith("/dev/ttyAMA"))
+            SerialPort = new();
+            Ports = SerialPort.GetPortNames().ToList();
+            List<string> toRemove = new();
+            foreach (var port in Ports)
             {
-               toRemove.Add(port);  
+                Console.WriteLine(port);
+                // if (port.StartsWith("/dev/ttyAMA") || port.StartsWith("/dev/ttyUSB"))
+                if (port.StartsWith("/dev/ttyAMA"))
+                {
+                    toRemove.Add(port);
+                }
             }
+            foreach (var port in toRemove) Ports.Remove(port);
+
+            if (Ports.Count > 0)
+            {
+                SerialPort = new SerialPort(Ports[0], 9600);
+                SerialPort.ReadTimeout = 1000;
+                SerialPort.WriteTimeout = 1000;
+                // SerialPort.DataReceived += OnSerialDataReceived;
+                SerialPort.RtsEnable = true;
+                SerialPort.DtrEnable = true;
+                SerialPort.Open();
+                SerialPortError = false;
+                Console.WriteLine($"Opened Serial Port -> {Ports[0]}");
+            }
+            else RetryOpenSerialPort();
         }
-
-
-        foreach (var port in toRemove)
+        catch
         {
-            Ports.Remove(port);
+            RetryOpenSerialPort();
         }
+    }
 
-        if (Ports.Count < 1) return;
-        SerialPort = new SerialPort(Ports[0], 9600);
-        SerialPort.ReadTimeout = 1000;
-        SerialPort.WriteTimeout = 1000;
-        // SerialPort.DataReceived += OnSerialDataReceived;
-        SerialPort.RtsEnable = true;
-        SerialPort.DtrEnable = true;
-        SerialPort.Open();
-        SerialPortError = false;
-        Console.WriteLine($"Opened Serial Port -> {Ports[0]}");
+    static async void RetryOpenSerialPort()
+    {
+        Console.WriteLine("Failed to open Serial Port. Trying again in 2 seconds.");
+        await Task.Delay(2000);
+        ResetSerialPort();
     }
 
     public static void ResetSerialPort()
     {
-        SerialPort.DiscardInBuffer();
-        SerialPort.DiscardOutBuffer();
-        SerialPort.Close();
-        SerialPort.Dispose();
-        OpenSerialPort();
+        try
+        {
+            SerialPort.DiscardInBuffer();
+            SerialPort.DiscardOutBuffer();
+            SerialPort.Close();
+            SerialPort.Dispose();
+            OpenSerialPort();
+        }
+        catch
+        {
+            OpenSerialPort();
+        }
     }
 
     public static void Write(byte addr1, byte addr2, byte function, byte r, byte g, byte b, byte p1, byte p2)
